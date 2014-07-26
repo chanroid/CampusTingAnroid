@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<color name="cherry">#B9121B</color>
+    <color name="cherry_dark">#4C1B1B</color>
+    <color name="cheese">#40B2D9</color>
+    <color name="milk">#FCFFF5</color>
+    <color name="bread">#076eb2</color>
+    <color name="bread_burned">#004579</color>
+    <color name="milk_line">#E7D6A0</color>
+    <color name="gray_text">#8A8A8A</color>
+    <color name="gray_light">#CCCCCC</color>
+
+<!--  원래 파랑 배경
+    <color name="bread">#0099CC</color>
+    <color name="bread_burned">#007399</color>
+ -->
+</resources>

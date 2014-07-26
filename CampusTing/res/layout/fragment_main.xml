@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/mainNightLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/main_bg_night" />
+
+        <ImageButton
+            android:id="@+id/domitoryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="42dp"
+            android:layout_marginTop="124dp"
+            android:src="@drawable/icon" />
+
+        <ImageButton
+            android:id="@+id/hofBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/domitoryBtn"
+            android:layout_marginRight="23dp"
+            android:src="@drawable/icon" />
+
+        <ImageButton
+            android:id="@+id/circleRoomBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/domitoryBtn"
+            android:layout_below="@+id/domitoryBtn"
+            android:layout_marginTop="121dp"
+            android:src="@drawable/icon" />
+
+        <ImageButton
+            android:id="@+id/clubBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/hofBtn"
+            android:layout_below="@+id/hofBtn"
+            android:layout_marginRight="22dp"
+            android:layout_marginTop="58dp"
+            android:src="@drawable/icon" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/mainDayLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" >
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/main_bg" />
+
+        <ImageButton
+            android:id="@+id/mainBuildingBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="308dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="157dp"
+            android:layout_marginTop="70dp"
+            android:src="@drawable/icon" />
+
+        <ImageButton
+            android:id="@+id/libraryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="165dp"
+            android:layout_marginRight="40dp"
+            android:src="@drawable/icon" />
+
+        <ImageButton
+            android:id="@+id/gymBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/mainBuildingBtn"
+            android:layout_alignLeft="@+id/libraryBtn"
+            android:layout_marginBottom="32dp"
+            android:src="@drawable/icon" />
+
+        <ImageButton
+            android:id="@+id/cafeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/mainBuildingBtn"
+            android:layout_alignTop="@+id/libraryBtn"
+            android:layout_marginLeft="18dp"
+            android:layout_marginTop="18dp"
+            android:src="@drawable/icon" />
+    </RelativeLayout>
+
+    <kr.co.redstrap.campusting.util.view.BadgeButton
+        android:id="@+id/mainAlertBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+    </kr.co.redstrap.campusting.util.view.BadgeButton>
+
+    <kr.co.redstrap.campusting.util.view.BadgeButton
+        android:id="@+id/mainShopBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/mainAlertBtn" >
+    </kr.co.redstrap.campusting.util.view.BadgeButton>
+
+    <TextView
+        android:id="@+id/mainClockText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:text="03:45:32"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#cccccc" />
+
+</RelativeLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">캠퍼스팅</string>
+    <string name="app_intro">소개팅, 미팅에 목마른 대학생들이여,\n주선자가 필요해?</string>
+    <string name="app_id">1412899105629907</string>
+    <string name="action_settings">설정</string>
+    <string name="btn_cancel">취소</string>
+    <string name="btn_login">로그인</string>
+    <string name="btn_join">가입하기</string>
+    <string name="btn_confirm">확인</string>
+    <string name="btn_find_id_pw">아이디/암호 찾기</string>
+    <string name="btn_univ_confirm">인증 메일 전송</string>
+    <string name="btn_search">검색</string>
+    <string name="exit_confirm">한번 더 누르면 캠퍼스팅을 종료합니다</string>
+    <string name="error_ok">ok</string>
+    <string name="error_connection">인터넷 접속이 원활하지 않습니다</string>
+    <string name="error_login_fail">아이디 혹은 비밀번호가 틀립니다</string>
+    <string name="error_email_confirm">이메일을 확인하세요</string>
+    <string name="error_password_confirm">비밀번호를 확인하세요</string>
+    <string name="error_password_not_same">비밀번호가 일치하지 않습니다</string>
+    <string name="error_email_duplication">이미 가입된 이메일입니다</string>
+    <string name="error_univ_confirm">학교를 다시 검색해주세요</string>
+    <string name="error_picture_more">최소 1장은 올려주세요</string>
+    <string name="error_no_picture">사진이 없습니다</string>
+    <string name="error_must_agree_all">모두 동의하셔야합니다</string>
+    <string name="error_press_confirm">확인 버튼을 눌러주세요</string>
+    <string name="hint_input_univ">학교를 검색하세요</string>
+    <string name="hint_input_univ_email">이메일을 입력하세요</string>
+    <string name="hint_login_email">이메일 아이디</string>
+    <string name="hint_login_pw">비밀번호</string>
+    <string name="hint_input_pw">비밀번호 (8글자 이상 16글자 이하)</string>
+    <string name="hint_input_pw_confirm">비밀번호 확인</string>
+    <string name="txt_reconnect">다시 접속</string>
+    <string name="txt_exit">종료</string>
+    <string name="txt_loading">불러오는 중</string>
+    <string name="txt_join_success">가입 성공!</string>
+    <string name="txt_join_fail">가입 실패!</string>
+    <string name="txt_send_mail_success">인증메일이 발송됐습니다</string>
+    <string name="txt_confirm_univ_topic">먼저 대학교 인증을 해볼까요?</string>
+    <string name="txt_confirm_univ_guide">승인 메일 발송을 누르면\n인증메일이 전송됩니다</string>
+    <string name="txt_picture_topic">다음은 학생증에 사용될 사진을\n업로드 하겠습니다</string>
+    <string name="dialog_picture_mod">사진 수정</string>
+
+    <string-array name="picture_mod_item">
+        <item>사진 촬영</item>
+        <item>앨범에서 선택</item>
+        <item>메인사진으로 설정</item>
+        <item>크게 보기</item>
+        <item>사진 제거</item>
+    </string-array>
+
+</resources>

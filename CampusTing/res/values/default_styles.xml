@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="CampusTing"></style>
+
+    <style name="CampusTing.List" parent="CampusTing"></style>
+
+    <style name="CampusTing.List.UnivList" parent="CampusTing.List">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="CampusTing.List.UnivList.Text" parent="CampusTing.List.UnivList">
+        <item name="android:gravity">center</item>
+        <item name="android:padding">4dp</item>
+        <item name="android:background">#ffcc66</item>
+    </style>
+
+    <style name="CampusTing.JoinPageIndicator" parent="CampusTing">
+        <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/vpi__tab_indicator</item>
+        <item name="android:paddingLeft">22dip</item>
+        <item name="android:paddingRight">22dip</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:textAppearance">@style/CampusTing.JoinPageIndicator.Text</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="CampusTing.JoinPageIndicator.Text" parent="CampusTing">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/vpi__dark_theme</item>
+    </style>
+
+    <style name="CampusTing.IconPageIndicator" parent="CampusTing">
+        <item name="android:layout_marginLeft">6dp</item>
+        <item name="android:layout_marginRight">6dp</item>
+    </style>
+
+</resources>
