@@ -1,5 +1,6 @@
 package kr.co.redstrap.campusting.main;
 
+import kr.co.redstrap.campusting.setting.SettingActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -49,6 +50,6 @@ public class MoreFragment extends Fragment implements MoreLayout.Callback {
 	@Override
 	public void onSettingClick() {
 		// TODO Auto-generated method stub
-
+		getActivity().startActivity(new Intent(getActivity(), SettingActivity.class));
 	}
 }

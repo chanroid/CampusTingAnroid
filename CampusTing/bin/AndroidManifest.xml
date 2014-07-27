@@ -63,8 +63,25 @@
             android:windowSoftInputMode="adjustResize|stateHidden" >
         </activity>
         <activity
-            android:name=".main.QAActivity"
-            android:windowSoftInputMode="adjustResize|stateHidden" >
+            android:name=".main.QAActivity">
+        </activity>
+        <activity
+            android:name=".setting.SettingActivity">
+        </activity>
+        <activity
+            android:name=".setting.FaqActivity">
+        </activity>
+        <activity 
+            android:name=".setting.ModifyProfileActivity">
+        </activity>
+        <activity 
+            android:name=".setting.LockSettingActivity">
+        </activity>
+        <activity 
+            android:name=".setting.ChangePWActivity">
+        </activity>
+        <activity 
+            android:name=".setting.PolishActivity">
         </activity>
     </application>
 

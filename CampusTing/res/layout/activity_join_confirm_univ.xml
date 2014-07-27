@@ -32,7 +32,7 @@
                     android:id="@+id/univConfirmBtnLayoutArrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/com_facebook_tooltip_blue_bottomnub" />
+                    android:src="@drawable/icon" />
             </LinearLayout>
 
             <LinearLayout
@@ -185,7 +185,7 @@
                     android:id="@+id/jobConfirmBtnLayoutArrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/com_facebook_tooltip_blue_bottomnub" />
+                    android:src="@drawable/icon" />
             </LinearLayout>
 
             <LinearLayout

@@ -9,7 +9,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -92,8 +91,8 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 	public void inflateViews() {
 		// TODO Auto-generated method stub
 		
-		expandedArrow = getContext().getResources().getDrawable(R.drawable.com_facebook_tooltip_blue_topnub);
-		collapsedArrow = getContext().getResources().getDrawable(R.drawable.com_facebook_tooltip_blue_bottomnub);
+//		expandedArrow = getContext().getResources().getDrawable(R.drawable.com_facebook_tooltip_blue_topnub);
+//		collapsedArrow = getContext().getResources().getDrawable(R.drawable.com_facebook_tooltip_blue_bottomnub);
 		
 		
 		Listener listener = new Listener();
