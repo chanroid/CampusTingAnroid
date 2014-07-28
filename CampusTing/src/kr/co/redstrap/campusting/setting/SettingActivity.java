@@ -71,7 +71,7 @@ public class SettingActivity extends Activity implements SettingLayout.Callback 
 	@Override
 	public void onPushAlarmClick() {
 		// TODO Auto-generated method stub
-		
+		startActivity(new Intent(this, PushAlarmActivity.class));
 	}
 
 	@Override
@@ -95,6 +95,6 @@ public class SettingActivity extends Activity implements SettingLayout.Callback 
 	@Override
 	public void onUnregisterClick() {
 		// TODO Auto-generated method stub
-		
+		startActivity(new Intent(this, UnregisterActivity.class));
 	}
 }

@@ -73,16 +73,7 @@ public class ConfirmUnivFrag extends AbsJoinFrag implements ConfirmUnivFragLayou
 	}
 
 	@Override
-	public void onUnivConfirmClick() {
-		// TODO Auto-generated method stub
-		
-		// 20140723 chanroid 일단 그냥 메인으로 넘어가게 설정. 나중에 액티비티 구현할때 마저 구현
-		startActivity(new Intent(getActivity(), MainActivity.class));
-		getActivity().finish();
-	}
-
-	@Override
-	public void onJobConfirmClick() {
+	public void onConfirmClick() {
 		// TODO Auto-generated method stub
 
 		// 20140723 chanroid 일단 그냥 메인으로 넘어가게 설정. 나중에 액티비티 구현할때 마저 구현

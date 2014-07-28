@@ -33,8 +33,7 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 		
 		public void onJobCardImageClick();
 		
-		public void onUnivConfirmClick();
-		public void onJobConfirmClick();
+		public void onConfirmClick();
 	}
 	
 	private Drawable expandedArrow;
@@ -60,14 +59,14 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 	private EditText univMailCodeEditText;
 	private CheckedTextView univMailCodeCheck;
 	private Button univMailCodeBtn;
-	private Button univConfirmBtn;
 	
 	private LinearLayout jobListBtn;
 	private ImageView joblistBtnArrow;
 	
 	private LinearLayout jobLayout;
 	private ImageButton jobCardImage;
-	private Button jobConfirmBtn;
+	
+	private Button confirmBtn;
 	
 	private Callback callback;
 	
@@ -124,9 +123,6 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 		univMailCodeBtn = (Button) findViewById(R.id.univMailCodeBtn);
 		univMailCodeBtn.setOnClickListener(listener);
 		
-		univConfirmBtn = (Button) findViewById(R.id.univConfirmBtn);
-		univConfirmBtn.setOnClickListener(listener);
-		
 		
 		jobListBtn = (LinearLayout) findViewById(R.id.jobConfirmBtnLayout);
 		jobListBtn.setOnClickListener(listener);
@@ -135,8 +131,11 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 		jobLayout = (LinearLayout) findViewById(R.id.jobConfirmLayout);
 		jobCardImage = (ImageButton) findViewById(R.id.jobCardImage);
 		jobCardImage.setOnClickListener(listener);
-		jobConfirmBtn = (Button) findViewById(R.id.jobConfirmBtn);
-		jobConfirmBtn.setOnClickListener(listener);
+		
+		confirmBtn = (Button) findViewById(R.id.confirmBtn);
+		confirmBtn.setOnClickListener(listener);
+		
+		
 	}
 	
 	private void clickUnivConfirmLayout() {
@@ -203,17 +202,14 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 			case R.id.univCardImage:
 				callback.onUnivCardImageClick();
 				break;
-			case R.id.univConfirmBtn:
-				callback.onUnivConfirmClick();
-				break;
 			case R.id.jobConfirmBtnLayout:
 				clickJobConfirmLayout();
 				break;
 			case R.id.jobCardImage:
 				callback.onJobCardImageClick();
 				break;
-			case R.id.jobConfirmBtn:
-				callback.onJobConfirmClick();
+			case R.id.confirmBtn:
+				callback.onConfirmClick();
 				break;
 			}
 		}

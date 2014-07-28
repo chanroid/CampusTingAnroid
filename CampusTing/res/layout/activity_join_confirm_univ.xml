@@ -102,9 +102,9 @@
                     <EditText
                         android:id="@+id/univMailEditText"
                         android:layout_width="0dp"
-                        android:hint="학교메일"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:hint="학교메일" />
 
                     <CheckedTextView
                         android:id="@+id/univMailCheck"
@@ -130,8 +130,8 @@
                         android:id="@+id/univMailCodeEditText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:hint="인증번호"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:hint="인증번호" />
 
                     <CheckedTextView
                         android:id="@+id/univMailCodeCheck"
@@ -159,12 +159,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon" />
-
-                <Button
-                    android:id="@+id/univConfirmBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="확인" />
             </LinearLayout>
 
             <LinearLayout
@@ -207,13 +201,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon" />
-
-                <Button
-                    android:id="@+id/jobConfirmBtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="확인" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/confirmBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="확인" />
         </LinearLayout>
     </ScrollView>
 

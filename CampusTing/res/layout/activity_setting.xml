@@ -25,241 +25,254 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </RelativeLayout>
 
-    <TextView
+    <ScrollView
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#cccccc"
-        android:padding="3dp"
-        android:text="서비스 정보"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_height="wrap_content" >
 
-    <RelativeLayout
-        android:id="@+id/settingVersionBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="버전"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#cccccc"
+                android:padding="3dp"
+                android:text="서비스 정보"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:id="@+id/settingCurrentVerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="최신버전 1.1.0"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            <RelativeLayout
+                android:id="@+id/settingVersionBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
 
-        <TextView
-            android:id="@+id/settingRecentVerText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_toLeftOf="@id/settingCurrentVerText"
-            android:text="현재버전 1.0.0"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-    </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="버전"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <RelativeLayout
-        android:id="@+id/settingPolishBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
+                <TextView
+                    android:id="@+id/settingCurrentVerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="최신버전 1.1.0"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="이용약관/개인정보 취급방침"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+                <TextView
+                    android:id="@+id/settingRecentVerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toLeftOf="@id/settingCurrentVerText"
+                    android:text="현재버전 1.0.0"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </RelativeLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/abc_ic_go_search_api_holo_light" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/settingPolishBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#cccccc"
-        android:padding="3dp"
-        android:text="계정 정보"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이용약관/개인정보 취급방침"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <RelativeLayout
-        android:id="@+id/settingLogoutBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/abc_ic_go_search_api_holo_light" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="로그아웃"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#cccccc"
+                android:padding="3dp"
+                android:text="계정 정보"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:id="@+id/settingEmailText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="qkqgm1@naver.com"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/settingLogoutBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
 
-    <RelativeLayout
-        android:id="@+id/settingChangePWBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="로그아웃"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="비밀번호 변경"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+                <TextView
+                    android:id="@+id/settingEmailText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="qkqgm1@naver.com"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </RelativeLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/abc_ic_go_search_api_holo_light" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/settingChangePWBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
 
-    <RelativeLayout
-        android:id="@+id/settingPromocodeBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="비밀번호 변경"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내 추천인 코드"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/abc_ic_go_search_api_holo_light" />
+            </RelativeLayout>
 
-        <TextView
-            android:id="@+id/settingPromoCodeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="XPU2S3"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/settingPromocodeBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#cccccc"
-        android:padding="3dp"
-        android:text="알림/잠금"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="내 추천인 코드"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <RelativeLayout
-        android:id="@+id/settingPushAlarmBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
+                <TextView
+                    android:id="@+id/settingPromoCodeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="XPU2S3"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="푸시알람 설정"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#cccccc"
+                android:padding="3dp"
+                android:text="알림/잠금"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/abc_ic_go_search_api_holo_light" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/settingPushAlarmBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
 
-    <RelativeLayout
-        android:id="@+id/settingLockBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="푸시알람 설정"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="잠금설정"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/abc_ic_go_search_api_holo_light" />
+            </RelativeLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/abc_ic_go_search_api_holo_light" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/settingLockBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#cccccc"
-        android:padding="3dp"
-        android:text="기타"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="잠금설정"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-    <RelativeLayout
-        android:id="@+id/settingTutorialBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/abc_ic_go_search_api_holo_light" />
+            </RelativeLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="튜토리얼 보기"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#cccccc"
+                android:padding="3dp"
+                android:text="기타"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/abc_ic_go_search_api_holo_light" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/settingTutorialBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
 
-    <RelativeLayout
-        android:id="@+id/settingFAQBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="튜토리얼 보기"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="자주 묻는 질문"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/abc_ic_go_search_api_holo_light" />
+            </RelativeLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/abc_ic_go_search_api_holo_light" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/settingFAQBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
 
-    <RelativeLayout
-        android:id="@+id/settingUnregisterBtn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp" >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="자주 묻는 질문"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="휴학/탈퇴"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/abc_ic_go_search_api_holo_light" />
+            </RelativeLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/abc_ic_go_search_api_holo_light" />
-    </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/settingUnregisterBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="휴학/탈퇴"
+                    android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/abc_ic_go_search_api_holo_light" />
+            </RelativeLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

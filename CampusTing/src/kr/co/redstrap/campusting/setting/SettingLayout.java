@@ -107,7 +107,7 @@ public class SettingLayout extends AbsCTLayout {
 				callback.onVersionClick();
 				break;
 			case R.id.settingPolishBtn:
-				callback.onLogoutClick();
+				callback.onPolishClick();
 				break;
 			case R.id.settingLogoutBtn:
 				callback.onLogoutClick();
