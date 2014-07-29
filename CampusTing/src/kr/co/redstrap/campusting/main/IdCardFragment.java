@@ -1,5 +1,7 @@
 package kr.co.redstrap.campusting.main;
 
+import kr.co.redstrap.campusting.setting.ModifyProfileActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -30,7 +32,7 @@ public class IdCardFragment extends Fragment implements IdCardLayout.Callback {
 	@Override
 	public void onModityProfileClick() {
 		// TODO Auto-generated method stub
-		
+		startActivity(new Intent(getActivity(), ModifyProfileActivity.class));
 	}
 
 }

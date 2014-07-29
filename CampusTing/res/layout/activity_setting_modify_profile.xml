@@ -14,6 +14,7 @@
             android:id="@+id/modifyProfileBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:src="@drawable/abc_ic_ab_back_holo_light" />
 
         <TextView
@@ -23,6 +24,26 @@
             android:layout_centerVertical="true"
             android:text="내 학생증 수정"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <LinearLayout
+            android:id="@+id/modifyProfileConfirmBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/icon_complete" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="확인"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+        </LinearLayout>
     </RelativeLayout>
 
     <LinearLayout
@@ -34,8 +55,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
             android:background="#7ed9eb"
+            android:gravity="center"
             android:padding="5dp"
             android:text="사진" />
 
@@ -56,6 +77,16 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="어필하기" />
+
+        <CheckedTextView
+            android:id="@+id/modifyProfileEditCardSkinTab"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="10sp"
+            android:text="학생증 꾸미기" />
     </LinearLayout>
 
     <FrameLayout
@@ -63,7 +94,6 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" >
-
     </FrameLayout>
 
 </LinearLayout>

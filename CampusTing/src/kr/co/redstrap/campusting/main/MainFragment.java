@@ -1,6 +1,7 @@
 package kr.co.redstrap.campusting.main;
 
 import kr.co.redstrap.campusting.constant.CampusTingConstant.Building;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -31,13 +32,14 @@ public class MainFragment extends Fragment implements MainFragmentLayout.Callbac
 	@Override
 	public void onAlertListClick() {
 		// TODO Auto-generated method stub
+		startActivity(new Intent(getActivity(), AlertListActivity.class));
 		
 	}
 
 	@Override
 	public void onShopClick() {
 		// TODO Auto-generated method stub
-		
+		startActivity(new Intent(getActivity(), PurchaseActivity.class));
 	}
 
 	@Override
@@ -92,6 +94,12 @@ public class MainFragment extends Fragment implements MainFragmentLayout.Callbac
 	public void onClubClick() {
 		// TODO Auto-generated method stub
 		showBuildingDialog(Building.CLUB);
+	}
+
+	@Override
+	public void onDayNightClick() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

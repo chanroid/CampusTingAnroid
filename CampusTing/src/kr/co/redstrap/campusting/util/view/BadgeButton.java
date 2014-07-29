@@ -5,13 +5,13 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class BadgeButton extends LinearLayout {
 	
-	private ImageButton button;
+	private ImageView button;
 	private TextView badge;
 	
 	private boolean zeroHide;
@@ -27,7 +27,7 @@ public class BadgeButton extends LinearLayout {
 		init();
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	public BadgeButton(Context context) {
 		super(context);
 		// TODO Auto-generated constructor stub
@@ -37,7 +37,7 @@ public class BadgeButton extends LinearLayout {
 	private void init() {
 		inflate(getContext(), R.layout.button_badge, this);
 		
-		button = (ImageButton) findViewById(R.id.badgeBtn);
+		button = (ImageView) findViewById(R.id.badgeBtn);
 		badge = (TextView) findViewById(R.id.badgeBtnText);
 	}
 	

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/main_bg" />
+
+    <ImageButton
+        android:id="@+id/mainBuildingBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="68dp"
+        android:layout_marginTop="128dp"
+        android:src="@drawable/icon" />
+
+    <ImageButton
+        android:id="@+id/gymBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/libraryBtn"
+        android:layout_alignTop="@+id/mainBuildingBtn"
+        android:src="@drawable/icon" />
+
+    <ImageButton
+        android:id="@+id/libraryBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/gymBtn"
+        android:layout_marginRight="51dp"
+        android:layout_marginTop="120dp"
+        android:src="@drawable/icon" />
+
+    <ImageButton
+        android:id="@+id/cafeBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/mainBuildingBtn"
+        android:layout_alignTop="@+id/libraryBtn"
+        android:layout_marginRight="29dp"
+        android:layout_marginTop="27dp"
+        android:src="@drawable/icon" />
+
+</RelativeLayout>
