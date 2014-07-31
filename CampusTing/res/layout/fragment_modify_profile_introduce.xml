@@ -25,42 +25,48 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp" >
+            android:layout_marginBottom="10dp" >
 
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="닉네임"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:text="냥냥이" />
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
-
+            
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="성별"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -88,193 +94,221 @@
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
-
+            
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="생년월일"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:text="Button" />
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
-
+            
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="거주지역"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:text="Button" />
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
 
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="성격"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:text="Button" />
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
 
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="체형"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:text="Button" />
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
 
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="키"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/editText1"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:layout_weight="1" >
+
+                    <requestFocus />
+                </EditText>
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
 
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="혈액형"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:text="Button" />
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
 
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="종교"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:text="Button" />
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
 
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="흡연유무"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -299,106 +333,119 @@
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
 
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="음주"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:text="Button" />
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
 
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="직업"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <EditText
+                    android:id="@+id/editText2"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:layout_weight="1" />
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
 
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="학과"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:text="Button" />
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
 
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="5dp" >
+                android:gravity="center_vertical" >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="연애경험"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                <TextView
-                    android:layout_width="0dp"
+                <Button
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Small Text"
-                    android:textAppearance="?android:attr/textAppearanceSmall" />
+                    android:text="Button" />
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
                     android:text="C" />
             </TableRow>
         </TableLayout>
@@ -427,11 +474,12 @@
         </LinearLayout>
 
         <!-- 인증하면 나옴 -->
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:visibility="gone" >
 
             <TextView
                 android:layout_width="wrap_content"
@@ -512,6 +560,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="직업 인증하러 가기" />
+        </LinearLayout>
+
+        <!-- 인증하면 보임 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="직업 인증"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="직업 인증을 완료하셨어요!"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
     </LinearLayout>
 

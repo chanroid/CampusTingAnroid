@@ -30,7 +30,7 @@ public class IdCardFragment extends Fragment implements IdCardLayout.Callback {
 	}
 
 	@Override
-	public void onModityProfileClick() {
+	public void onModifyProfileClick() {
 		// TODO Auto-generated method stub
 		startActivity(new Intent(getActivity(), ModifyProfileActivity.class));
 	}

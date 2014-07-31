@@ -65,8 +65,8 @@ public class MainFragment extends Fragment implements MainFragmentLayout.Callbac
 	@Override
 	public void onLibraryClick() {
 		// TODO Auto-generated method stub
-		showBuildingDialog(Building.LIBRARY);
-		
+		PremiumSearchPopupFragment dialog = new PremiumSearchPopupFragment(Building.LIBRARY);
+		dialog.show(getActivity().getSupportFragmentManager(), "tag");
 	}
 
 	@Override
@@ -93,7 +93,8 @@ public class MainFragment extends Fragment implements MainFragmentLayout.Callbac
 	@Override
 	public void onClubClick() {
 		// TODO Auto-generated method stub
-		showBuildingDialog(Building.CLUB);
+		PremiumSearchPopupFragment dialog = new PremiumSearchPopupFragment(Building.CLUB);
+		dialog.show(getActivity().getSupportFragmentManager(), "tag");
 	}
 
 	@Override

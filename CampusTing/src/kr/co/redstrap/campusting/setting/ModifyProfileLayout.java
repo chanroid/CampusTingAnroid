@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckedTextView;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 public class ModifyProfileLayout extends AbsCTLayout {
 
@@ -15,6 +16,8 @@ public class ModifyProfileLayout extends AbsCTLayout {
 		public void onPhotoTabClick();
 		public void onInfoTabClick();
 		public void onAppealTabClick();
+		public void onIDCardSkinTabClick();
+		public void onConfirmClick();
 	}
 	
 	private Callback callback;
@@ -25,9 +28,12 @@ public class ModifyProfileLayout extends AbsCTLayout {
 	
 	private ImageButton backBtn;
 	
+	private LinearLayout confirmBtn;
+	
 	private CheckedTextView photoTab;
 	private CheckedTextView infoTab;
 	private CheckedTextView appealTab;
+	private CheckedTextView idcardSkinTab;
 	
 	public ModifyProfileLayout(Context ctx) {
 		super(ctx);
@@ -54,7 +60,14 @@ public class ModifyProfileLayout extends AbsCTLayout {
 		infoTab.setOnClickListener(l);
 		appealTab = (CheckedTextView) findViewById(R.id.modifyProfileAppealTab);
 		appealTab.setOnClickListener(l);
+		idcardSkinTab = (CheckedTextView) findViewById(R.id.modifyProfileEditCardSkinTab);
+		idcardSkinTab.setOnClickListener(l);
+		confirmBtn = (LinearLayout) findViewById(R.id.modifyProfileConfirmBtn);
+		confirmBtn.setOnClickListener(l);
 		
+	}
+	
+	private void switchTabBackground(View v) {
 		
 	}
 	
@@ -70,12 +83,22 @@ public class ModifyProfileLayout extends AbsCTLayout {
 				break;
 			case R.id.modifyProfilePhotoTab:
 				callback.onPhotoTabClick();
+				switchTabBackground(photoTab);
 				break;
 			case R.id.modifyProfileInfoTab:
 				callback.onInfoTabClick();
+				switchTabBackground(infoTab);
 				break;
 			case R.id.modifyProfileAppealTab:
 				callback.onAppealTabClick();
+				switchTabBackground(appealTab);
+				break;
+			case R.id.modifyProfileEditCardSkinTab:
+				callback.onIDCardSkinTabClick();
+				switchTabBackground(idcardSkinTab);
+				break;
+			case R.id.modifyProfileConfirmBtn:
+				callback.onConfirmClick();
 				break;
 			}
 		}

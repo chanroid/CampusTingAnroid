@@ -44,12 +44,14 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <Button
+                        android:id="@+id/joininfoLocalBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Button" />
+                        android:text="" />
 
                     <CheckedTextView
+                        android:id="@+id/joininfoLocalCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -72,12 +74,14 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <Button
+                        android:id="@+id/joininfoCharacterBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Button" />
 
                     <CheckedTextView
+                        android:id="@+id/joininfoCharacterCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -100,12 +104,14 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <Button
+                        android:id="@+id/joininfoBodyBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Button" />
 
                     <CheckedTextView
+                        android:id="@+id/joininfoBodyCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -127,16 +133,15 @@
                         android:text="키"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                    <EditText
-                        android:id="@+id/editText1"
+                    <Button
+                        android:id="@+id/joininfoHeightBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" >
-
-                        <requestFocus />
-                    </EditText>
+                    </Button>
 
                     <CheckedTextView
+                        android:id="@+id/joininfoHeightCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -159,12 +164,14 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <Button
+                        android:id="@+id/joininfoBloodBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Button" />
 
                     <CheckedTextView
+                        android:id="@+id/joininfoBloodCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -187,12 +194,14 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <Button
+                        android:id="@+id/joininfoReligionBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Button" />
 
                     <CheckedTextView
+                        android:id="@+id/joininfoReligionCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -215,21 +224,21 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <RadioGroup
-                        android:id="@+id/radioGroup1"
+                        android:id="@+id/joininfoSmokeRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="horizontal" >
 
                         <RadioButton
-                            android:id="@+id/radio0"
+                            android:id="@+id/joininfoSmokeRadio1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
                             android:text="남성" />
 
                         <RadioButton
-                            android:id="@+id/radio1"
+                            android:id="@+id/joininfoSmokeRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="여성" />
@@ -258,12 +267,14 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <Button
+                        android:id="@+id/joininfoDrinkBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Button" />
 
                     <CheckedTextView
+                        android:id="@+id/joininfoDrinkCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -286,12 +297,13 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <EditText
-                        android:id="@+id/editText2"
+                        android:id="@+id/joininfoJobEdit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"/>
 
                     <CheckedTextView
+                        android:id="@+id/joininfoJobCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -314,12 +326,14 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <Button
+                        android:id="@+id/joininfoMajorBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Button" />
 
                     <CheckedTextView
+                        android:id="@+id/joininfoMajorEdit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
@@ -342,12 +356,14 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <Button
+                        android:id="@+id/joininfoCoupleCountBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Button" />
 
                     <CheckedTextView
+                        android:id="@+id/joininfoCoupleCountCheck"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"

@@ -62,6 +62,8 @@ public class MainLayout extends AbsCTLayout {
 		moreBtn = (RelativeLayout) findViewById(R.id.mainMoreBtn);
 		moreBtn.setOnClickListener(listener);
 
+		switchButtonBackground(mainBtn);
+		
 	}
 	
 	private void switchButtonBackground(View v) {

@@ -21,7 +21,7 @@ public class IdCardLayout extends AbsCTLayout {
 		 * @param position 메인은 0, 밑에껀 1부터 시작
 		 */
 		public void onProfileImageClick(int position);
-		public void onModityProfileClick();
+		public void onModifyProfileClick();
 		
 		// 탭은 그냥 내부에서 처리
 	}
@@ -152,7 +152,7 @@ public class IdCardLayout extends AbsCTLayout {
 				charmingPointTab.setBackgroundColor(Color.parseColor("#7ed9eb"));
 				break;
 			case R.id.modifyProfileBtn:
-				callback.onModityProfileClick();
+				callback.onModifyProfileClick();
 				break;
 			case R.id.idcardMainProfileImage:
 				callback.onProfileImageClick(0);

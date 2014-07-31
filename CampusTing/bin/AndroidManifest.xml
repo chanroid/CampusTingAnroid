@@ -66,6 +66,8 @@
         </activity>
         <activity android:name=".main.AlertListActivity" >
         </activity>
+        <activity android:name=".main.MatchingResultActivity" >
+        </activity>
         <activity android:name=".main.PurchaseActivity" >
         </activity>
         <activity android:name=".setting.SettingActivity" >

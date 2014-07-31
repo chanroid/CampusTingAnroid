@@ -76,6 +76,8 @@ public class JoinLayout extends AbsCTLayout {
 		jobunivBtn = (LinearLayout) findViewById(R.id.joinIndicator5);
 		jobunivBtn.setOnClickListener(listener);
 		
+		highlightIndicatorButton(termsBtn);
+		
 	}
 	
 	private void highlightIndicatorButton(View highlightView) {

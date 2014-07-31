@@ -11,9 +11,10 @@
         android:padding="3dp" >
 
         <ImageButton
-            android:id="@+id/noticeBackBtn"
+            android:id="@+id/modifyProfileBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:src="@drawable/abc_ic_ab_back_holo_light" />
 
         <TextView
@@ -21,13 +22,9 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:text="공지사항"
+            android:text="대학/직업 인증"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-    </RelativeLayout>
 
-    <WebView
-        android:id="@+id/noticeWebView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    </RelativeLayout>
 
 </LinearLayout>

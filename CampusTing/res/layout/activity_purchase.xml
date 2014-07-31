@@ -85,7 +85,7 @@
                     android:id="@+id/purchaseBonusText1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="보너스 종범"
+                    android:text="보너스"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
@@ -137,7 +137,7 @@
                     android:id="@+id/purchaseBonusText2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="보너스 종범"
+                    android:text="보너스"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
@@ -189,7 +189,7 @@
                     android:id="@+id/purchaseBonusText3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="보너스 종범"
+                    android:text="보너스"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
@@ -241,7 +241,7 @@
                     android:id="@+id/purchaseBonusText4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="보너스 종범"
+                    android:text="보너스"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 
@@ -293,7 +293,7 @@
                     android:id="@+id/purchaseBonusText5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="보너스 종범"
+                    android:text="보너스"
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </LinearLayout>
 

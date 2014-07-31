@@ -3,6 +3,7 @@ package kr.co.redstrap.campusting.main;
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.constant.CampusTingConstant;
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -96,5 +97,7 @@ public class MainBuildingPopupFragment extends DialogFragment implements MainBui
 	public void onConfirmClick() {
 		// TODO Auto-generated method stub
 		dismiss();
+		// 20140731 chanroid 전달할 인자값들 좀 필요할듯
+		startActivity(new Intent(getActivity(), MatchingResultActivity.class));
 	}
 }
