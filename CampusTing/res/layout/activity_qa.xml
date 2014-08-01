@@ -11,7 +11,7 @@
         android:padding="3dp" >
 
         <ImageButton
-            android:id="@+id/joinBackBtn"
+            android:id="@+id/qaBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/abc_ic_ab_back_holo_light" />

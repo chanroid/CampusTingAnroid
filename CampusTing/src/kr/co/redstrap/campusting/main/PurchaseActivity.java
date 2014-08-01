@@ -19,4 +19,11 @@ public class PurchaseActivity extends Activity implements PurchaseLayout.Callbac
 		
 		setContentView(layout.getView());
 	}
+
+
+	@Override
+	public void onBackClick() {
+		// TODO Auto-generated method stub
+		finish();
+	}
 }

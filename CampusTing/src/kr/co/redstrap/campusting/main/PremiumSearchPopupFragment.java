@@ -39,4 +39,10 @@ public class PremiumSearchPopupFragment extends DialogFragment implements Callba
 		
 		return layout.getView();
 	}
+
+	@Override
+	public void onCloseClick() {
+		// TODO Auto-generated method stub
+		dismiss();
+	}
 }

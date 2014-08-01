@@ -1,10 +1,9 @@
 package kr.co.redstrap.campusting.main;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 
-public class NoticeActivity extends Activity {
+public class NoticeActivity extends Activity implements NoticeLayout.Callback {
 
 	private NoticeLayout layout;
 	
@@ -16,6 +15,12 @@ public class NoticeActivity extends Activity {
 		layout = new NoticeLayout(this);
 		
 		setContentView(layout.getView());
+	}
+
+	@Override
+	public void onBackClick() {
+		// TODO Auto-generated method stub
+		finish();
 	}
 
 }

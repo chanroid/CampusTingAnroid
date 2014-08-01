@@ -37,6 +37,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
+            android:id="@+id/appealOnelineEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </EditText>
@@ -49,16 +50,19 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
+            android:id="@+id/appealFaceEdit1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </EditText>
 
         <EditText
+            android:id="@+id/appealFaceEdit2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </EditText>
 
         <EditText
+            android:id="@+id/appealFaceEdit3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </EditText>
@@ -71,16 +75,19 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
+            android:id="@+id/appealHobbyEdit1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </EditText>
 
         <EditText
+            android:id="@+id/appealHobbyEdit2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </EditText>
 
         <EditText
+            android:id="@+id/appealHobbyEdit3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </EditText>
@@ -93,16 +100,19 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
+            android:id="@+id/appealFavoriteEdit1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </EditText>
 
         <EditText
+            android:id="@+id/appealFavoriteEdit2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </EditText>
 
         <EditText
+            android:id="@+id/appealFavoriteEdit3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
         </EditText>
