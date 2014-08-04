@@ -17,7 +17,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class ConfirmUnivFragLayout extends AbsCTLayout {
 	
@@ -43,12 +44,11 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 	private LinearLayout univListBtn;
 	private ImageView univListBtnArrow;
 	
-	private Spinner univStateSpinner;
-	
+	// 대학인증 이메일인증 부분
 	private LinearLayout univLayout;
-	private ImageButton univCardImage;
+	private RadioGroup univStateSpinner;
 	private Button univCardBtn;
-
+	
 	private AutoCompleteTextView univAutoTextView;
 	private CheckedTextView univAutoCheck;
 
@@ -59,14 +59,21 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 	private EditText univMailCodeEditText;
 	private CheckedTextView univMailCodeCheck;
 	private Button univMailCodeBtn;
-	
+
+	// 대학인증 사진활영 부분
+	private LinearLayout univCardBtnLayout;
+	private ImageButton univCardBtnArrow;
+	private LinearLayout univCardLayout;
+	private RadioGroup univCardStateSpinner;
+	private ImageButton univCardImage;
+	private Button univCardConfirmBtn;
+
+	// 직업인증 부분
 	private LinearLayout jobListBtn;
 	private ImageView joblistBtnArrow;
-	
 	private LinearLayout jobLayout;
 	private ImageButton jobCardImage;
-	
-	private Button confirmBtn;
+	private Button confirmJobBtn;
 	
 	private Callback callback;
 	
@@ -100,8 +107,8 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 		univListBtn.setOnClickListener(listener);
 		univListBtnArrow = (ImageView) findViewById(R.id.univConfirmBtnLayoutArrow);
 		
-		univStateSpinner = (Spinner) findViewById(R.id.univStateSpinner);
-		univStateSpinner.setOnItemSelectedListener(listener);
+		univStateSpinner = (RadioGroup) findViewById(R.id.univStateSpinner);
+		univStateSpinner.setOnCheckedChangeListener(listener);
 
 		univLayout = (LinearLayout) findViewById(
 				R.id.univLayout);
@@ -132,8 +139,8 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 		jobCardImage = (ImageButton) findViewById(R.id.jobCardImage);
 		jobCardImage.setOnClickListener(listener);
 		
-		confirmBtn = (Button) findViewById(R.id.confirmBtn);
-		confirmBtn.setOnClickListener(listener);
+		confirmJobBtn = (Button) findViewById(R.id.confirmJobBtn);
+		confirmJobBtn.setOnClickListener(listener);
 		
 		
 	}
@@ -151,6 +158,10 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 		joblistBtnArrow.setImageDrawable(collapsedArrow);
 	}
 	
+	private void clickUnivPhotoConfirmLayout() {
+		
+	}
+	
 	private void clickJobConfirmLayout() {
 		if (jobLayout.getVisibility() == View.VISIBLE) {
 			jobLayout.setVisibility(View.GONE);
@@ -164,7 +175,7 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 		univListBtnArrow.setImageDrawable(collapsedArrow);
 	}
 	
-	private class Listener implements OnClickListener, OnItemSelectedListener, TextWatcher {
+	private class Listener implements OnClickListener, OnItemSelectedListener, TextWatcher, OnCheckedChangeListener {
 
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count,
@@ -208,7 +219,7 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 			case R.id.jobCardImage:
 				callback.onJobCardImageClick();
 				break;
-			case R.id.confirmBtn:
+			case R.id.confirmJobBtn:
 				callback.onConfirmClick();
 				break;
 			}
@@ -223,6 +234,12 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 
 		@Override
 		public void onNothingSelected(AdapterView<?> parent) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void onCheckedChanged(RadioGroup group, int checkedId) {
 			// TODO Auto-generated method stub
 			
 		}

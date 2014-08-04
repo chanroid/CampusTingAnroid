@@ -1,28 +1,24 @@
 package kr.co.redstrap.campusting.login;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
 import kr.co.redstrap.campusting.MainApp;
 import kr.co.redstrap.campusting.R;
+import kr.co.redstrap.campusting.common.AbsCTSyncTask;
+import kr.co.redstrap.campusting.common.AbsCTSyncTask.CTSyncTaskCallback;
+import kr.co.redstrap.campusting.common.ErrorResult;
+import kr.co.redstrap.campusting.common.LoginInfo;
 import kr.co.redstrap.campusting.constant.CampusTingConstant;
-import kr.co.redstrap.campusting.deprecated.WebOneCharTask;
-import kr.co.redstrap.campusting.deprecated.WebOneJsonTask;
+import kr.co.redstrap.campusting.constant.CampusTingConstant.LoginType;
+import kr.co.redstrap.campusting.main.MainActivity;
 import kr.co.redstrap.campusting.util.PwInputFilter;
-import kr.co.redstrap.campusting.util.SHA256;
 import kr.co.redstrap.campusting.util.ViewUtil;
-import kr.co.redstrap.campusting.util.WrittingUtil;
 import kr.co.redstrap.campusting.util.indicator.TabPageIndicator;
-import kr.co.redstrap.campusting.util.web.UrlUtil;
+import kr.co.redstrap.campusting.util.web.CTJSONSyncTask;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
@@ -43,7 +39,7 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 
-public class UnitedLoginActivity extends FragmentActivity {
+public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskCallback<String, Object> {
 	/**
 	 * Fragment를 사용하지 않는데 왜 FragmentActivity를 사용하는지 의문
 	 */
@@ -54,6 +50,8 @@ public class UnitedLoginActivity extends FragmentActivity {
 	public TabPageIndicator indicator;
 	private LoginEditorActionListener loginEditorActionListener;
 	private LoginClickListener loginClickListener;
+	
+	private CTJSONSyncTask getuserTask;
 
 	private UnitedLoginLayout layout;
 	
@@ -93,35 +91,13 @@ public class UnitedLoginActivity extends FragmentActivity {
 
 		// 인트로 시작
 		introStart();
-
-		// 변수 셋팅
-		Log.i("user", MainApp.mainUser.toString());
-
-		// 페이스북 자동 로그인 체크
-		if (Session.openActiveSessionFromCache(this) != null) { // 캐쉬에 페이스북 로그인 정보 있음
-			Log.i("캐쉬 페이스북 세션 있음", Session.getActiveSession().toString());
-			Request.newMeRequest(Session.openActiveSessionFromCache(this), new GraphUserCallback() {
-				@Override
-				public void onCompleted(GraphUser user, Response response) {
-					if (user != null) {
-						facebookLoginAction(user, response);
-					} else {
-						layout.toast(R.string.error_connection, Toast.LENGTH_SHORT);
-						loginFlag = true;
-					}
-				}
-			}).executeAsync();
-		// } 
-		// else if (false) {
-		// 캐쉬에 네이버 로그인 정보 있음
-			
-		} else if (WrittingUtil.getInstance(MainApp.appContext).loadObject("user") != null) { // 캐쉬에 자체 로그인 정보 있음
-			// 20140701 테스트용 자동로그인 방지. 해제시 아래 코드 주석 해제
-//			MainApp.mainUser = (User) WrittingUtil.getInstance(MainApp.appContext).loadObject("user");
-//			Log.i("일반 로그인", MainApp.mainUser.toString());
-//			normalLoginAction();
-			loginFlag = true;
-		} else { // 캐쉬에 저장된 로그인 정보 없음
+		
+		if (LoginInfo.getInstance(this).isAutoLogin()) {
+			loginFlag = false;
+			LoginInfo info = LoginInfo.getInstance(this);
+			layout.inputId.setText(info.getUserId());
+			layout.inputPw.setText(info.getUserPw());
+		} else {
 			loginFlag = true;
 		}
 	}
@@ -195,67 +171,7 @@ public class UnitedLoginActivity extends FragmentActivity {
 	 *            {@link GraphUserCallback#onCompleted(GraphUser, Response)}
 	 */
 	private void facebookLoginAction(GraphUser user, Response response) {
-		try {
-			MainApp.mainUser.setUserLoginId(user.getInnerJSONObject().getString("id"));
-			MainApp.mainUser.setLoginTypeId(CampusTingConstant.LoginType.FACEBOOK);
-			Log.i("user", MainApp.mainUser.toString());
-
-			// TODO
-			char result = '!';
-
-			// 가입 여부 체크
-			WebOneCharTask<Void, Void> task = new WebOneCharTask<Void, Void>("isUserAlready") {
-
-				@Override
-				protected void onPostExecute(Character result) {
-					switch (result) {
-					case '0': // 가입하지 않은 유저
-						Intent joinIntent = new Intent(MainApp.appContext, kr.co.redstrap.campusting.join.JoinActivity.class);
-						startActivity(joinIntent);
-						finish();
-						break;
-					case '1': // 이미 가입한 유저
-						// 웹에서 유저 정보 받아온 후 맵핑
-						WebOneJsonTask<Void, Void> getUserTask = new WebOneJsonTask<Void, Void>("getUser") {
-
-							@Override
-							protected void onPostExecute(JSONObject result) {
-								result = mainUserTestValue();
-								if (result != null) {
-									try {
-										settingMainUserInfo(result);
-										Log.i("페이스북 로그인 유저", MainApp.mainUser.toString());
-									} catch (JSONException e) {
-										e.printStackTrace();
-									}
-									if (introEndFlag) { // 인트로 이후의 수동 로그인일 경우 직접 메인 이동
-										Intent mianIntent = new Intent(MainApp.appContext, kr.co.redstrap.campusting.main.MainActivity.class);
-										startActivity(mianIntent);
-										finish();
-									}
-								}
-							}
-
-						};
-						getUserTask.put("userLoginId", MainApp.mainUser.getUserLoginId());
-						getUserTask.put("loginTypeId", MainApp.mainUser.getLoginTypeId());
-						getUserTask.executeSerial();
-						break;
-					default: // 웹서버 연결 과정에서 에러 발생
-						layout.toast(R.string.error_connection, Toast.LENGTH_SHORT);
-						loginFlag = true;
-						break;
-					}
-				}
-			};
-			task.put("userLoginId", MainApp.mainUser.getUserLoginId());
-			task.put("loginTypeId", MainApp.mainUser.getLoginTypeId());
-			task.executeSerial();
-
-		} catch (Exception e) {
-			layout.toast(R.string.error_connection, Toast.LENGTH_SHORT);
-			Log.e("에러", e.toString());
-		}
+		// 20140804 chanroid 페이스북 로그인은 나중에...
 	}
 
 	/**
@@ -263,94 +179,38 @@ public class UnitedLoginActivity extends FragmentActivity {
 	 */
 	private void normalLoginAction() {
 		if (loginFlag) { // 자동 로그인이 아닌 경우
-			MainApp.mainUser.setLoginTypeId(CampusTingConstant.LoginType.CAMPUSTING);
-			MainApp.mainUser.setUserLoginId(layout.inputId.getEditableText().toString());
-			MainApp.mainUser.setPw(SHA256.getCipherText(layout.inputPw.getEditableText().toString())); // 비밀번호는 암호화하여 저장
+			// 아이디 비밀번호 저장
+			LoginInfo info = LoginInfo.getInstance(this);
+			info.setUserId(layout.inputId.getText().toString());
+			info.setUserPw(layout.inputPw.getText().toString());
+			info.setAutoLogin(true);
 		}
-		WebOneJsonTask<Void, Void> getUserTask = new WebOneJsonTask<Void, Void>("getUser") {
-
-			@Override
-			protected void onPreExecute() {
-				// TODO Auto-generated method stub
-				super.onPreExecute();
-				layout.showLoading("Loading...");
-			}
-			
-			@Override
-			protected void onPostExecute(JSONObject result) {
-				
-				result = mainUserTestValue();
-				
-				if (result != null) { // 우선은 결과값이 뭐라도 있으면 로그인 성공으로 간주
-					try {
-						settingMainUserInfo(result);
-						Log.i("일반 로그인 유저", MainApp.mainUser.toString());
-					} catch (JSONException e) {
-						e.printStackTrace();
-						// 로그인 실패시 따로 처리하는 부분 구현해야 함
-					}
-					WrittingUtil.getInstance(MainApp.appContext).saveObject("user", MainApp.mainUser); // 저장된 user 객체 갱신
-					if (introEndFlag) { // 인트로 이후의 수동 로그인일 경우 직접 메인 이동
-						Intent mianIntent = new Intent(MainApp.appContext, kr.co.redstrap.campusting.main.MainActivity.class);
-						startActivity(mianIntent);
-						finish();
-					}
-				} else {
-					layout.toast(R.string.error_login_fail, Toast.LENGTH_SHORT);
-				}
-			}
-
-		};
-		getUserTask.put("userLoginId", MainApp.mainUser.getUserLoginId());
-		getUserTask.put("loginTypeId", MainApp.mainUser.getLoginTypeId());
-		getUserTask.put("pw", MainApp.mainUser.getPw());
-		getUserTask.executeSerial();
+		
+		getuserTask = new CTJSONSyncTask();
+		getuserTask.addCallback(this);
+		
+		getuserTask.addHttpParam("userId", layout.inputId.getText().toString());
+		getuserTask.addHttpParam("userPw", layout.inputPw.getText().toString());
+		getuserTask.addHttpParam("pushKey", "12312312312313"); // test
+		
+		getuserTask.executeSerial("login");
 	}
 	
 	private void settingMainUserInfo(JSONObject result) throws JSONException {
-		MainApp.mainUser.setAcEmail(result.getString("acEmail"));
-		MainApp.mainUser.setJoinDate(result.getString("joinDate"));
-		MainApp.mainUser.setPictureNum(result.getString("pictureNum"));
-		MainApp.mainUser.setMainPicture(result.getString("mainPicture"));
-		MainApp.mainUser.setLoginTypeId(result.getString("loginTypeId"));
-		MainApp.mainUser.setJudge(result.getString("judge"));
-		MainApp.mainUser.setTermsDate(result.getString("termsDate"));
-		MainApp.mainUser.setUserId(result.getString("userId"));
-		MainApp.mainUser.setUserLoginId(result.getString("userLoginId"));
-		MainApp.mainUser.setPw(result.getString("pw"));
-		MainApp.mainUser.setSchoolId(result.getString("schoolId"));
-		MainApp.mainUser.setConfirm(result.getString("confirm"));
+		
+		LoginInfo info = LoginInfo.getInstance(this);
+		
+		info.setAcEmail(result.getString("univMail"));
+		info.setRegDate(result.getString("regDate"));
+		info.setPhotoCount(result.getInt("photoCount"));
+		info.setUnivNum(result.getInt("univNum"));
+		info.setIsAccept(result.getBoolean("isAccept"));
+		info.setUserNum(result.getInt("userNum"));
+		info.setNickName(result.getString("nickName"));
+		info.setMajorNum(result.getInt("majorNum"));
+		
 	}
 
-	/**
-	 * 
-	 * 테스트값. 서버 구현되면 지울것 <br>
-	   아직 모든 값들이 무엇을 의미하는지 알 수 없음.
-	   
-	 * @return
-	 */
-	private JSONObject mainUserTestValue() {
-		JSONObject result = new JSONObject();
-		try {
-			result.put("acEmail", "chanroid@gmail.com");
-			result.put("joinDate", "20140701");
-			result.put("pictureNum", "0");
-			result.put("mainPicture", "0");
-			result.put("loginTypeId", "3");
-			result.put("judge", "null");
-			result.put("termsDate", "20140701");
-			result.put("userId", "chanroid");
-			result.put("userLoginId", "chanroid@gmail.com");
-			result.put("pw", SHA256.getCipherText("doddodwmf"));
-			result.put("schoolId", "kit");
-			result.put("confirm", "1");
-		} catch (JSONException e1) {
-			e1.printStackTrace();
-		}
-		
-		return result;
-	}
-	
 	/**
 	 * 키보드 액션 버튼 리스너
 	 * 
@@ -414,7 +274,7 @@ public class UnitedLoginActivity extends FragmentActivity {
 				break;
 			case R.id.btn_normal_join:
 				Intent joinIntent = new Intent(MainApp.appContext, kr.co.redstrap.campusting.join.JoinActivity.class);
-				MainApp.mainUser.setLoginTypeId(CampusTingConstant.LoginType.CAMPUSTING);
+				joinIntent.putExtra("loginType", LoginType.CAMPUSTING);
 				startActivity(joinIntent);
 				finish();
 				break;
@@ -455,42 +315,6 @@ public class UnitedLoginActivity extends FragmentActivity {
 	}
 
 	/**
-	 * 유저의 가입여부를 파악. 이미 가입된 유저라면 '1', 없으면 '0', 나머지는 에러코드임.
-	 */
-	private class IsUserCheckTask extends AsyncTask<String, Void, Character> {
-		char checker = '!';
-
-		@Override
-		protected Character doInBackground(String... userInfo) {
-
-			InputStream urlInputStream = null;
-			try {
-				URL url = new URL(UrlUtil.campusTingWebUrl + "isUserAlready?userLoginId=" + userInfo[0] + "&loginTypeId=" + userInfo[1]);
-				Log.i("isUserAlready : ", userInfo[0] + " // " + userInfo[1]);
-				HttpURLConnection con = (HttpURLConnection) url.openConnection();
-				con.setConnectTimeout(2500);
-				con.setUseCaches(false);
-				urlInputStream = con.getInputStream();
-				checker = (char) urlInputStream.read();
-				con.disconnect();
-				Log.i("체크", "" + checker);
-			} catch (Exception e) {
-				layout.toast(R.string.error_connection, Toast.LENGTH_SHORT);
-				Log.e("에러", e.toString());
-			} finally {
-				if (urlInputStream != null) {
-					try {
-						urlInputStream.close();
-					} catch (IOException e) {
-						Log.e("IOException", e.toString()); // 스트림 닫기 에러
-					}
-				}
-			}
-			return checker;
-		}
-	}
-
-	/**
 	 * 이메일 '@', '.'의 위치를 통해 간략한 형식 체크
 	 * 
 	 * @param email
@@ -519,5 +343,51 @@ public class UnitedLoginActivity extends FragmentActivity {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public void onStartTask(AbsCTSyncTask<String, Object> task) {
+		// TODO Auto-generated method stub
+		layout.showLoading("Loading...");
+	}
+
+	@Override
+	public void onProgressTask(AbsCTSyncTask<String, Object> task, int progress) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onErrorTask(AbsCTSyncTask<String, Object> task,
+			ErrorResult error) {
+		// TODO Auto-generated method stub
+		layout.dismissLoading();
+		layout.showErrorDialog(error);
+		LoginInfo.getInstance(this).setAutoLogin(false);
+		layout.swapLoginInterface();
+	}
+
+	@Override
+	public void onSuccessTask(AbsCTSyncTask<String, Object> task, Object result) {
+		// TODO Auto-generated method stub
+		layout.dismissLoading();
+
+		JSONObject resultJSON = (JSONObject) result;
+		
+		if (result != null) { // 우선은 결과값이 뭐라도 있으면 로그인 성공으로 간주
+			try {
+				settingMainUserInfo(resultJSON);
+			} catch (JSONException e) {
+				e.printStackTrace();
+				// 로그인 실패시 따로 처리하는 부분 구현해야 함
+			}
+			if (introEndFlag) { // 인트로 이후의 수동 로그인일 경우 직접 메인 이동
+				Intent mianIntent = new Intent(MainApp.appContext, MainActivity.class);
+				startActivity(mianIntent);
+				finish();
+			}
+		} else {
+			layout.toast(R.string.error_login_fail, Toast.LENGTH_SHORT);
+		}
 	}
 }

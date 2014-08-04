@@ -1,6 +1,5 @@
 package kr.co.redstrap.campusting.join.frag;
 
-import kr.co.redstrap.campusting.MainApp;
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.constant.CampusTingConstant;
 import kr.co.redstrap.campusting.join.AbsJoinFrag;
@@ -126,7 +125,7 @@ public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 			}
 		}
 		if (pictureSize == 0) {
-			MainApp.mainUser.setMainPicture(null);
+			
 		}
 	}
 
@@ -140,5 +139,11 @@ public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 	public void onPictureConfirmClick() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean isComfirmed() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class NormalJoinFrag extends AbsJoinFrag {
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -15,6 +16,12 @@ public class NormalJoinFrag extends AbsJoinFrag {
 		NormalJoinLayout rootView = new NormalJoinLayout(actContext);
 
 		return rootView.getView();
+	}
+
+	@Override
+	public boolean isComfirmed() {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 }

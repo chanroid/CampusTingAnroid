@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="#ffffff">
+
+    <FrameLayout
+        android:layout_width="438dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="-40dp" >
+
+        <ImageView
+            android:id="@+id/mainScrollBg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/map_nor" />
+
+        <ImageButton
+            android:id="@+id/libraryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="150dp"
+            android:layout_marginLeft="140dp"
+            android:background="@null"
+            android:src="@drawable/btn_map_library_nor1" />
+
+        <ImageButton
+            android:id="@+id/domitoryBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="195dp"
+            android:layout_marginTop="70dp"
+            android:background="@null"
+            android:src="@drawable/btn_map_dormitory_nor1" />
+
+        <ImageButton
+            android:id="@+id/gymBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="142dp"
+            android:layout_marginTop="102dp"
+            android:background="@null"
+            android:src="@drawable/btn_map_gym_nor1" />
+
+        <ImageButton
+            android:id="@+id/cafeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="125dp"
+            android:background="@null"
+            android:src="@drawable/btn_map_cafe_nor1" />
+
+        <ImageButton
+            android:id="@+id/circleRoomBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="118dp"
+            android:layout_marginRight="183dp"
+            android:background="@null"
+            android:src="@drawable/btn_map_join_nor1" />
+
+        <ImageButton
+            android:id="@+id/mainBuildingBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-40dp"
+            android:layout_marginTop="80dp"
+            android:background="@null"
+            android:src="@drawable/btn_map_main_nor1" />
+
+        <ImageButton
+            android:id="@+id/hofBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="0dp"
+            android:layout_marginTop="75dp"
+            android:background="@null"
+            android:src="@drawable/btn_map_hof_nor1" />
+
+        <ImageButton
+            android:id="@+id/clubBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginBottom="180dp"
+            android:layout_marginRight="5dp"
+            android:background="@null"
+            android:src="@drawable/btn_map_club_nor1" />
+    </FrameLayout>
+
+</HorizontalScrollView>

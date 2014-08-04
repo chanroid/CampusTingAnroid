@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/mainBuildingViewPager"
+    <include
+        android:id="@+id/mainBuildingPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
-    </android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"
+        layout="@layout/layout_main_day_night" />
 
     <kr.co.redstrap.campusting.util.view.BadgeButton
         android:id="@+id/mainAlertBtn"

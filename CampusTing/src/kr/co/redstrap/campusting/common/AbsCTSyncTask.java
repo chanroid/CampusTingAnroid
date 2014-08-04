@@ -73,12 +73,11 @@ public abstract class AbsCTSyncTask<P, R> extends AsyncTask<P, Integer, R> {
 	 * @return 
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	public AsyncTask<P, Integer, R> executeParallel() {
+	public AsyncTask<P, Integer, R> executeParallel(P... params) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			return this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+			return this.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 		} else {
-			return this.execute();
+			return this.execute(params);
 		}
 	}
 
@@ -87,12 +86,11 @@ public abstract class AbsCTSyncTask<P, R> extends AsyncTask<P, Integer, R> {
 	 * 
 	 * @param listGetter
 	 */
-	@SuppressWarnings("unchecked")
-	public AsyncTask<P, Integer, R> executeSerial() {
+	public AsyncTask<P, Integer, R> executeSerial(P... params) {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			return this.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
+			return this.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, params);
 		} else {
-			return this.execute();
+			return this.execute(params);
 		}
 	}
 

@@ -49,11 +49,7 @@ public class JoinActivity extends FragmentActivity implements JoinLayout.Callbac
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// 변수 셋팅
-		Log.i("user", MainApp.mainUser.toString());
-		Log.i("로그인 타입", MainApp.mainUser.getLoginTypeId());
-
-		if (MainApp.mainUser.getLoginTypeId().equalsIgnoreCase(CampusTingConstant.LoginType.CAMPUSTING)) { // 자체 로그인
+		if (getIntent().getStringExtra("loginType").equalsIgnoreCase(CampusTingConstant.LoginType.CAMPUSTING)) { // 자체 로그인
 			counter = 5;
 			contents = new Fragment[] { new TermsFrag(), new NormalJoinFrag(), new InfoFrag(), new PictureFrag(), new ConfirmUnivFrag() };
 		} else { // 외부 로그인

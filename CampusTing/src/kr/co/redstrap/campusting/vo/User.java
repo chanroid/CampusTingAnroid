@@ -34,9 +34,9 @@ public class User implements Serializable {
 	private String acEmail;
 	private String bodyTypeId;
 	private String height;
-	private String joinDate;
+	private long joinDate;
 	private String lastConnection;
-	private String pictureNum;
+	private int pictureNum;
 	private String mainPicture;
 	private String personalityId1;
 	private String personalityId2;
@@ -52,8 +52,8 @@ public class User implements Serializable {
 	}
 
 	public User(String userId, String schoolId, String deptId, String studentNum, String userLoginId, String loginTypeId, String pw, String mobileId, String mobileType,
-			String cpNum, String userName, String gender, String birth, String acEmail, String bodyTypeId, String height, String joinDate, String lastConnection,
-			String pictureNum, String mainPicture, String personalityId1, String personalityId2, String personalityId3, String idealType, String appeal, String confirm,
+			String cpNum, String userName, String gender, String birth, String acEmail, String bodyTypeId, String height, long joinDate, String lastConnection,
+			int pictureNum, String mainPicture, String personalityId1, String personalityId2, String personalityId3, String idealType, String appeal, String confirm,
 			String judge, String cityId, String termsDate) {
 		super();
 		this.userId = userId;
@@ -215,12 +215,12 @@ public class User implements Serializable {
 		this.height = height;
 	}
 
-	public String getJoinDate() {
+	public long getJoinDate() {
 		return joinDate;
 	}
 
-	public void setJoinDate(String joinDate) {
-		this.joinDate = joinDate;
+	public void setJoinDate(long l) {
+		this.joinDate = l;
 	}
 
 	public String getLastConnection() {
@@ -231,12 +231,12 @@ public class User implements Serializable {
 		this.lastConnection = lastConnection;
 	}
 
-	public String getPictureNum() {
+	public int getPictureNum() {
 		return pictureNum;
 	}
 
-	public void setPictureNum(String pictureNum) {
-		this.pictureNum = pictureNum;
+	public void setPictureNum(int i) {
+		this.pictureNum = i;
 	}
 
 	public String getMainPicture() {
@@ -327,6 +327,26 @@ public class User implements Serializable {
 				+ lastConnection + ", pictureNum=" + pictureNum + ", mainPicture=" + mainPicture + ", personalityId1=" + personalityId1 + ", personalityId2=" + personalityId2
 				+ ", personalityId3=" + personalityId3 + ", idealType=" + idealType + ", appeal=" + appeal + ", confirm=" + confirm + ", judge=" + judge + ", cityId=" + cityId
 				+ ", termsDate=" + termsDate + "]";
+	}
+
+	public void setIsAccept(boolean boolean1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setUserNum(int int1) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setNickName(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void setMajorNum(int int1) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

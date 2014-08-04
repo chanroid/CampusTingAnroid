@@ -32,4 +32,10 @@ public class TermsFrag extends AbsJoinFrag {
 		return layout.getView();
 	}
 
+	@Override
+	public boolean isComfirmed() {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }

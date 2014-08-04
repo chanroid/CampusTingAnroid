@@ -28,7 +28,6 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
@@ -196,14 +195,10 @@ public class JoinPageIndicator extends HorizontalScrollView implements PageIndic
 
 	@Override
 	public void onPageSelected(int position) {
-		Log.i("onPageSelected", "" + position);
-		Log.i("onPageSelected : 사용자", MainApp.mainUser.toString());
 		if (mListener != null) {
 			mListener.onPageSelected(position);
 		}
 
-		int validatorLength = validator.length;
-		boolean isValid = false;
 		for (int i = 0; i < position; i++) {
 			if (validator[i] == false) {
 				switch (i) {

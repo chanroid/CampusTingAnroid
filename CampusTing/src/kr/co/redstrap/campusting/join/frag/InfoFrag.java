@@ -56,4 +56,10 @@ public class InfoFrag extends AbsJoinFrag {
 		}
 
 	}
+
+	@Override
+	public boolean isComfirmed() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }

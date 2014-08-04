@@ -8,7 +8,6 @@ import java.util.Properties;
 import kr.co.redstrap.campusting.util.AnimUtil;
 import kr.co.redstrap.campusting.util.VibratorUtil;
 import kr.co.redstrap.campusting.util.web.UrlUtil;
-import kr.co.redstrap.campusting.vo.User;
 import android.app.Application;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -26,7 +25,6 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 public class MainApp extends Application {
 
 	public static MainApp appContext;
-	public static User mainUser = new User();
 
 	public MainApp() {
 		super();

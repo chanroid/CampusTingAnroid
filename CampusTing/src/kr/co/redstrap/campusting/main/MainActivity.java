@@ -40,19 +40,10 @@ public class MainActivity extends FragmentActivity implements MainLayout.Callbac
 			Log.i("startMode", "isBiginner : " + isBiginner);
 			if (isBiginner) {
 				Intent idIntent = new Intent(this, kr.co.redstrap.campusting.common.IdActivity.class);
-				idIntent.putExtra("user", MainApp.mainUser);
 				startActivity(idIntent);
 			}
 		}
 
-		//
-		// 학생증 테스트용 하드코딩
-		Intent idIntent = new Intent(this, kr.co.redstrap.campusting.common.IdActivity.class);
-		idIntent.putExtra("user", MainApp.mainUser);
-		startActivity(idIntent);
-		// 학생증 테스틍용 하드코딩
-		//
-		
 		initFragment();
 		switchFragment(mainFrag);
 	}

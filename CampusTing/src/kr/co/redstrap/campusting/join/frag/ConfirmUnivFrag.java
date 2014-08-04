@@ -80,4 +80,10 @@ public class ConfirmUnivFrag extends AbsJoinFrag implements ConfirmUnivFragLayou
 		startActivity(new Intent(getActivity(), MainActivity.class));
 		getActivity().finish();
 	}
+
+	@Override
+	public boolean isComfirmed() {
+		// TODO Auto-generated method stub
+		return true;
+	}
 }
