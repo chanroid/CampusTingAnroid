@@ -117,6 +117,7 @@ public interface CampusTingConstant {
 		public static final int CROP_PICTURE = 13;
 		public static final int PHOTO_VIEW = 14;
 		public static final int BEGINNER = 15;
+		public static final int SETTING = 16;
 	}
 
 	public class Parameter {

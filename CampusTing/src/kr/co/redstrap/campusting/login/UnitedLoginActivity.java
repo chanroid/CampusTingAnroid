@@ -83,7 +83,7 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 
 			@Override
 			public void afterTextChanged(Editable s) {
-				layout.changeInputIdIcon(isTypeEmail(s.toString()));
+				layout.changeInputIdIcon(ViewUtil.isTypeEmail(s.toString()));
 			}
 		});
 		
@@ -208,6 +208,7 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 		info.setUserNum(result.getInt("userNum"));
 		info.setNickName(result.getString("nickName"));
 		info.setMajorNum(result.getInt("majorNum"));
+		// 20140805 chanroid 아직 덜 작성함;;
 		
 	}
 
@@ -223,7 +224,7 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 		public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 			switch (v.getId()) {
 			case R.id.input_id:
-				if (isTypeEmail(v.getEditableText().toString())) {
+				if (ViewUtil.isTypeEmail(v.getEditableText().toString())) {
 					return false; // 액션 작동
 				} else {
 					layout.toast(R.string.error_email_confirm, Toast.LENGTH_SHORT);
@@ -263,7 +264,7 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 				if (layout.inputPw.getText().toString().length() < 6) { // 비밀번호 자릿수
 					layout.toast(R.string.error_password_confirm, Toast.LENGTH_SHORT);
 					layout.inputPw.requestFocus();
-				} else if (!isTypeEmail(layout.inputId.getText().toString())) { // 유효하지 않은 아이디
+				} else if (!ViewUtil.isTypeEmail(layout.inputId.getText().toString())) { // 유효하지 않은 아이디
 					layout.toast(R.string.error_email_confirm, Toast.LENGTH_SHORT);
 					layout.inputId.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
 					layout.inputId.requestFocus();
@@ -312,37 +313,6 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 			}
 			
 		}
-	}
-
-	/**
-	 * 이메일 '@', '.'의 위치를 통해 간략한 형식 체크
-	 * 
-	 * @param email
-	 *            체크할 이메일
-	 * @return 이메일 형식에 맞으면 true를 반환
-	 */
-	private boolean isTypeEmail(String email) {
-		boolean atCheck = false;
-		char[] emailChars = email.toCharArray();
-		int emailLength = emailChars.length;
-		int target = 0;
-		for (target = 0; target < emailLength; target++) {
-			if (emailChars[target] == '@') {
-				atCheck = true;
-				break;
-			}
-		}
-
-		if (atCheck == false) {
-			return false;
-		}
-
-		for (int i = target; i < emailLength; i++) {
-			if (emailChars[i] == '.') {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	@Override

@@ -22,6 +22,10 @@ public class LoginInfo {
 
 	public void setAutoLogin(boolean flag) {
 		mPref.edit().putBoolean("autoLogin", flag).commit();
+		if (!flag) {
+			setUserId("");
+			setUserPw("");
+		}
 	}
 
 	public boolean isAutoLogin() {
@@ -67,6 +71,11 @@ public class LoginInfo {
 
 	public void setUserNum(int num) {
 		mPref.edit().putInt("userNum", num).commit();
+	}
+
+	public String getUserNum() {
+		// TODO Auto-generated method stub
+		return mPref.getString("userNum", "0");
 	}
 
 	public void setNickName(String nickName) {

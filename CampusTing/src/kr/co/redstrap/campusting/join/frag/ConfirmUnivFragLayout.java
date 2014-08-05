@@ -47,7 +47,7 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 	// 대학인증 이메일인증 부분
 	private LinearLayout univLayout;
 	private RadioGroup univStateSpinner;
-	private Button univCardBtn;
+	private Button univConfirmBtn;
 	
 	private AutoCompleteTextView univAutoTextView;
 	private CheckedTextView univAutoCheck;

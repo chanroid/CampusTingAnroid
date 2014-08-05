@@ -51,12 +51,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <CheckedTextView
-                        android:id="@+id/emailIdCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -82,12 +76,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <CheckedTextView
-                        android:id="@+id/pwEditCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -113,12 +101,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <CheckedTextView
-                        android:id="@+id/pwConfirmEditCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -144,12 +126,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <CheckedTextView
-                        android:id="@+id/nickEditCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -177,14 +153,14 @@
                         android:orientation="horizontal" >
 
                         <RadioButton
-                            android:id="@+id/radio0"
+                            android:id="@+id/radio_mail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
                             android:text="남성" />
 
                         <RadioButton
-                            android:id="@+id/radio1"
+                            android:id="@+id/radio_femail"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="여성" />
@@ -255,12 +231,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <CheckedTextView
-                    android:id="@+id/promoCodeCheck"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </LinearLayout>
 
             <Button

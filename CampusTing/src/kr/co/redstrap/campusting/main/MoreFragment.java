@@ -1,5 +1,6 @@
 package kr.co.redstrap.campusting.main;
 
+import kr.co.redstrap.campusting.constant.CampusTingConstant.RequestCodes;
 import kr.co.redstrap.campusting.setting.SettingActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,7 +39,7 @@ public class MoreFragment extends Fragment implements MoreLayout.Callback {
 	@Override
 	public void onStoreClick() {
 		// TODO Auto-generated method stub
-
+		getActivity().startActivity(new Intent(getActivity(), PurchaseActivity.class));
 	}
 
 	@Override
@@ -50,6 +51,6 @@ public class MoreFragment extends Fragment implements MoreLayout.Callback {
 	@Override
 	public void onSettingClick() {
 		// TODO Auto-generated method stub
-		getActivity().startActivity(new Intent(getActivity(), SettingActivity.class));
+		getActivity().startActivityForResult(new Intent(getActivity(), SettingActivity.class), RequestCodes.SETTING);
 	}
 }

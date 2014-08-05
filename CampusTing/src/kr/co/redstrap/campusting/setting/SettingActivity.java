@@ -1,5 +1,6 @@
 package kr.co.redstrap.campusting.setting;
 
+import kr.co.redstrap.campusting.common.LoginInfo;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -49,7 +50,10 @@ public class SettingActivity extends Activity implements SettingLayout.Callback 
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				// TODO Auto-generated method stub
-				
+				setResult(RESULT_CANCELED);
+				LoginInfo info = LoginInfo.getInstance(SettingActivity.this);
+				info.setAutoLogin(false); // 로그인 정보 알아서 초기화됨
+				finish();
 			}
 		})
 		.setNegativeButton("아니오", null);

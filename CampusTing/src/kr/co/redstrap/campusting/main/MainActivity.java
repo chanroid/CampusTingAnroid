@@ -3,6 +3,7 @@ package kr.co.redstrap.campusting.main;
 import kr.co.redstrap.campusting.MainApp;
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.constant.CampusTingConstant;
+import kr.co.redstrap.campusting.login.UnitedLoginActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,9 +12,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.widget.Toast;
 
-public class MainActivity extends FragmentActivity implements MainLayout.Callback, CampusTingConstant {
+public class MainActivity extends FragmentActivity implements
+		MainLayout.Callback, CampusTingConstant {
 	private boolean finishFlag = false; // 두번 눌러야 종료
-	
+
 	private MainLayout layout;
 
 	private Fragment mainFrag;
@@ -21,14 +23,14 @@ public class MainActivity extends FragmentActivity implements MainLayout.Callbac
 	private Fragment moreFrag;
 	private Fragment historyFrag;
 	private Fragment chatFrag;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		layout = new MainLayout(this);
 		layout.setCallback(this);
-		
+
 		setContentView(layout.getView());
 
 		// TODO 마지막 접속일 저장
@@ -39,7 +41,8 @@ public class MainActivity extends FragmentActivity implements MainLayout.Callbac
 			boolean isBiginner = startMode.getBooleanExtra("isBiginner", false);
 			Log.i("startMode", "isBiginner : " + isBiginner);
 			if (isBiginner) {
-				Intent idIntent = new Intent(this, kr.co.redstrap.campusting.common.IdActivity.class);
+				Intent idIntent = new Intent(this,
+						kr.co.redstrap.campusting.common.IdActivity.class);
 				startActivity(idIntent);
 			}
 		}
@@ -47,15 +50,31 @@ public class MainActivity extends FragmentActivity implements MainLayout.Callbac
 		initFragment();
 		switchFragment(mainFrag);
 	}
-	
+
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		// TODO Auto-generated method stub
+		switch (arg0) {
+		case RequestCodes.SETTING:
+			switch (arg1) {
+			case RESULT_CANCELED:
+				finish();
+				startActivity(new Intent(this, UnitedLoginActivity.class));
+				break;
+			}
+			break;
+		}
+	}
+
 	private void initFragment() {
 		mainFrag = new MainFragment();
 		idCardFrag = new IdCardFragment();
 		moreFrag = new MoreFragment();
 		historyFrag = new HistoryFragment();
 		chatFrag = new ChatFragment();
-		
-		FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+
+		FragmentTransaction trans = getSupportFragmentManager()
+				.beginTransaction();
 		trans.add(R.id.mainFragmentContainer, mainFrag);
 		trans.add(R.id.mainFragmentContainer, idCardFrag);
 		trans.add(R.id.mainFragmentContainer, moreFrag);
@@ -63,22 +82,23 @@ public class MainActivity extends FragmentActivity implements MainLayout.Callbac
 		trans.add(R.id.mainFragmentContainer, chatFrag);
 		trans.commit();
 	}
-	
+
 	private void switchFragment(Fragment fragment) {
-		FragmentTransaction trans = getSupportFragmentManager().beginTransaction();
+		FragmentTransaction trans = getSupportFragmentManager()
+				.beginTransaction();
 		trans.hide(mainFrag);
 		trans.hide(idCardFrag);
 		trans.hide(moreFrag);
 		trans.hide(historyFrag);
 		trans.hide(chatFrag);
-		
+
 		trans.show(fragment);
 		trans.commit();
 	}
 
 	@Override
 	protected void onResume() {
-		super.onResume(); 
+		super.onResume();
 		overridePendingTransition(R.anim.fade_in, 0);
 	}
 
@@ -89,7 +109,8 @@ public class MainActivity extends FragmentActivity implements MainLayout.Callbac
 			super.onBackPressed();
 		} else {
 			finishFlag = true;
-			Toast.makeText(MainApp.appContext, R.string.exit_confirm, Toast.LENGTH_SHORT).show();
+			Toast.makeText(MainApp.appContext, R.string.exit_confirm,
+					Toast.LENGTH_SHORT).show();
 
 			new Thread() {
 				@Override
@@ -104,7 +125,7 @@ public class MainActivity extends FragmentActivity implements MainLayout.Callbac
 			}.start();
 		}
 	}
-	
+
 	@Override
 	public void onIdCardClick() {
 		// TODO Auto-generated method stub

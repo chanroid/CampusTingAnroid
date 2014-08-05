@@ -80,6 +80,12 @@ public class JoinLayout extends AbsCTLayout {
 		
 	}
 	
+	public void setCampustingJoin(boolean flag) {
+		if (!flag) {
+			myinfoBtn.setVisibility(View.GONE);
+		}
+	}
+	
 	private void highlightIndicatorButton(View highlightView) {
 		termsBtn.setBackgroundColor(Color.WHITE);
 		myinfoBtn.setBackgroundColor(Color.WHITE);

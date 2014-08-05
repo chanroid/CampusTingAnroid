@@ -1,7 +1,11 @@
 package kr.co.redstrap.campusting.main;
 
+import com.nostra13.universalimageloader.core.ImageLoader;
+
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTLayout;
+import kr.co.redstrap.campusting.util.web.LoadImage;
+import kr.co.redstrap.campusting.util.web.LoadImage.ImageKind;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.View;
@@ -20,8 +24,11 @@ public class IdCardLayout extends AbsCTLayout {
 		 * 
 		 * @param position 메인은 0, 밑에껀 1부터 시작
 		 */
+		public void onMainProfileImageClick();
 		public void onProfileImageClick(int position);
 		public void onModifyProfileClick();
+		public void onShowFaceCharmingClick();
+		public void onShowProfileCharmingClick();
 		
 		// 탭은 그냥 내부에서 처리
 	}
@@ -67,7 +74,7 @@ public class IdCardLayout extends AbsCTLayout {
 	private TextView faceCharmingPointText;
 	private Button faceCharmingPointBtn;
 	private TextView profileCharmingPointText;
-	private Button profileChramingPointButton;
+	private Button profileCharmingPointButton;
 	
 	public void setCallback(Callback callback) {
 		this.callback = callback;
@@ -128,7 +135,110 @@ public class IdCardLayout extends AbsCTLayout {
 		
 		charmingPointLayout = (LinearLayout) findViewById(R.id.charmingPointLayout);
 		
+		faceCharmingPointBtn = (Button) findViewById(R.id.faceCharmingPointBtn);
+		faceCharmingPointBtn.setOnClickListener(listener);
+		faceCharmingPointText = (TextView) findViewById(R.id.faceCharmingPointText);
+		profileCharmingPointText = (TextView) findViewById(R.id.profileCharmingPointText);
+		profileCharmingPointButton = (Button) findViewById(R.id.profileCharmingPointButton);
+		profileCharmingPointButton.setOnClickListener(listener);
 		
+	}
+	
+	public void setSimpleinfoText(String simpleinfoText) {
+		this.simpleinfoText.setText(simpleinfoText);
+	}
+	
+	public void setNicknameText(String nicknameText) {
+		this.nicknameText.setText(nicknameText);
+	}
+	
+	public void setSimpleintroText(String simpleintroText) {
+		this.simpleintroText.setText(simpleintroText);
+	}
+	
+	public void setProfileImage(int index, String url) {
+		switch (index) {
+		case 0:
+			LoadImage.load(profile1Img, url, ImageKind.PROFILE);
+			break;
+		case 1:
+			LoadImage.load(profile2Img, url, ImageKind.PROFILE);
+			break;
+		case 2:
+			LoadImage.load(profile3Img, url, ImageKind.PROFILE);
+			break;
+		case 3:
+			LoadImage.load(profile4Img, url, ImageKind.PROFILE);
+			break;
+		default:
+			LoadImage.load(mainImage, url, ImageKind.PROFILE);
+			break;
+		}
+	}
+	
+	public void setProfileAboutmeText(String profileAboutmeText) {
+		this.profileAboutmeText.setText(profileAboutmeText);
+	}
+	
+	public void setProfileCharacterText(String profileCharacterText) {
+		this.profileCharacterText.setText(profileCharacterText);
+	}
+	
+	public void setProfileBodyText(String profileBodyText) {
+		this.profileBodyText.setText(profileBodyText);
+	}
+	
+	public void setProfileSchoolText(String profileSchoolText) {
+		this.profileSchoolText.setText(profileSchoolText);
+	}
+	
+	public void setProfileBloodText(String profileBloodText) {
+		this.profileBloodText.setText(profileBloodText);
+	}
+	
+	public void setProfileReligionText(String profileReligionText) {
+		this.profileReligionText.setText(profileReligionText);
+	}
+	
+	public void setProfileDrinksmokeText(String profileDrinksmokeText) {
+		this.profileDrinksmokeText.setText(profileDrinksmokeText);
+	}
+	
+	public void setProfileCoupleCountText(String profileCoupleCountText) {
+		this.profileCoupleCountText.setText(profileCoupleCountText);
+	}
+	
+	public void setProfileSimpleIntroDescText(
+			String profileSimpleIntroDescText) {
+		this.profileSimpleIntroDescText.setText(profileSimpleIntroDescText);
+	}
+	
+	public void setProfileFaceText(String profileFaceText) {
+		this.profileFaceText.setText(profileFaceText);
+	}
+	
+	public void setProfileHobbyText(String profileHobbyText) {
+		this.profileHobbyText.setText(profileHobbyText);
+	}
+	
+	public void setProfileFavoriteText(String profileFavoriteText) {
+		this.profileFavoriteText.setText(profileFavoriteText);
+	}
+	
+	public void setProfileCharmingPointText(String profileCharmingPointText) {
+		this.profileCharmingPointText.setText(profileCharmingPointText);
+	}
+	
+	public void setProfileCharmingPointButtonText(String profileCharmingPointButton) {
+		this.profileCharmingPointButton.setText(profileCharmingPointButton);
+	}
+	
+	public void setFaceCharmingPointText(String faceCharmingPointText) {
+		this.faceCharmingPointText.setText(faceCharmingPointText);
+	}
+	
+	public void setFaceCharmingPointBtnText(String faceCharmingPointBtn) {
+		this.faceCharmingPointBtn.setText(faceCharmingPointBtn);
 	}
 	
 	private class Listener implements OnClickListener {
@@ -137,6 +247,12 @@ public class IdCardLayout extends AbsCTLayout {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
+			case R.id.profileCharmingPointButton:
+				callback.onShowProfileCharmingClick();
+				break;
+			case R.id.faceCharmingPointBtn:
+				callback.onShowFaceCharmingClick();
+				break;
 			case R.id.idcardTab:
 				idcardLayout.setVisibility(View.VISIBLE);
 				charmingPointLayout.setVisibility(View.GONE);
@@ -155,19 +271,19 @@ public class IdCardLayout extends AbsCTLayout {
 				callback.onModifyProfileClick();
 				break;
 			case R.id.idcardMainProfileImage:
-				callback.onProfileImageClick(0);
+				callback.onMainProfileImageClick();
 				break;
 			case R.id.idcardProfileImage1:
-				callback.onProfileImageClick(1);
+				callback.onProfileImageClick(0);
 				break;
 			case R.id.idcardProfileImage2:
-				callback.onProfileImageClick(2);
+				callback.onProfileImageClick(1);
 				break;
 			case R.id.idcardProfileImage3:
-				callback.onProfileImageClick(3);
+				callback.onProfileImageClick(2);
 				break;
 			case R.id.idcardProfileImage4:
-				callback.onProfileImageClick(4);
+				callback.onProfileImageClick(3);
 				break;
 			}
 		}

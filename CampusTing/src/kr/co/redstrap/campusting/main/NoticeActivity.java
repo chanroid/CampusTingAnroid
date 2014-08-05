@@ -13,6 +13,7 @@ public class NoticeActivity extends Activity implements NoticeLayout.Callback {
 		super.onCreate(savedInstanceState);
 		
 		layout = new NoticeLayout(this);
+		layout.setCallback(this);
 		
 		setContentView(layout.getView());
 	}
