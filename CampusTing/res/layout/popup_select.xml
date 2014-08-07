@@ -9,17 +9,18 @@
         android:layout_height="wrap_content"
         android:gravity="right" >
 
-        <Button
+        <ImageButton
             android:id="@+id/selectBackBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="7dp"
             android:layout_marginTop="7dp"
-            android:background="@drawable/icon_bad"/>
+            android:background="@null"
+            android:src="@drawable/btn_x"/>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/selectTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
@@ -28,48 +29,48 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <LinearLayout
+        android:id="@+id/selectCheckLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:gravity="center">
 
         <CheckedTextView
-            android:id="@+id/checkedTextView1"
+            android:id="@+id/selectCheck1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="C" />
+            android:checkMark="@drawable/img_check" />
 
         <CheckedTextView
-            android:id="@+id/checkedTextView2"
+            android:id="@+id/selectCheck2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="C" />
+            android:checkMark="@drawable/img_check"/>
 
         <CheckedTextView
-            android:id="@+id/checkedTextView3"
+            android:id="@+id/selectCheck3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:text="C" />
+            android:checkMark="@drawable/img_check"/>
     </LinearLayout>
 
     <GridView
-        android:id="@+id/gridView1"
-        android:layout_width="match_parent"
+        android:id="@+id/selectGrid"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="7dp"
-        android:numColumns="3"
-        android:choiceMode="multipleChoice"
+        android:numColumns="2"
         android:horizontalSpacing="0dp"
         android:verticalSpacing="0dp"
         android:stretchMode="columnWidth" >
     </GridView>
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
+        android:id="@+id/selectConfirmBtn"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Button" />
+        android:text="확인" />
 
 </LinearLayout>

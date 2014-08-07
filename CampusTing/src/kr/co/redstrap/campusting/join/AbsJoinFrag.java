@@ -4,6 +4,16 @@ import android.app.Activity;
 import android.support.v4.app.Fragment;
 
 public abstract class AbsJoinFrag extends Fragment {
+	
+	public interface Callback {
+		public void goNext(int currentIndex);
+	}
+	
+	public Callback callback;
+	
+	public void setCallback(Callback callback) {
+		this.callback = callback;
+	}
 
 	public JoinActivity actContext;
 

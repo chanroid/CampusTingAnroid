@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class ViewUtil {
 
@@ -101,7 +102,7 @@ public class ViewUtil {
 	 * @param stringId
 	 *            표시할 문장의 ID
 	 */
-	public static void setGood(EditText forImage) {
+	public static void setGood(TextView forImage) {
 		forImage.setCompoundDrawablesWithIntrinsicBounds(null, null, iconGood,
 				null);
 	}
@@ -118,7 +119,7 @@ public class ViewUtil {
 	 * @param stringId
 	 *            표시할 문장의 ID
 	 */
-	public static void setBad(EditText forImage) {
+	public static void setBad(TextView forImage) {
 		forImage.setCompoundDrawablesWithIntrinsicBounds(null, null, iconBad,
 				null);
 	}

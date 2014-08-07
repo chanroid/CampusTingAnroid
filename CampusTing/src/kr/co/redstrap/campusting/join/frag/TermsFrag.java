@@ -7,12 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class TermsFrag extends AbsJoinFrag {
+public class TermsFrag extends AbsJoinFrag implements TermsLayout.Callback {
 
 	// 뷰
 	private TermsLayout layout;
 
 	//
+	private boolean polishConfirmed;
+	private boolean privacyConfirmed;
 
 	public TermsFrag() {
 		super();
@@ -28,6 +30,7 @@ public class TermsFrag extends AbsJoinFrag {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		Log.i("TermsFrag :: onCreateView", "onCreateView");
 		layout = new TermsLayout(actContext);
+		layout.setCallback(this);
 
 		return layout.getView();
 	}
@@ -35,7 +38,23 @@ public class TermsFrag extends AbsJoinFrag {
 	@Override
 	public boolean isComfirmed() {
 		// TODO Auto-generated method stub
-		return true;
+		return polishConfirmed && privacyConfirmed;
+	}
+
+	@Override
+	public void onPolicyClick() {
+		// TODO Auto-generated method stub
+		polishConfirmed = true;
+		if (isComfirmed())
+			callback.goNext(0);
+	}
+
+	@Override
+	public void onPrivacyClick() {
+		// TODO Auto-generated method stub
+		privacyConfirmed = true;
+		if (isComfirmed())
+			callback.goNext(0);
 	}
 
 }

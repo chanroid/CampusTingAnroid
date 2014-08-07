@@ -80,12 +80,6 @@ public class JoinLayout extends AbsCTLayout {
 		
 	}
 	
-	public void setCampustingJoin(boolean flag) {
-		if (!flag) {
-			myinfoBtn.setVisibility(View.GONE);
-		}
-	}
-	
 	private void highlightIndicatorButton(View highlightView) {
 		termsBtn.setBackgroundColor(Color.WHITE);
 		myinfoBtn.setBackgroundColor(Color.WHITE);
@@ -98,6 +92,23 @@ public class JoinLayout extends AbsCTLayout {
 	
 	public void setCurrentPage(int page) {
 		pager.setCurrentItem(page, true);
+		switch (page) {
+		case 0:
+			highlightIndicatorButton(termsBtn);
+			break;
+		case 1:
+			highlightIndicatorButton(myinfoBtn);
+			break;
+		case 2:
+			highlightIndicatorButton(profileBtn);
+			break;
+		case 3:
+			highlightIndicatorButton(photoBtn);
+			break;
+		case 4:
+			highlightIndicatorButton(jobunivBtn);
+			break;
+		}
 	}
 	
 	private class Listener implements OnClickListener {

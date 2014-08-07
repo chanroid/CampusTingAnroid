@@ -48,14 +48,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="" />
+                        android:text="거주지역을 선택해주세요."
+                        android:textSize="12sp" />
 
-                    <CheckedTextView
-                        android:id="@+id/joininfoLocalCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -78,14 +73,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Button" />
+                        android:textSize="12sp" 
+                        android:text="성격을 선택해주세요." />
 
-                    <CheckedTextView
-                        android:id="@+id/joininfoCharacterCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -108,14 +98,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Button" />
+                        android:text="체형을 선택해주세요."
+                        android:textSize="12sp"  />
 
-                    <CheckedTextView
-                        android:id="@+id/joininfoBodyCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -133,19 +118,14 @@
                         android:text="키"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
-                    <Button
+                    <EditText
                         android:id="@+id/joininfoHeightBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:layout_weight="1" >
-                    </Button>
+                    </EditText>
 
-                    <CheckedTextView
-                        android:id="@+id/joininfoHeightCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -168,14 +148,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Button" />
+                        android:textSize="12sp" 
+                        android:text="혈액형을 선택해주세요" />
 
-                    <CheckedTextView
-                        android:id="@+id/joininfoBloodCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -198,14 +173,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Button" />
+                        android:text="종교를 선택해주세요."
+                        android:textSize="12sp"  />
 
-                    <CheckedTextView
-                        android:id="@+id/joininfoReligionCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -235,20 +205,15 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:text="남성" />
+                            android:text="흡연" />
 
                         <RadioButton
                             android:id="@+id/joininfoSmokeRadio2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="여성" />
+                            android:text="비흡연" />
                     </RadioGroup>
 
-                    <CheckedTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -271,14 +236,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Button" />
+                        android:text="음주 여부를 선택해주세요."
+                        android:textSize="12sp"  />
 
-                    <CheckedTextView
-                        android:id="@+id/joininfoDrinkCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -302,12 +262,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"/>
 
-                    <CheckedTextView
-                        android:id="@+id/joininfoJobCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -330,14 +284,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Button" />
+                        android:text="학과를 선택해주세요." />
 
-                    <CheckedTextView
-                        android:id="@+id/joininfoMajorEdit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
 
                 <TableRow
@@ -360,20 +308,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Button" />
+                        android:text="연애경험을 선택해주세요." />
 
-                    <CheckedTextView
-                        android:id="@+id/joininfoCoupleCountCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="C" />
                 </TableRow>
             </TableLayout>
 
             <Button
                 android:id="@+id/joininfoConfirmBtn"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"

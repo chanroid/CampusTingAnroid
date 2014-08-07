@@ -2,6 +2,7 @@ package kr.co.redstrap.campusting.join.frag;
 
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTLayout;
+import kr.co.redstrap.campusting.common.SimpleTextWatcher;
 import kr.co.redstrap.campusting.util.ViewUtil;
 import android.content.Context;
 import android.text.Editable;
@@ -56,20 +57,7 @@ public class NormalJoinLayout extends AbsCTLayout {
 
 		// 뷰 연결
 		emailIdEdit = (EditText) findViewById(R.id.emailIdEdit);
-		emailIdEdit.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-			
+		emailIdEdit.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -83,20 +71,7 @@ public class NormalJoinLayout extends AbsCTLayout {
 		});
 		
 		pwEdit = (EditText) findViewById(R.id.pwEdit);
-		pwEdit.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-			
+		pwEdit.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -107,20 +82,7 @@ public class NormalJoinLayout extends AbsCTLayout {
 			}
 		});
 		pwConfirmEdit = (EditText) findViewById(R.id.pwConfirmEdit);
-		pwConfirmEdit.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-			
+		pwConfirmEdit.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -131,20 +93,7 @@ public class NormalJoinLayout extends AbsCTLayout {
 			}
 		});
 		nickEdit = (EditText) findViewById(R.id.nickEdit);
-		nickEdit.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-			
+		nickEdit.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -163,20 +112,7 @@ public class NormalJoinLayout extends AbsCTLayout {
 		birthBtn.setOnClickListener(l);
 
 		promoCodeEdit = (EditText) findViewById(R.id.promoCodeEdit);
-		promoCodeEdit.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
-			}
-			
+		promoCodeEdit.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -197,12 +133,25 @@ public class NormalJoinLayout extends AbsCTLayout {
 		return emailIdEdit.getText().toString();
 	}
 	
+	public void setEmailId(String email) {
+		emailIdEdit.setText(email);
+		emailIdEdit.setEnabled(false);
+	}
+	
 	public String getPwText() {
 		return pwEdit.getText().toString();
 	}
-	
+
 	public String getPwConfirmText() {
 		return pwConfirmEdit.getText().toString();
+	}
+	
+	public void setPwText(String pw) {
+		pwEdit.setText(pw);
+		pwConfirmEdit.setText(pw);
+		
+		pwEdit.setEnabled(false);
+		pwConfirmEdit.setEnabled(false);
 	}
 	
 	public String getNickname() {
@@ -213,6 +162,15 @@ public class NormalJoinLayout extends AbsCTLayout {
 		return gender;
 	}
 	
+	public void setGender(String gender) {
+		if ("M".equals(gender))
+			genderRadioGroup.check(R.id.radio_mail);
+		else if ("F".equals(gender))
+			genderRadioGroup.check(R.id.radio_femail);
+		
+		genderRadioGroup.setEnabled(false);
+	}
+	
 	public String getPromoCode() {
 		return promoCodeEdit.getText().toString();
 	}
@@ -220,6 +178,11 @@ public class NormalJoinLayout extends AbsCTLayout {
 	// 20140805 chanroid 임의값으로 하고 나중에 팝업 구현되면 해당 값 넣을것 
 	public String getBirth() {
 		return "198880811";
+	}
+	
+	public void setBirth(String birth) {
+		birthBtn.setText(birth);
+		birthBtn.setEnabled(false);
 	}
 	
 	public boolean isConfirmed() {

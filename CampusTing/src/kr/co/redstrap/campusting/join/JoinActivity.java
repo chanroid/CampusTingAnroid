@@ -1,7 +1,5 @@
 package kr.co.redstrap.campusting.join;
 
-import java.util.ArrayList;
-
 import kr.co.redstrap.campusting.MainApp;
 import kr.co.redstrap.campusting.common.ErrorResult;
 import kr.co.redstrap.campusting.constant.CampusTingConstant;
@@ -22,13 +20,12 @@ import android.widget.Toast;
 
 import com.facebook.Session;
 
-public class JoinActivity extends FragmentActivity implements JoinLayout.Callback {
+public class JoinActivity extends FragmentActivity implements
+		JoinLayout.Callback, AbsJoinFrag.Callback {
 
 	private boolean finishFlag = false;
 
 	private int counter;
-
-	public ArrayList<String> pictureList = new ArrayList<String>();
 
 	public int getCounter() {
 		return counter;
@@ -38,7 +35,11 @@ public class JoinActivity extends FragmentActivity implements JoinLayout.Callbac
 		this.counter = counter;
 	}
 
-	private AbsJoinFrag[] contents;
+	private TermsFrag termsFrag;
+	private NormalJoinFrag normalFrag;
+	private InfoFrag infoFrag;
+	private PictureFrag picFrag;
+	private ConfirmUnivFrag confirmunivFrag;
 
 	// 뷰
 	public JoinLayout layout;
@@ -50,25 +51,38 @@ public class JoinActivity extends FragmentActivity implements JoinLayout.Callbac
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		if (getIntent().getStringExtra("loginType").equalsIgnoreCase(CampusTingConstant.LoginType.CAMPUSTING)) { // 자체 로그인
-			counter = 5;
-			contents = new AbsJoinFrag[] { new TermsFrag(), new NormalJoinFrag(), new InfoFrag(), new PictureFrag(), new ConfirmUnivFrag() };
-		} else { // 외부 로그인
-			counter = 4;
-			contents = new AbsJoinFrag[] { new TermsFrag(), new InfoFrag(), new PictureFrag(), new ConfirmUnivFrag() };
-		}
-
+		counter = 5;
+		
+		termsFrag = new TermsFrag();
+		termsFrag.setCallback(this);
+		normalFrag = new NormalJoinFrag();
+		normalFrag.setCallback(this);
+		infoFrag = new InfoFrag();
+		infoFrag.setCallback(this);
+		picFrag = new PictureFrag();
+		picFrag.setCallback(this);
+		confirmunivFrag = new ConfirmUnivFrag();
+		confirmunivFrag.setCallback(this);
+		
 		// 인디케이터 셋팅
-		FragmentPagerAdapter adapter = new JoinFragAdapter(getSupportFragmentManager());
+		FragmentPagerAdapter adapter = new JoinFragAdapter(
+				getSupportFragmentManager());
 		layout = new JoinLayout(this, adapter);
 		layout.setCallback(this);
 		setContentView(layout.getView());
 
-		// 20140805 chanroid 인텐트 받아서 내정보 입력 부분 조정해 줘야 하는 부분 
+		// 20140805 chanroid 인텐트 받아서 내정보 입력 부분 조정해 줘야 하는 부분
+		if (getIntent().getStringExtra("loginType").equalsIgnoreCase(
+				CampusTingConstant.LoginType.FACEBOOK)) {
+			
+		} else if (getIntent().getStringExtra("loginType").equalsIgnoreCase(
+				CampusTingConstant.LoginType.NAVER)) {
+			
+		}
 		// 서비스 시작
 
 	}
-	
+
 	class JoinFragAdapter extends FragmentPagerAdapter {
 		public JoinFragAdapter(FragmentManager fm) {
 			super(fm);
@@ -76,7 +90,20 @@ public class JoinActivity extends FragmentActivity implements JoinLayout.Callbac
 
 		@Override
 		public Fragment getItem(int position) {
-			return contents[position];
+			switch (position) {
+			case 0:
+				return termsFrag;
+			case 1:
+				return normalFrag;
+			case 2:
+				return infoFrag;
+			case 3:
+				return picFrag;
+			case 4:
+				return confirmunivFrag;
+			default:
+				return termsFrag;
+			}
 		}
 
 		@Override
@@ -97,7 +124,8 @@ public class JoinActivity extends FragmentActivity implements JoinLayout.Callbac
 			super.onBackPressed();
 		} else {
 			finishFlag = true;
-			Toast.makeText(MainApp.appContext, "한번 더 누르면 캠퍼스팅을 종료합니다", Toast.LENGTH_SHORT).show();
+			Toast.makeText(MainApp.appContext, "한번 더 누르면 캠퍼스팅을 종료합니다",
+					Toast.LENGTH_SHORT).show();
 
 			new Thread() {
 				@Override
@@ -121,25 +149,25 @@ public class JoinActivity extends FragmentActivity implements JoinLayout.Callbac
 		if (session != null) {
 			session.closeAndClearTokenInformation();
 		}
-		
+
 		startActivity(new Intent(this, UnitedLoginActivity.class));
 		finish();
 	}
-	
+
 	private void changeFragment(int index) {
-		if (index > 0 && !contents[0].isComfirmed()) {
+		if (index > 0 && !termsFrag.isComfirmed()) {
 			// 이용약관에 동의
 			layout.showErrorDialog(new ErrorResult(0, "이용약관에 동의해주세요."));
 			layout.setCurrentPage(0);
-		} else if (index > 1 && !contents[1].isComfirmed()) {
+		} else if (index > 1 && !normalFrag.isComfirmed()) {
 			// 내 정보를 입력
 			layout.showErrorDialog(new ErrorResult(0, "내 정보를 입력해주세요."));
 			layout.setCurrentPage(1);
-		} else if (index > 2 && !contents[2].isComfirmed()) {
+		} else if (index > 2 && !infoFrag.isComfirmed()) {
 			// 프로필 입력
 			layout.showErrorDialog(new ErrorResult(0, "프로필을 입력해주세요."));
 			layout.setCurrentPage(2);
-		} else if (index > 3 && !contents[3].isComfirmed()) {
+		} else if (index > 3 && !picFrag.isComfirmed()) {
 			// 사진을 등록
 			layout.showErrorDialog(new ErrorResult(0, "사진을 등록해주세요."));
 			layout.setCurrentPage(3);
@@ -177,5 +205,12 @@ public class JoinActivity extends FragmentActivity implements JoinLayout.Callbac
 	public void onJobUnivClick() {
 		// TODO Auto-generated method stub
 		changeFragment(4);
+	}
+
+	@Override
+	public void goNext(int currentIndex) {
+		// TODO Auto-generated method stub
+		if (currentIndex < 4)
+			changeFragment(currentIndex + 1);
 	}
 }

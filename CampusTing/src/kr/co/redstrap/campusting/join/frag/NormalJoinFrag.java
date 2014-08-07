@@ -9,8 +9,16 @@ import android.view.ViewGroup;
 
 public class NormalJoinFrag extends AbsJoinFrag implements NormalJoinLayout.Callback {
 	
+	public static class NormalJoinInfo {
+		public String email;
+		public String pw; // 연동 코드로 대체
+		public String nickName;
+		public String gender;
+		public String birth;
+	}
+	
 	private NormalJoinLayout layout;
-	private Object normalJoinInfo;
+	public NormalJoinInfo info;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -21,9 +29,12 @@ public class NormalJoinFrag extends AbsJoinFrag implements NormalJoinLayout.Call
 		return layout.getView();
 	}
 	
-	public void setNormalJoinInfo(Object info) {
-		// 20140805 chanroid 해당 객체 생성되면 바꿀것
-		// 대체로 객체에 있는 정보들 레이아웃에 세팅하는 코드
+	public void setNormalJoinInfo(NormalJoinInfo info) {
+		this.info = info;
+		layout.setBirth(info.birth);
+		layout.setEmailId(info.email);
+		layout.setGender(info.gender);
+		layout.setPwText(info.pw);
 	}
 
 	@Override
@@ -35,7 +46,7 @@ public class NormalJoinFrag extends AbsJoinFrag implements NormalJoinLayout.Call
 	@Override
 	public void onNextClick() {
 		// TODO Auto-generated method stub
-		
+		callback.goNext(1);
 	}
 
 }
