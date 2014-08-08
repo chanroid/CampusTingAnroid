@@ -1,28 +1,34 @@
 package kr.co.redstrap.campusting.join.frag;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Locale;
+
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTLayout;
 import kr.co.redstrap.campusting.common.SimpleTextWatcher;
 import kr.co.redstrap.campusting.util.ViewUtil;
+import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class NormalJoinLayout extends AbsCTLayout {
-	
+
 	public interface Callback {
 		// 패스워드는 클래스 안에서 바로 처리
 		public void onNextClick();
 	}
-	
+
 	private Callback callback;
-	
+
 	public void setCallback(Callback callback) {
 		this.callback = callback;
 	}
@@ -35,8 +41,9 @@ public class NormalJoinLayout extends AbsCTLayout {
 	private Button birthBtn;
 	private EditText promoCodeEdit;
 	private Button nextBtn;
-	
-	private String gender = "M";
+
+	private boolean gender = true;
+	private String birth = null;
 
 	public NormalJoinLayout(Context ctx) {
 		super(ctx);
@@ -52,7 +59,7 @@ public class NormalJoinLayout extends AbsCTLayout {
 	@Override
 	public void inflateViews() {
 		// TODO Auto-generated method stub
-		
+
 		Listener l = new Listener();
 
 		// 뷰 연결
@@ -69,7 +76,7 @@ public class NormalJoinLayout extends AbsCTLayout {
 				}
 			}
 		});
-		
+
 		pwEdit = (EditText) findViewById(R.id.pwEdit);
 		pwEdit.addTextChangedListener(new SimpleTextWatcher() {
 			@Override
@@ -128,16 +135,16 @@ public class NormalJoinLayout extends AbsCTLayout {
 		nextBtn.setOnClickListener(l);
 
 	}
-	
+
 	public String getEmailId() {
 		return emailIdEdit.getText().toString();
 	}
-	
+
 	public void setEmailId(String email) {
 		emailIdEdit.setText(email);
 		emailIdEdit.setEnabled(false);
 	}
-	
+
 	public String getPwText() {
 		return pwEdit.getText().toString();
 	}
@@ -145,50 +152,51 @@ public class NormalJoinLayout extends AbsCTLayout {
 	public String getPwConfirmText() {
 		return pwConfirmEdit.getText().toString();
 	}
-	
+
 	public void setPwText(String pw) {
 		pwEdit.setText(pw);
 		pwConfirmEdit.setText(pw);
-		
+
 		pwEdit.setEnabled(false);
 		pwConfirmEdit.setEnabled(false);
 	}
-	
+
 	public String getNickname() {
 		return nickEdit.getText().toString();
 	}
-	
-	public String getGender() {
+
+	public boolean getGender() {
 		return gender;
 	}
-	
-	public void setGender(String gender) {
-		if ("M".equals(gender))
+
+	public void setGender(boolean gender) {
+		if (gender)
 			genderRadioGroup.check(R.id.radio_mail);
-		else if ("F".equals(gender))
+		else
 			genderRadioGroup.check(R.id.radio_femail);
-		
+
 		genderRadioGroup.setEnabled(false);
 	}
-	
+
 	public String getPromoCode() {
 		return promoCodeEdit.getText().toString();
 	}
-	
-	// 20140805 chanroid 임의값으로 하고 나중에 팝업 구현되면 해당 값 넣을것 
+
 	public String getBirth() {
-		return "198880811";
+		return birth;
 	}
-	
+
 	public void setBirth(String birth) {
 		birthBtn.setText(birth);
 		birthBtn.setEnabled(false);
 	}
-	
+
 	public boolean isConfirmed() {
-		// 20140805 chanroid 일단 테스트로 이렇게 만들어 놓고 얘네들 따로 변수로 관리해야 함. 서버모듈 붙이고.. 팝업 달고...
+		// 20140805 chanroid 일단 테스트로 이렇게 만들어 놓고 얘네들 따로 변수로 관리해야 함. 서버모듈 붙이고.. 팝업
+		// 달고...
 		boolean confirmEmail = ViewUtil.isTypeEmail(getEmailId());
-		boolean confirmPw = getPwText().equals(getPwConfirmText()) && getPwText().length() > 5;
+		boolean confirmPw = getPwText().equals(getPwConfirmText())
+				&& getPwText().length() > 5;
 		boolean confirmNick = getNickname().length() > 1;
 		boolean confirmBirth = !getBirth().equals("00000000");
 		return confirmEmail && confirmPw && confirmNick && confirmBirth;
@@ -201,10 +209,10 @@ public class NormalJoinLayout extends AbsCTLayout {
 			// TODO Auto-generated method stub
 			switch (checkedId) {
 			case R.id.radio_mail:
-				gender = "M";
+				gender = true;
 				break;
 			case R.id.radio_femail:
-				gender = "F";
+				gender = false;
 				break;
 			}
 		}
@@ -215,6 +223,28 @@ public class NormalJoinLayout extends AbsCTLayout {
 			switch (v.getId()) {
 			case R.id.birthBtn:
 				// 생일 설정하는 팝업창 띄움
+				GregorianCalendar calendar = new GregorianCalendar(
+						Locale.getDefault());
+
+				DatePickerDialog.OnDateSetListener datecallback = new OnDateSetListener() {
+
+					@Override
+					public void onDateSet(DatePicker view, int year,
+							int monthOfYear, int dayOfMonth) {
+						// TODO Auto-generated method stub
+						String format = "%04d%02d%02d";
+						String birth = String.format(format, year,
+								monthOfYear + 1, dayOfMonth);
+						birthBtn.setText(birth);
+						NormalJoinLayout.this.birth = birth;
+					}
+				};
+
+				DatePickerDialog dialog = new DatePickerDialog(getContext(),
+						datecallback, calendar.get(Calendar.YEAR),
+						calendar.get(Calendar.MONTH) + 1,
+						calendar.get(Calendar.DAY_OF_MONTH));
+				dialog.show();
 				break;
 			case R.id.nextBtn:
 				callback.onNextClick();

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<kr.co.redstrap.campusting.util.view.HalfPagingScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="#ffffff">
+    android:layout_height="match_parent"
+    android:background="#ffffff" >
 
     <FrameLayout
         android:layout_width="438dp"
@@ -96,4 +96,4 @@
             android:src="@drawable/btn_map_club_nor1" />
     </FrameLayout>
 
-</HorizontalScrollView>
+</kr.co.redstrap.campusting.util.view.HalfPagingScrollView>

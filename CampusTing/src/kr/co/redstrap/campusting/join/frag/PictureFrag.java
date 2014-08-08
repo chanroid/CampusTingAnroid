@@ -82,14 +82,17 @@ public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 	 * @param uri
 	 *            크롭할 대상의 Uri
 	 */
-	private void crop(Uri uri) {
+	private void crop(Intent intent) {
 		// 20140807 chanroid crop intent에 문제가 있어서 실행이 안됨
 		// handle activity not found 어쩌고 저쩌고
-		Log.i("uri", "" + uri);
+		Log.i("uri", "" + intent.getData());
 		Intent cropIntent = new Intent("com.android.camera.action.CROP");
-		cropIntent.setData(uri);
+		cropIntent.setData(intent.getData());
 		cropIntent.putExtra("aspectX", 1);
 		cropIntent.putExtra("aspectY", 1);
+		cropIntent.putExtra("outputX", 100);
+		cropIntent.putExtra("outputY", 100);
+		cropIntent.putExtra("return-data", true);
 		cropIntent.putExtra("scale", true);
 		startActivityForResult(cropIntent,
 				CampusTingConstant.RequestCodes.CROP_PICTURE);
@@ -104,7 +107,7 @@ public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 			if ((requestCode == CampusTingConstant.RequestCodes.PICK_CAMERA || requestCode == CampusTingConstant.RequestCodes.PICK_GALLERY)) { // 사진
 																																				// 선택
 				Log.i("onActivityResult", data.getData() + "");
-				crop(data.getData());
+				crop(data);
 			} else if (requestCode == CampusTingConstant.RequestCodes.CROP_PICTURE) { // 크롭
 				Log.i("onActivityResult", data.getData() + "");
 				Log.i("onActivityResult", data.getExtras() + "");
@@ -186,6 +189,8 @@ public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 	@Override
 	public boolean isComfirmed() {
 		// TODO Auto-generated method stub
-		return profileImageList.size() > 1;
+//		return profileImageList.size() > 1;
+		return true;
+		// 20140808 chanroid 에러가 나는 관계로 일단 그냥 넘어감
 	}
 }

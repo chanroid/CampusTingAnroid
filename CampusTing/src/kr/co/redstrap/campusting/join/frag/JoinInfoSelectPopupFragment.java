@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import kr.co.redstrap.campusting.R;
+import kr.co.redstrap.campusting.common.ErrorResult;
 import kr.co.redstrap.campusting.join.JoinInfoSelectItems;
 import android.app.Dialog;
 import android.graphics.Color;
@@ -29,7 +30,7 @@ public class JoinInfoSelectPopupFragment extends DialogFragment implements
 	private Callback callback;
 	private BaseAdapter adapter;
 	private ArrayList<Map<String, Object>> gridItems;
-	private ArrayList<Map<String, Object>> selectItems = new ArrayList<Map<String,Object>>();
+	private ArrayList<Map<String, Object>> selectItems = new ArrayList<Map<String, Object>>();
 
 	private JoinInfoSelectPopupLayout layout;
 
@@ -42,8 +43,8 @@ public class JoinInfoSelectPopupFragment extends DialogFragment implements
 	public JoinInfoSelectPopupFragment(int requestCode) {
 		// TODO Auto-generated constructor stub
 		// 여기서 코드 기반으로 리스트 어댑터 아이템 세팅
-		this.requestCode = requestCode; 
-		
+		this.requestCode = requestCode;
+
 		if (requestCode == JoinInfoSelectItems.CHARACTER) {
 			selectableCount = 3;
 		} else {
@@ -72,10 +73,11 @@ public class JoinInfoSelectPopupFragment extends DialogFragment implements
 
 				icon.setImageResource(iconRes);
 				title.setText(titleText);
-				
+
 				// 20140807 chanroid 임시로 색상으로 하고 나중에 이미지로 변경
 				if (selectItems.contains(map)) {
-					convertView.setBackgroundColor(getResources().getColor(android.R.color.holo_blue_light));
+					convertView.setBackgroundColor(getResources().getColor(
+							android.R.color.holo_blue_light));
 				} else {
 					convertView.setBackgroundColor(Color.TRANSPARENT);
 				}
@@ -88,13 +90,13 @@ public class JoinInfoSelectPopupFragment extends DialogFragment implements
 				// TODO Auto-generated method stub
 				return 0l;
 			}
-			
+
 			@Override
 			public Object getItem(int position) {
 				// TODO Auto-generated method stub
 				return gridItems.get(position);
 			}
-			
+
 			@Override
 			public int getCount() {
 				// TODO Auto-generated method stub
@@ -135,9 +137,13 @@ public class JoinInfoSelectPopupFragment extends DialogFragment implements
 		// TODO Auto-generated method stub
 		// 20140806 chanroid 선택된 아이템 번호로 실제 데이터를 넘겨주어야 함
 		// 선택해야할 갯수 체크하는 로직 필요
-		dismiss();
-		if (selectItems.size() == selectableCount)
+		if (selectItems.size() == selectableCount) {
+			dismiss();
 			callback.onConfirmed(requestCode, selectItems);
+		} else {
+			layout.showErrorDialog(new ErrorResult(0, "최소 " + selectableCount
+					+ "개 이상 선택해주세요."));
+		}
 	}
 
 	@Override

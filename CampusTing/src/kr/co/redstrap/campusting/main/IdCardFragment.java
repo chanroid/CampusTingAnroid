@@ -33,7 +33,7 @@ public class IdCardFragment extends Fragment implements IdCardLayout.Callback {
 		CTJSONSyncTask task = new CTJSONSyncTask();
 		
 		task.addHttpParam("userNum", LoginInfo.getInstance(getActivity()).getUserNum());
-		task.addHttpParam("univCardType", 0);
+		task.addHttpParam("univCardType", 1);
 		
 		task.addCallback(new CTSyncTaskCallback<String, Object>() {
 

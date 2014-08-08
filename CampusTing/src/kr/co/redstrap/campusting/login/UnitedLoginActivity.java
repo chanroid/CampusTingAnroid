@@ -10,6 +10,7 @@ import kr.co.redstrap.campusting.constant.CampusTingConstant;
 import kr.co.redstrap.campusting.constant.CampusTingConstant.LoginType;
 import kr.co.redstrap.campusting.main.MainActivity;
 import kr.co.redstrap.campusting.util.PwInputFilter;
+import kr.co.redstrap.campusting.util.SHA256;
 import kr.co.redstrap.campusting.util.ViewUtil;
 import kr.co.redstrap.campusting.util.indicator.TabPageIndicator;
 import kr.co.redstrap.campusting.util.web.CTJSONSyncTask;
@@ -39,7 +40,8 @@ import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.model.GraphUser;
 
-public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskCallback<String, Object> {
+public class UnitedLoginActivity extends FragmentActivity implements
+		CTSyncTaskCallback<String, Object> {
 	/**
 	 * Fragment를 사용하지 않는데 왜 FragmentActivity를 사용하는지 의문
 	 */
@@ -50,11 +52,11 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 	public TabPageIndicator indicator;
 	private LoginEditorActionListener loginEditorActionListener;
 	private LoginClickListener loginClickListener;
-	
+
 	private CTJSONSyncTask getuserTask;
 
 	private UnitedLoginLayout layout;
-	
+
 	public UnitedLoginActivity() {
 		super();
 	}
@@ -66,7 +68,7 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 
 		loginEditorActionListener = new LoginEditorActionListener();
 		loginClickListener = new LoginClickListener();
-		
+
 		layout = new UnitedLoginLayout(this);
 		layout.setClickListener(loginClickListener);
 		layout.setEditorListener(loginEditorActionListener);
@@ -74,11 +76,13 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 		layout.addIdTextChangedListener(new TextWatcher() {
 
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
 			}
 
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
 			}
 
 			@Override
@@ -86,12 +90,12 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 				layout.changeInputIdIcon(ViewUtil.isTypeEmail(s.toString()));
 			}
 		});
-		
+
 		setContentView(layout.getView());
 
 		// 인트로 시작
 		introStart();
-		
+
 		if (LoginInfo.getInstance(this).isAutoLogin()) {
 			loginFlag = false;
 			LoginInfo info = LoginInfo.getInstance(this);
@@ -105,21 +109,21 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
-		Log.i("onActivityResult", requestCode + " :: " + resultCode + " :: " + data);
+		Log.i("onActivityResult", requestCode + " :: " + resultCode + " :: "
+				+ data);
 
 		// 로그인 체크
 		if (resultCode == Activity.RESULT_OK) {
 			if (requestCode == 64206) { // 페이스북
-				Session.getActiveSession().onActivityResult(this, requestCode, resultCode, data);
+				Session.getActiveSession().onActivityResult(this, requestCode,
+						resultCode, data);
 			} else if (requestCode == CampusTingConstant.RequestCodes.INTRO_REQUEST) {
 				introEndFlag = true;
+				layout.showLoginViews();
 				if (loginFlag) {
-					layout.showLoginViews();
 					finishActivity(CampusTingConstant.RequestCodes.INTRO_REQUEST);
 				} else { // 자동 로그인
-					Intent mianIntent = new Intent(MainApp.appContext, kr.co.redstrap.campusting.main.MainActivity.class);
-					startActivity(mianIntent);
-					finish();
+					normalLoginAction();
 				}
 			}
 		}
@@ -158,8 +162,10 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 	 * 인트로 액티비티 실행
 	 */
 	private void introStart() {
-		Intent introIntent = new Intent(MainApp.appContext, kr.co.redstrap.campusting.login.IntroActivity.class);
-		startActivityForResult(introIntent, CampusTingConstant.RequestCodes.INTRO_REQUEST);
+		Intent introIntent = new Intent(MainApp.appContext,
+				kr.co.redstrap.campusting.login.IntroActivity.class);
+		startActivityForResult(introIntent,
+				CampusTingConstant.RequestCodes.INTRO_REQUEST);
 	}
 
 	/**
@@ -178,38 +184,46 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 	 * 일반 로그인시 할 작업
 	 */
 	private void normalLoginAction() {
+
+		String userId;
+		String userPw;
+
 		if (loginFlag) { // 자동 로그인이 아닌 경우
-			// 아이디 비밀번호 저장
+			userId = layout.inputId.getText().toString();
+			userPw = SHA256.getCipherText(layout.inputPw.getText().toString());
+		} else {
 			LoginInfo info = LoginInfo.getInstance(this);
-			info.setUserId(layout.inputId.getText().toString());
-			info.setUserPw(layout.inputPw.getText().toString());
-			info.setAutoLogin(true);
+			userId = info.getUserId();
+			userPw = info.getUserPw();
 		}
-		
+
 		getuserTask = new CTJSONSyncTask();
 		getuserTask.addCallback(this);
-		
-		getuserTask.addHttpParam("userId", layout.inputId.getText().toString());
-		getuserTask.addHttpParam("userPw", layout.inputPw.getText().toString());
-		getuserTask.addHttpParam("pushKey", "12312312312313"); // test
-		
+
+		getuserTask.addHttpParam("userId", userId);
+		getuserTask.addHttpParam("userPw", userPw);
+		getuserTask.addHttpParam("pushKey", "12312312312313"); // 20140808
+																// chanroid test
+
 		getuserTask.executeSerial("login");
 	}
-	
+
 	private void settingMainUserInfo(JSONObject result) throws JSONException {
-		
+
 		LoginInfo info = LoginInfo.getInstance(this);
-		
+
 		info.setAcEmail(result.getString("univMail"));
-		info.setRegDate(result.getString("regDate"));
-		info.setPhotoCount(result.getInt("photoCount"));
-		info.setUnivNum(result.getInt("univNum"));
-		info.setIsAccept(result.getBoolean("isAccept"));
 		info.setUserNum(result.getInt("userNum"));
 		info.setNickName(result.getString("nickName"));
 		info.setMajorNum(result.getInt("majorNum"));
+		info.setRegDate(result.getString("regDate"));
+		info.setPhotoCount(result.getInt("photoCount"));
+		info.setIsAccept("N".equals(result.getString("isAccept")) ? false
+				: true);
+		info.setUnivNum(result.getInt("univNum"));
+
 		// 20140805 chanroid 아직 덜 작성함;;
-		
+
 	}
 
 	/**
@@ -227,7 +241,8 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 				if (ViewUtil.isTypeEmail(v.getEditableText().toString())) {
 					return false; // 액션 작동
 				} else {
-					layout.toast(R.string.error_email_confirm, Toast.LENGTH_SHORT);
+					layout.toast(R.string.error_email_confirm,
+							Toast.LENGTH_SHORT);
 					layout.changeInputIdIcon(false);
 					return true; // 액션 작동 안함
 				}
@@ -235,7 +250,7 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 				layout.performConfirm();
 				return false;
 			}
-			
+
 			return true; // 액션 멈춤
 		}
 	}
@@ -251,7 +266,7 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 		@Override
 		public void onClick(View view) {
 			ViewUtil.filterClick(view);
-			
+
 			switch (view.getId()) {
 			case R.id.btn_normal_login_cancel:
 				layout.swapLoginInterface();
@@ -260,21 +275,28 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 			case R.id.btn_normal_login_confirm:
 				// 로그인 버튼 클릭시
 				// 이메일 유효성과 비밀번호 입력 여부 확인
-				
-				if (layout.inputPw.getText().toString().length() < 6) { // 비밀번호 자릿수
-					layout.toast(R.string.error_password_confirm, Toast.LENGTH_SHORT);
+
+				if (layout.inputPw.getText().toString().length() < 6) { // 비밀번호
+																		// 자릿수
+					layout.toast(R.string.error_password_confirm,
+							Toast.LENGTH_SHORT);
 					layout.inputPw.requestFocus();
-				} else if (!ViewUtil.isTypeEmail(layout.inputId.getText().toString())) { // 유효하지 않은 아이디
-					layout.toast(R.string.error_email_confirm, Toast.LENGTH_SHORT);
-					layout.inputId.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+				} else if (!ViewUtil.isTypeEmail(layout.inputId.getText()
+						.toString())) { // 유효하지 않은 아이디
+					layout.toast(R.string.error_email_confirm,
+							Toast.LENGTH_SHORT);
+					layout.inputId.setCompoundDrawablesWithIntrinsicBounds(
+							null, null, null, null);
 					layout.inputId.requestFocus();
 				} else {
-					layout.inputId.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+					layout.inputId.setCompoundDrawablesWithIntrinsicBounds(
+							null, null, null, null);
 					normalLoginAction();
 				}
 				break;
 			case R.id.btn_normal_join:
-				Intent joinIntent = new Intent(MainApp.appContext, kr.co.redstrap.campusting.join.JoinActivity.class);
+				Intent joinIntent = new Intent(MainApp.appContext,
+						kr.co.redstrap.campusting.join.JoinActivity.class);
 				joinIntent.putExtra("loginType", LoginType.CAMPUSTING);
 				startActivity(joinIntent);
 				finish();
@@ -282,27 +304,35 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 			case R.id.btn_find_pw:
 				break;
 			case R.id.btn_facebook:
-				Session.openActiveSession(UnitedLoginActivity.this, true, new Session.StatusCallback() {
+				Session.openActiveSession(UnitedLoginActivity.this, true,
+						new Session.StatusCallback() {
 
-					@Override
-					public void call(Session session, SessionState state, Exception exception) {
-						if (session.isOpened()) {
-							Request.newMeRequest(session, new GraphUserCallback() {
+							@Override
+							public void call(Session session,
+									SessionState state, Exception exception) {
+								if (session.isOpened()) {
+									Request.newMeRequest(session,
+											new GraphUserCallback() {
 
-								@Override
-								public void onCompleted(GraphUser user, Response response) {
-									if (user != null) {
-										facebookLoginAction(user, response);
-									} else {
-										layout.toast(R.string.error_connection, Toast.LENGTH_SHORT);
-									}
+												@Override
+												public void onCompleted(
+														GraphUser user,
+														Response response) {
+													if (user != null) {
+														facebookLoginAction(
+																user, response);
+													} else {
+														layout.toast(
+																R.string.error_connection,
+																Toast.LENGTH_SHORT);
+													}
+												}
+											}).executeAsync();
+								} else {
+									Log.i("세션 닫힘", "세션 닫힘");
 								}
-							}).executeAsync();
-						} else {
-							Log.i("세션 닫힘", "세션 닫힘");
-						}
-					}
-				});
+							}
+						});
 				break;
 			case R.id.btn_normal_login:
 				layout.swapLoginInterface();
@@ -311,7 +341,7 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 			default:
 				break;
 			}
-			
+
 		}
 	}
 
@@ -324,7 +354,7 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 	@Override
 	public void onProgressTask(AbsCTSyncTask<String, Object> task, int progress) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -343,16 +373,25 @@ public class UnitedLoginActivity extends FragmentActivity implements CTSyncTaskC
 		layout.dismissLoading();
 
 		JSONObject resultJSON = (JSONObject) result;
-		
+
 		if (result != null) { // 우선은 결과값이 뭐라도 있으면 로그인 성공으로 간주
 			try {
 				settingMainUserInfo(resultJSON);
+
+				LoginInfo info = LoginInfo.getInstance(this);
+				if (loginFlag) {
+					info.setUserId(layout.inputId.getText().toString());
+					info.setUserPw(SHA256.getCipherText(layout.inputPw
+							.getText().toString()));
+					info.setAutoLogin(true);
+				}
 			} catch (JSONException e) {
 				e.printStackTrace();
 				// 로그인 실패시 따로 처리하는 부분 구현해야 함
 			}
 			if (introEndFlag) { // 인트로 이후의 수동 로그인일 경우 직접 메인 이동
-				Intent mianIntent = new Intent(MainApp.appContext, MainActivity.class);
+				Intent mianIntent = new Intent(MainApp.appContext,
+						MainActivity.class);
 				startActivity(mianIntent);
 				finish();
 			}

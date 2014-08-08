@@ -2,8 +2,10 @@ package kr.co.redstrap.campusting.util;
 
 public class SHA256 {
 
-	private final static char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q',
-			'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' };
+	private final static char[] digits = { '0', '1', '2', '3', '4', '5', '6',
+			'7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+			'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w',
+			'x', 'y', 'z' };
 
 	private static String toUnsignedString(int i) {
 		char[] buf = new char[32];
@@ -25,15 +27,18 @@ public class SHA256 {
 	 * @return 암호문
 	 */
 	public static String getCipherText(String plainText) {
-		byte[] pszMessage = plainText.getBytes();
-		int uPlainTextLen = plainText.length();
-		byte[] pszDigest = new byte[32];
-		SHA256_Encrpyt(pszMessage, uPlainTextLen, pszDigest);
-		StringBuilder hexString = new StringBuilder();
-		for (byte b : pszDigest) {
-			hexString.append(toUnsignedString(b + 128));
-		}
-		return hexString.toString();
+		// 20140808 chanroid 서버측에서 테스트 아이디 비밀번호를 평문으로 설정해 놔서 일단 평문으로 전송. 서비스
+		// 단계에서는 다시 암호화 해야함
+		return plainText;
+		// byte[] pszMessage = plainText.getBytes();
+		// int uPlainTextLen = plainText.length();
+		// byte[] pszDigest = new byte[32];
+		// SHA256_Encrpyt(pszMessage, uPlainTextLen, pszDigest);
+		// StringBuilder hexString = new StringBuilder();
+		// for (byte b : pszDigest) {
+		// hexString.append(toUnsignedString(b + 128));
+		// }
+		// return hexString.toString();
 	}
 
 	// DEFAULT : JAVA = BIG_ENDIAN
@@ -42,11 +47,20 @@ public class SHA256 {
 	private static final int SHA256_DIGEST_BLOCKLEN = 64;
 	private static final int SHA256_DIGEST_VALUELEN = 32;
 
-	private static final int SHA256_K[] = { 0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be,
-			0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174, 0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da, 0x983e5152,
-			0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967, 0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e,
-			0x92722c85, 0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070, 0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3,
-			0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3, 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2 };
+	private static final int SHA256_K[] = { 0x428a2f98, 0x71374491, 0xb5c0fbcf,
+			0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+			0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74,
+			0x80deb1fe, 0x9bdc06a7, 0xc19bf174, 0xe49b69c1, 0xefbe4786,
+			0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc,
+			0x76f988da, 0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7,
+			0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967, 0x27b70a85,
+			0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb,
+			0x81c2c92e, 0x92722c85, 0xa2bfe8a1, 0xa81a664b, 0xc24b8b70,
+			0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+			0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3,
+			0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3, 0x748f82ee, 0x78a5636f,
+			0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7,
+			0xc67178f2 };
 
 	private static final int ROTL_ULONG(int x, int n) {
 		return (x << n) | Common.URShift(x, 32 - n);
@@ -105,13 +119,18 @@ public class SHA256 {
 	private static final int abcdefgh_g = 6;
 	private static final int abcdefgh_h = 7;
 
-	private static final void FF(int[] abcdefgh, int a, int b, int c, int d, int e, int f, int g, int h, int[] X, int j) {
+	private static final void FF(int[] abcdefgh, int a, int b, int c, int d,
+			int e, int f, int g, int h, int[] X, int j) {
 		long T1;
 
-		T1 = Common.intToUnsigned(abcdefgh[h]) + Common.intToUnsigned(Sigma1(abcdefgh[e])) + Common.intToUnsigned(Ch(abcdefgh[e], abcdefgh[f], abcdefgh[g]))
-				+ Common.intToUnsigned(SHA256_K[j]) + Common.intToUnsigned(X[j]);
+		T1 = Common.intToUnsigned(abcdefgh[h])
+				+ Common.intToUnsigned(Sigma1(abcdefgh[e]))
+				+ Common.intToUnsigned(Ch(abcdefgh[e], abcdefgh[f], abcdefgh[g]))
+				+ Common.intToUnsigned(SHA256_K[j])
+				+ Common.intToUnsigned(X[j]);
 		abcdefgh[d] += T1;
-		abcdefgh[h] = (int) (T1 + Common.intToUnsigned(Sigma0(abcdefgh[a])) + Common.intToUnsigned(Maj(abcdefgh[a], abcdefgh[b], abcdefgh[c])));
+		abcdefgh[h] = (int) (T1 + Common.intToUnsigned(Sigma0(abcdefgh[a])) + Common
+				.intToUnsigned(Maj(abcdefgh[a], abcdefgh[b], abcdefgh[c])));
 	}
 
 	private static final int GetData(byte[] x, int x_offset) {
@@ -135,7 +154,10 @@ public class SHA256 {
 			X[j] = GetData(Message, j * 4);
 
 		for (j = 16; j < 64; j++)
-			X[j] = (int) (Common.intToUnsigned(RHO1(X[j - 2])) + Common.intToUnsigned(X[j - 7]) + Common.intToUnsigned(RHO0(X[j - 15])) + Common.intToUnsigned(X[j - 16]));
+			X[j] = (int) (Common.intToUnsigned(RHO1(X[j - 2]))
+					+ Common.intToUnsigned(X[j - 7])
+					+ Common.intToUnsigned(RHO0(X[j - 15])) + Common
+					.intToUnsigned(X[j - 16]));
 
 		abcdefgh[abcdefgh_a] = ChainVar[0];
 		abcdefgh[abcdefgh_b] = ChainVar[1];
@@ -147,14 +169,22 @@ public class SHA256 {
 		abcdefgh[abcdefgh_h] = ChainVar[7];
 
 		for (j = 0; j < 64; j += 8) {
-			FF(abcdefgh, abcdefgh_a, abcdefgh_b, abcdefgh_c, abcdefgh_d, abcdefgh_e, abcdefgh_f, abcdefgh_g, abcdefgh_h, X, j + 0);
-			FF(abcdefgh, abcdefgh_h, abcdefgh_a, abcdefgh_b, abcdefgh_c, abcdefgh_d, abcdefgh_e, abcdefgh_f, abcdefgh_g, X, j + 1);
-			FF(abcdefgh, abcdefgh_g, abcdefgh_h, abcdefgh_a, abcdefgh_b, abcdefgh_c, abcdefgh_d, abcdefgh_e, abcdefgh_f, X, j + 2);
-			FF(abcdefgh, abcdefgh_f, abcdefgh_g, abcdefgh_h, abcdefgh_a, abcdefgh_b, abcdefgh_c, abcdefgh_d, abcdefgh_e, X, j + 3);
-			FF(abcdefgh, abcdefgh_e, abcdefgh_f, abcdefgh_g, abcdefgh_h, abcdefgh_a, abcdefgh_b, abcdefgh_c, abcdefgh_d, X, j + 4);
-			FF(abcdefgh, abcdefgh_d, abcdefgh_e, abcdefgh_f, abcdefgh_g, abcdefgh_h, abcdefgh_a, abcdefgh_b, abcdefgh_c, X, j + 5);
-			FF(abcdefgh, abcdefgh_c, abcdefgh_d, abcdefgh_e, abcdefgh_f, abcdefgh_g, abcdefgh_h, abcdefgh_a, abcdefgh_b, X, j + 6);
-			FF(abcdefgh, abcdefgh_b, abcdefgh_c, abcdefgh_d, abcdefgh_e, abcdefgh_f, abcdefgh_g, abcdefgh_h, abcdefgh_a, X, j + 7);
+			FF(abcdefgh, abcdefgh_a, abcdefgh_b, abcdefgh_c, abcdefgh_d,
+					abcdefgh_e, abcdefgh_f, abcdefgh_g, abcdefgh_h, X, j + 0);
+			FF(abcdefgh, abcdefgh_h, abcdefgh_a, abcdefgh_b, abcdefgh_c,
+					abcdefgh_d, abcdefgh_e, abcdefgh_f, abcdefgh_g, X, j + 1);
+			FF(abcdefgh, abcdefgh_g, abcdefgh_h, abcdefgh_a, abcdefgh_b,
+					abcdefgh_c, abcdefgh_d, abcdefgh_e, abcdefgh_f, X, j + 2);
+			FF(abcdefgh, abcdefgh_f, abcdefgh_g, abcdefgh_h, abcdefgh_a,
+					abcdefgh_b, abcdefgh_c, abcdefgh_d, abcdefgh_e, X, j + 3);
+			FF(abcdefgh, abcdefgh_e, abcdefgh_f, abcdefgh_g, abcdefgh_h,
+					abcdefgh_a, abcdefgh_b, abcdefgh_c, abcdefgh_d, X, j + 4);
+			FF(abcdefgh, abcdefgh_d, abcdefgh_e, abcdefgh_f, abcdefgh_g,
+					abcdefgh_h, abcdefgh_a, abcdefgh_b, abcdefgh_c, X, j + 5);
+			FF(abcdefgh, abcdefgh_c, abcdefgh_d, abcdefgh_e, abcdefgh_f,
+					abcdefgh_g, abcdefgh_h, abcdefgh_a, abcdefgh_b, X, j + 6);
+			FF(abcdefgh, abcdefgh_b, abcdefgh_c, abcdefgh_d, abcdefgh_e,
+					abcdefgh_f, abcdefgh_g, abcdefgh_h, abcdefgh_a, X, j + 7);
 		}
 
 		ChainVar[0] += abcdefgh[abcdefgh_a];
@@ -194,7 +224,8 @@ public class SHA256 {
 	 * @param inLen
 	 *            : 사용자 입력 평문 길이
 	 */
-	private static void SHA256_Process(SHA256_INFO Info, byte[] pszMessage, int uDataLen) {
+	private static void SHA256_Process(SHA256_INFO Info, byte[] pszMessage,
+			int uDataLen) {
 		int pszMessage_offset;
 
 		if ((Info.uLowLength += (uDataLen << 3)) < 0) {
@@ -205,13 +236,15 @@ public class SHA256 {
 
 		pszMessage_offset = 0;
 		while (uDataLen >= SHA256_DIGEST_BLOCKLEN) {
-			Common.arraycopy_offset(Info.szBuffer, 0, pszMessage, pszMessage_offset, SHA256_DIGEST_BLOCKLEN);
+			Common.arraycopy_offset(Info.szBuffer, 0, pszMessage,
+					pszMessage_offset, SHA256_DIGEST_BLOCKLEN);
 			SHA256_Transform(Info.szBuffer, Info.uChainVar);
 			pszMessage_offset += SHA256_DIGEST_BLOCKLEN;
 			uDataLen -= SHA256_DIGEST_BLOCKLEN;
 		}
 
-		Common.arraycopy_offset(Info.szBuffer, 0, pszMessage, pszMessage_offset, uDataLen);
+		Common.arraycopy_offset(Info.szBuffer, 0, pszMessage,
+				pszMessage_offset, uDataLen);
 	}
 
 	/**
@@ -228,11 +261,14 @@ public class SHA256 {
 		Info.szBuffer[Index++] = (byte) 0x80;
 
 		if (Index > SHA256_DIGEST_BLOCKLEN - 8) {
-			Common.arrayinit_offset(Info.szBuffer, Index, (byte) 0, SHA256_DIGEST_BLOCKLEN - Index);
+			Common.arrayinit_offset(Info.szBuffer, Index, (byte) 0,
+					SHA256_DIGEST_BLOCKLEN - Index);
 			SHA256_Transform(Info.szBuffer, Info.uChainVar);
-			Common.arrayinit(Info.szBuffer, (byte) 0, SHA256_DIGEST_BLOCKLEN - 8);
+			Common.arrayinit(Info.szBuffer, (byte) 0,
+					SHA256_DIGEST_BLOCKLEN - 8);
 		} else {
-			Common.arrayinit_offset(Info.szBuffer, Index, (byte) 0, SHA256_DIGEST_BLOCKLEN - Index - 8);
+			Common.arrayinit_offset(Info.szBuffer, Index, (byte) 0,
+					SHA256_DIGEST_BLOCKLEN - Index - 8);
 		}
 
 		if (ENDIAN == Common.LITTLE_ENDIAN) {
@@ -240,8 +276,12 @@ public class SHA256 {
 			Info.uHighLength = ENDIAN_REVERSE_ULONG(Info.uHighLength);
 		}
 
-		Common.int_to_byte_unit(Info.szBuffer, ((int) (SHA256_DIGEST_BLOCKLEN / 4 - 2)) * 4, Info.uHighLength, ENDIAN);
-		Common.int_to_byte_unit(Info.szBuffer, ((int) (SHA256_DIGEST_BLOCKLEN / 4 - 1)) * 4, Info.uLowLength, ENDIAN);
+		Common.int_to_byte_unit(Info.szBuffer,
+				((int) (SHA256_DIGEST_BLOCKLEN / 4 - 2)) * 4, Info.uHighLength,
+				ENDIAN);
+		Common.int_to_byte_unit(Info.szBuffer,
+				((int) (SHA256_DIGEST_BLOCKLEN / 4 - 1)) * 4, Info.uLowLength,
+				ENDIAN);
 
 		SHA256_Transform(Info.szBuffer, Info.uChainVar);
 
@@ -257,7 +297,8 @@ public class SHA256 {
 	 *            : 암호문
 	 * @remarks 내부적으로 SHA256_Init, SHA256_Process, SHA256_Close를 호출한다.
 	 */
-	private static void SHA256_Encrpyt(byte[] pszMessage, int uPlainTextLen, byte[] pszDigest) {
+	private static void SHA256_Encrpyt(byte[] pszMessage, int uPlainTextLen,
+			byte[] pszDigest) {
 		SHA256_INFO info = new SHA256_INFO();
 		SHA256_Init(info);
 		SHA256_Process(info, pszMessage, uPlainTextLen);
@@ -282,7 +323,8 @@ public class SHA256 {
 			}
 		}
 
-		private static void arraycopy_offset(byte[] dst, int dst_offset, byte[] src, int src_offset, int length) {
+		private static void arraycopy_offset(byte[] dst, int dst_offset,
+				byte[] src, int src_offset, int length) {
 			for (int i = 0; i < length; i++) {
 				dst[dst_offset + i] = src[src_offset + i];
 			}
@@ -294,7 +336,8 @@ public class SHA256 {
 			}
 		}
 
-		private static void arrayinit_offset(byte[] dst, int dst_offset, byte value, int length) {
+		private static void arrayinit_offset(byte[] dst, int dst_offset,
+				byte value, int length) {
 			for (int i = 0; i < length; i++) {
 				dst[dst_offset + i] = value;
 			}
@@ -307,26 +350,30 @@ public class SHA256 {
 			}
 		}
 
-		private static void memcpy(int[] dst, int[] src, int src_offset, int length) {
+		private static void memcpy(int[] dst, int[] src, int src_offset,
+				int length) {
 			int iLen = length / 4 + ((length % 4 != 0) ? 1 : 0);
 			for (int i = 0; i < iLen; i++) {
 				dst[i] = src[src_offset + i];
 			}
 		}
 
-		private static void set_byte_for_int(int[] dst, int b_offset, byte value, int ENDIAN) {
+		private static void set_byte_for_int(int[] dst, int b_offset,
+				byte value, int ENDIAN) {
 			if (ENDIAN == BIG_ENDIAN) {
 				int shift_value = (3 - b_offset % 4) * 8;
 				int mask_value = 0x0ff << shift_value;
 				int mask_value2 = ~mask_value;
 				int value2 = (value & 0x0ff) << shift_value;
-				dst[b_offset / 4] = (dst[b_offset / 4] & mask_value2) | (value2 & mask_value);
+				dst[b_offset / 4] = (dst[b_offset / 4] & mask_value2)
+						| (value2 & mask_value);
 			} else {
 				int shift_value = (b_offset % 4) * 8;
 				int mask_value = 0x0ff << shift_value;
 				int mask_value2 = ~mask_value;
 				int value2 = (value & 0x0ff) << shift_value;
-				dst[b_offset / 4] = (dst[b_offset / 4] & mask_value2) | (value2 & mask_value);
+				dst[b_offset / 4] = (dst[b_offset / 4] & mask_value2)
+						| (value2 & mask_value);
 			}
 		}
 
@@ -345,7 +392,8 @@ public class SHA256 {
 
 		}
 
-		private static byte[] get_bytes_for_ints(int[] src, int offset, int ENDIAN) {
+		private static byte[] get_bytes_for_ints(int[] src, int offset,
+				int ENDIAN) {
 			int iLen = src.length - offset;
 			byte[] result = new byte[(iLen) * 4];
 			for (int i = 0; i < iLen; i++) {
@@ -355,33 +403,49 @@ public class SHA256 {
 			return result;
 		}
 
-		private static void byte_to_int(int[] dst, int dst_offset, byte[] src, int src_offset, int ENDIAN) {
+		private static void byte_to_int(int[] dst, int dst_offset, byte[] src,
+				int src_offset, int ENDIAN) {
 			if (ENDIAN == BIG_ENDIAN) {
-				dst[dst_offset] = ((0x0ff & src[src_offset]) << 24) | ((0x0ff & src[src_offset + 1]) << 16) | ((0x0ff & src[src_offset + 2]) << 8)
+				dst[dst_offset] = ((0x0ff & src[src_offset]) << 24)
+						| ((0x0ff & src[src_offset + 1]) << 16)
+						| ((0x0ff & src[src_offset + 2]) << 8)
 						| ((0x0ff & src[src_offset + 3]));
 			} else {
-				dst[dst_offset] = ((0x0ff & src[src_offset])) | ((0x0ff & src[src_offset + 1]) << 8) | ((0x0ff & src[src_offset + 2]) << 16)
+				dst[dst_offset] = ((0x0ff & src[src_offset]))
+						| ((0x0ff & src[src_offset + 1]) << 8)
+						| ((0x0ff & src[src_offset + 2]) << 16)
 						| ((0x0ff & src[src_offset + 3]) << 24);
 			}
 		}
 
 		private static int byte_to_int(byte[] src, int src_offset, int ENDIAN) {
 			if (ENDIAN == BIG_ENDIAN) {
-				return ((0x0ff & src[src_offset]) << 24) | ((0x0ff & src[src_offset + 1]) << 16) | ((0x0ff & src[src_offset + 2]) << 8) | ((0x0ff & src[src_offset + 3]));
+				return ((0x0ff & src[src_offset]) << 24)
+						| ((0x0ff & src[src_offset + 1]) << 16)
+						| ((0x0ff & src[src_offset + 2]) << 8)
+						| ((0x0ff & src[src_offset + 3]));
 			} else {
-				return ((0x0ff & src[src_offset])) | ((0x0ff & src[src_offset + 1]) << 8) | ((0x0ff & src[src_offset + 2]) << 16) | ((0x0ff & src[src_offset + 3]) << 24);
+				return ((0x0ff & src[src_offset]))
+						| ((0x0ff & src[src_offset + 1]) << 8)
+						| ((0x0ff & src[src_offset + 2]) << 16)
+						| ((0x0ff & src[src_offset + 3]) << 24);
 			}
 		}
 
 		private static int byte_to_int_big_endian(byte[] src, int src_offset) {
-			return ((0x0ff & src[src_offset]) << 24) | ((0x0ff & src[src_offset + 1]) << 16) | ((0x0ff & src[src_offset + 2]) << 8) | ((0x0ff & src[src_offset + 3]));
+			return ((0x0ff & src[src_offset]) << 24)
+					| ((0x0ff & src[src_offset + 1]) << 16)
+					| ((0x0ff & src[src_offset + 2]) << 8)
+					| ((0x0ff & src[src_offset + 3]));
 		}
 
-		private static void int_to_byte(byte[] dst, int dst_offset, int[] src, int src_offset, int ENDIAN) {
+		private static void int_to_byte(byte[] dst, int dst_offset, int[] src,
+				int src_offset, int ENDIAN) {
 			int_to_byte_unit(dst, dst_offset, src[src_offset], ENDIAN);
 		}
 
-		private static void int_to_byte_unit(byte[] dst, int dst_offset, int src, int ENDIAN) {
+		private static void int_to_byte_unit(byte[] dst, int dst_offset,
+				int src, int ENDIAN) {
 			if (ENDIAN == BIG_ENDIAN) {
 				dst[dst_offset] = (byte) ((src >> 24) & 0x0ff);
 				dst[dst_offset + 1] = (byte) ((src >> 16) & 0x0ff);
@@ -396,7 +460,8 @@ public class SHA256 {
 
 		}
 
-		private static void int_to_byte_unit_big_endian(byte[] dst, int dst_offset, int src) {
+		private static void int_to_byte_unit_big_endian(byte[] dst,
+				int dst_offset, int src) {
 			dst[dst_offset] = (byte) ((src >> 24) & 0x0ff);
 			dst[dst_offset + 1] = (byte) ((src >> 16) & 0x0ff);
 			dst[dst_offset + 2] = (byte) ((src >> 8) & 0x0ff);
@@ -423,11 +488,18 @@ public class SHA256 {
 	}
 
 	private static void main(String[] args) {
-		byte pbData[] = { (byte) 0x00, (byte) 0x01, (byte) 0x02, (byte) 0x03, (byte) 0x04, (byte) 0x05, (byte) 0x06, (byte) 0x07, (byte) 0x08, (byte) 0x09, (byte) 0x0A,
-				(byte) 0x0B, (byte) 0x0C, (byte) 0x0D, (byte) 0x0E, (byte) 0x0F, (byte) 0x08, (byte) 0x09, (byte) 0x0A, (byte) 0x0B, (byte) 0x0C, (byte) 0x0D, (byte) 0x0E,
-				(byte) 0x0F, (byte) 0x00, (byte) 0x01, (byte) 0x02, (byte) 0x03, (byte) 0x04, (byte) 0x05, (byte) 0x06, (byte) 0x07, (byte) 0x08, (byte) 0x09, (byte) 0x0A,
-				(byte) 0x0B, (byte) 0x0C, (byte) 0x0D, (byte) 0x0E, (byte) 0x0F, (byte) 0x08, (byte) 0x09, (byte) 0x0A, (byte) 0x0B, (byte) 0x0C, (byte) 0x0D, (byte) 0x0E,
-				(byte) 0x0F };
+		byte pbData[] = { (byte) 0x00, (byte) 0x01, (byte) 0x02, (byte) 0x03,
+				(byte) 0x04, (byte) 0x05, (byte) 0x06, (byte) 0x07,
+				(byte) 0x08, (byte) 0x09, (byte) 0x0A, (byte) 0x0B,
+				(byte) 0x0C, (byte) 0x0D, (byte) 0x0E, (byte) 0x0F,
+				(byte) 0x08, (byte) 0x09, (byte) 0x0A, (byte) 0x0B,
+				(byte) 0x0C, (byte) 0x0D, (byte) 0x0E, (byte) 0x0F,
+				(byte) 0x00, (byte) 0x01, (byte) 0x02, (byte) 0x03,
+				(byte) 0x04, (byte) 0x05, (byte) 0x06, (byte) 0x07,
+				(byte) 0x08, (byte) 0x09, (byte) 0x0A, (byte) 0x0B,
+				(byte) 0x0C, (byte) 0x0D, (byte) 0x0E, (byte) 0x0F,
+				(byte) 0x08, (byte) 0x09, (byte) 0x0A, (byte) 0x0B,
+				(byte) 0x0C, (byte) 0x0D, (byte) 0x0E, (byte) 0x0F };
 		byte pbData1[] = { (byte) 0x61 };
 
 		byte pbCipher[] = new byte[32];

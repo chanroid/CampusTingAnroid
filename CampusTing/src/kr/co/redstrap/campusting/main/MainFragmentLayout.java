@@ -4,8 +4,11 @@ import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTLayout;
 import kr.co.redstrap.campusting.util.view.BadgeButton;
 import android.content.Context;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageButton;
@@ -38,7 +41,7 @@ public class MainFragmentLayout extends AbsCTLayout {
 	}
 
 	private Callback callback;
-	
+
 	private HorizontalScrollView daynightPager;
 
 	private BadgeButton alertListBtn;
@@ -52,12 +55,12 @@ public class MainFragmentLayout extends AbsCTLayout {
 	private ImageButton gymBtn;
 	private ImageButton cafeBtn;
 	private ImageButton libraryBtn;
-	
+
 	private ImageButton dormitoriesBtn;
 	private ImageButton circleroomBtn;
 	private ImageButton hofBtn;
 	private ImageButton clubBtn;
-	
+
 	public void setCallback(Callback callback) {
 		this.callback = callback;
 	}
@@ -78,7 +81,7 @@ public class MainFragmentLayout extends AbsCTLayout {
 		// TODO Auto-generated method stub
 
 		Listener listener = new Listener();
-		
+
 		alertListBtn = (BadgeButton) findViewById(R.id.mainAlertBtn);
 		alertListBtn.setOnClickListener(listener);
 		shopBtn = (BadgeButton) findViewById(R.id.mainShopBtn);
@@ -87,10 +90,11 @@ public class MainFragmentLayout extends AbsCTLayout {
 		dayNightBtn = (Button) findViewById(R.id.mainDayNightBtn);
 		dayNightBtn.setOnClickListener(listener);
 
-
 		daynightPager = (HorizontalScrollView) findViewById(R.id.mainBuildingPager);
 		
-		mainBuildingBtn = (ImageButton) daynightPager.findViewById(R.id.mainBuildingBtn);
+
+		mainBuildingBtn = (ImageButton) daynightPager
+				.findViewById(R.id.mainBuildingBtn);
 		mainBuildingBtn.setOnClickListener(listener);
 		gymBtn = (ImageButton) daynightPager.findViewById(R.id.gymBtn);
 		gymBtn.setOnClickListener(listener);
@@ -99,9 +103,11 @@ public class MainFragmentLayout extends AbsCTLayout {
 		libraryBtn = (ImageButton) daynightPager.findViewById(R.id.libraryBtn);
 		libraryBtn.setOnClickListener(listener);
 
-		dormitoriesBtn = (ImageButton) daynightPager.findViewById(R.id.domitoryBtn);
+		dormitoriesBtn = (ImageButton) daynightPager
+				.findViewById(R.id.domitoryBtn);
 		dormitoriesBtn.setOnClickListener(listener);
-		circleroomBtn = (ImageButton) daynightPager.findViewById(R.id.circleRoomBtn);
+		circleroomBtn = (ImageButton) daynightPager
+				.findViewById(R.id.circleRoomBtn);
 		circleroomBtn.setOnClickListener(listener);
 		hofBtn = (ImageButton) daynightPager.findViewById(R.id.hofBtn);
 		hofBtn.setOnClickListener(listener);
@@ -109,7 +115,7 @@ public class MainFragmentLayout extends AbsCTLayout {
 		clubBtn.setOnClickListener(listener);
 
 	}
-	
+
 	private class Listener implements OnClickListener {
 
 		@Override

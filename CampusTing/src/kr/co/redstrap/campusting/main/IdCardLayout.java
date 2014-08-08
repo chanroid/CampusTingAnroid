@@ -1,7 +1,5 @@
 package kr.co.redstrap.campusting.main;
 
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTLayout;
 import kr.co.redstrap.campusting.util.web.LoadImage;

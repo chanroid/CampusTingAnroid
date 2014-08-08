@@ -17,7 +17,8 @@ public class InfoFrag extends AbsJoinFrag implements InfoLayout.Callback,
 	private InfoLayout layout;
 
 	public int local = -1;
-	public ArrayList<Integer> character;
+	public ArrayList<Integer> character = new ArrayList<Integer>();
+	public String characterConstText;
 	public int body = -1;
 	public int height = -1;
 	public String bloodType = "C";
@@ -132,7 +133,7 @@ public class InfoFrag extends AbsJoinFrag implements InfoLayout.Callback,
 		// TODO Auto-generated method stub
 		this.height = height;
 	}
-	
+
 	@Override
 	public void onMajorClick() {
 		// TODO Auto-generated method stub
@@ -178,6 +179,9 @@ public class InfoFrag extends AbsJoinFrag implements InfoLayout.Callback,
 			layout.setCharacter(new String[] { characterText.get(0),
 					characterText.get(1), characterText.get(2) });
 
+			characterConstText = String.format("%d|%d|%d", characters.get(0),
+					characters.get(1), characters.get(2));
+
 			break;
 		case JoinInfoSelectItems.COUPLECOUNT:
 			coupleCount = (Integer) confirmedItems.get(0).get("index");
@@ -201,5 +205,4 @@ public class InfoFrag extends AbsJoinFrag implements InfoLayout.Callback,
 			break;
 		}
 	}
-
 }

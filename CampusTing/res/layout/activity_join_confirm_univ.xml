@@ -72,6 +72,7 @@
                         android:id="@+id/button_one"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:checked="true"
                         android:text="재학중" />
 
                     <RadioButton
@@ -103,14 +104,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:maxLines="1"
                         android:hint="학교" />
 
-                    <CheckedTextView
-                        android:id="@+id/univAutoCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="C" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -121,16 +117,10 @@
                     <EditText
                         android:id="@+id/univMailEditText"
                         android:layout_width="0dp"
+                        android:maxLines="1"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:hint="학교메일" />
-
-                    <CheckedTextView
-                        android:id="@+id/univMailCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="C" />
 
                     <Button
                         android:id="@+id/univMailSendBtn"
@@ -149,15 +139,9 @@
                         android:id="@+id/univMailCodeEditText"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:maxLines="1"
                         android:layout_weight="1"
                         android:hint="인증번호" />
-
-                    <CheckedTextView
-                        android:id="@+id/univMailCodeCheck"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
-                        android:text="C" />
 
                     <Button
                         android:id="@+id/univMailCodeBtn"
@@ -168,7 +152,7 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/univConfirmBtn"
+                    android:id="@+id/univMailConfirmBtn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="인증" />
@@ -200,7 +184,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#cccccc"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:visibility="gone" >
 
                 <RadioGroup
                     android:id="@+id/univPhotoStateSpinner"
@@ -313,6 +298,12 @@
                     android:layout_height="wrap_content"
                     android:text="인증" />
             </LinearLayout>
+
+            <Button
+                android:id="@+id/confirmBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="건너뛰기" />
         </LinearLayout>
     </ScrollView>
 

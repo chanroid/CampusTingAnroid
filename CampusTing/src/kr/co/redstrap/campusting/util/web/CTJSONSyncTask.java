@@ -1,10 +1,11 @@
 package kr.co.redstrap.campusting.util.web;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,19 +15,11 @@ import kr.co.redstrap.campusting.common.AbsCTSyncTask;
 import kr.co.redstrap.campusting.common.ErrorProcessor;
 import kr.co.redstrap.campusting.common.ErrorResult;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.ContentType;
 import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.json.JSONObject;
 
@@ -35,7 +28,7 @@ import android.util.Log;
 public class CTJSONSyncTask extends AbsCTSyncTask<String, Object> {
 
 	private ArrayList<NameValuePair> httpParams = new ArrayList<NameValuePair>();
-	private Map<String, FileBody> httpFileParams = new HashMap<String, FileBody>();
+	private Map<String, File> httpFileParams = new HashMap<String, File>();
 
 	@Override
 	/**
@@ -44,27 +37,37 @@ public class CTJSONSyncTask extends AbsCTSyncTask<String, Object> {
 	 */
 	protected Object doInBackground(String... params) {
 		// TODO Auto-generated method stub
-		HttpClient client = new DefaultHttpClient();
-
-		HttpParams netparams = client.getParams();
-		HttpConnectionParams.setConnectionTimeout(netparams, getTimeout());
-		HttpConnectionParams.setSoTimeout(netparams, getTimeout());
 
 		try {
-			Log.d("CTJSONSyncTask", "url : " + UrlUtil.campusTingWebUrl
-					+ params[0]);
-			HttpResponse response = client
-					.execute(getRequest(UrlUtil.campusTingWebUrl + params[0]));
-			BufferedReader reader = new BufferedReader(new InputStreamReader(
-					response.getEntity().getContent(), HTTP.UTF_8));
+			URL url = new URL(UrlUtil.campusTingWebUrl + params[0]);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setDoInput(true);
 
-			StringBuffer buffer = new StringBuffer();
-			String line = null;
-			while ((line = reader.readLine()) != null) {
-				buffer.append(line);
+			Log.d("CTJSONSyncTask", "url : " + url.toString());
+
+			StringBuilder paramBuilder = new StringBuilder();
+			if (params != null) {
+				conn.setDoOutput(true); // 이거 호출하면 자동으로 POST로 변경됨
+				addHttpParam("device", "android");
+				for (NameValuePair p : httpParams) {
+					if (!"".equals(p.getValue()) || p.getValue() != null) {
+						String append = p.getName() + "="
+								+ URLEncoder.encode(p.getValue(), HTTP.UTF_8);
+						Log.i("CTJSONSyncTask", append);
+						paramBuilder.append(append);
+						paramBuilder.append("&");
+					}
+				}
+				paramBuilder.deleteCharAt(paramBuilder.length() - 1);
+
+				OutputStream paramWriter = conn.getOutputStream();
+				paramWriter.write(paramBuilder.toString().getBytes(HTTP.UTF_8));
+				paramWriter.flush();
+				paramWriter.close();
 			}
 
-			JSONObject result = new JSONObject(buffer.toString());
+			JSONObject result = new JSONObject(
+					StringUtils.stringFromStream(conn.getInputStream()));
 			Log.i("CTJSONSyncTask", result.toString());
 			if (ErrorProcessor.isError(result)) {
 				ErrorResult error = new ErrorResult(result.getInt("errCode"),
@@ -73,6 +76,7 @@ public class CTJSONSyncTask extends AbsCTSyncTask<String, Object> {
 			} else {
 				return (Object) result;
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return (Object) ErrorResult.resultFromException(e);
@@ -82,20 +86,24 @@ public class CTJSONSyncTask extends AbsCTSyncTask<String, Object> {
 	public void addHttpParam(String key, String value) {
 		httpParams.add(new BasicNameValuePair(key, value));
 	}
-	
+
 	public void addHttpParam(String key, int value) {
 		httpParams.add(new BasicNameValuePair(key, String.valueOf(value)));
 	}
 
 	public void addHttpFileParam(String key, String path) {
-		httpFileParams.put(key, new FileBody(new File(URI.create(path))));
+		try {
+			httpFileParams.put(key, new File(path));
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public ArrayList<NameValuePair> getHttpParams() {
 		return httpParams;
 	}
 
-	public Map<String, FileBody> getHttpFileParams() {
+	public Map<String, File> getHttpFileParams() {
 		return httpFileParams;
 	}
 
@@ -116,23 +124,42 @@ public class CTJSONSyncTask extends AbsCTSyncTask<String, Object> {
 	 * @return
 	 * @throws UnsupportedEncodingException
 	 */
-	@SuppressWarnings("deprecation")
-	public HttpPost getRequest(String params) throws UnsupportedEncodingException {
+	public HttpPost getRequest(String params)
+			throws UnsupportedEncodingException {
 		HttpPost httpPost = new HttpPost(params);
 		addHttpParam("device", "android"); // test
-		
+
 		String boundary = "*****BOUNDARY*****";
-		
-		MultipartEntity entity = new MultipartEntity(HttpMultipartMode.BROWSER_COMPATIBLE, boundary, Charset.forName(HTTP.UTF_8));
+
+		// UrlEncodedFormEntity entity = new UrlEncodedFormEntity(httpParams);
+
+		MultipartEntityBuilder builder = MultipartEntityBuilder.create();
+		builder.setBoundary(boundary);
+		builder.setCharset(Charset.defaultCharset());
+		builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
+
 		for (NameValuePair param : httpParams) {
-			entity.addPart(param.getName(), new StringBody(param.getValue(), ContentType.TEXT_PLAIN));
+			try {
+				builder.addTextBody(param.getName(), param.getValue());
+				Log.i("CTJSONSyncTask",
+						param.getName() + ", " + param.getValue());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		
-		for (String key : httpFileParams.keySet()) {
-			entity.addPart(key, httpFileParams.get(key));
-		}
-		
-		httpPost.setEntity(entity);
+
+		// 20140808 chanroid 파일은 완전 추가되기 전까지 주석처리
+		// for (String key : httpFileParams.keySet()) {
+		// try {
+		// builder.addBinaryBody(key, httpFileParams.get(key));
+		// entity.addPart(key, httpFileParams.get(key));
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		// }
+
+		httpPost.setEntity(builder.build());
+		// httpPost.setEntity(entity);
 		return httpPost;
 	}
 }

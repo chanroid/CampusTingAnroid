@@ -1,7 +1,14 @@
 package kr.co.redstrap.campusting.join;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+import org.apache.http.protocol.HTTP;
+
 import kr.co.redstrap.campusting.MainApp;
+import kr.co.redstrap.campusting.common.AbsCTSyncTask;
 import kr.co.redstrap.campusting.common.ErrorResult;
+import kr.co.redstrap.campusting.common.AbsCTSyncTask.CTSyncTaskCallback;
 import kr.co.redstrap.campusting.constant.CampusTingConstant;
 import kr.co.redstrap.campusting.join.frag.ConfirmUnivFrag;
 import kr.co.redstrap.campusting.join.frag.InfoFrag;
@@ -9,6 +16,9 @@ import kr.co.redstrap.campusting.join.frag.NormalJoinFrag;
 import kr.co.redstrap.campusting.join.frag.PictureFrag;
 import kr.co.redstrap.campusting.join.frag.TermsFrag;
 import kr.co.redstrap.campusting.login.UnitedLoginActivity;
+import kr.co.redstrap.campusting.main.MainActivity;
+import kr.co.redstrap.campusting.util.SHA256;
+import kr.co.redstrap.campusting.util.web.CTJSONSyncTask;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -212,5 +222,79 @@ public class JoinActivity extends FragmentActivity implements
 		// TODO Auto-generated method stub
 		if (currentIndex < 4)
 			changeFragment(currentIndex + 1);
+		else if (currentIndex == 4) {
+
+			CTJSONSyncTask task = new CTJSONSyncTask();
+			
+			task.addHttpParam("userId", normalFrag.getInfo().email);
+			task.addHttpParam("userPw", SHA256.getCipherText(normalFrag.getInfo().pw));
+			task.addHttpParam("gender", String.valueOf(normalFrag.getInfo().gender));
+			task.addHttpParam("birth", normalFrag.getInfo().birth);
+			task.addHttpParam("promoCode", normalFrag.getInfo().promoCode);
+			task.addHttpParam("local", infoFrag.local);
+			task.addHttpParam("character", infoFrag.characterConstText);
+			task.addHttpParam("body", infoFrag.body);
+			task.addHttpParam("height", infoFrag.height);
+			task.addHttpParam("bloodType", infoFrag.bloodType);
+			task.addHttpParam("religion", infoFrag.religion);
+			task.addHttpParam("smoke", String.valueOf(infoFrag.smoke));
+			task.addHttpParam("drink", infoFrag.drink);
+			task.addHttpParam("major", infoFrag.major);
+			task.addHttpParam("coupleCount", infoFrag.coupleCount);
+			task.addHttpParam("univMail", confirmunivFrag.univMail);
+			task.addHttpParam("univState", confirmunivFrag.univState);
+			task.addHttpFileParam("univCardPhoto", confirmunivFrag.univCardImage);
+			task.addHttpFileParam("jobPhoto", confirmunivFrag.jobImage);
+			task.addHttpFileParam("profilePhoto1", null); // 임시값
+			task.addHttpFileParam("profilePhoto2", null);
+			task.addHttpFileParam("profilePhoto3", null);
+			task.addHttpFileParam("profilePhoto4", null);
+			
+			
+			try {
+				task.addHttpParam("job", URLEncoder.encode(infoFrag.job, HTTP.UTF_8));
+				task.addHttpParam("nickName", URLEncoder.encode(normalFrag.getInfo().nickName, HTTP.UTF_8));
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			task.addCallback(new CTSyncTaskCallback<String, Object>() {
+
+				@Override
+				public void onStartTask(AbsCTSyncTask<String, Object> task) {
+					// TODO Auto-generated method stub
+					layout.showLoading("Loading...");
+				}
+
+				@Override
+				public void onProgressTask(AbsCTSyncTask<String, Object> task,
+						int progress) {
+					// TODO Auto-generated method stub
+					
+				}
+
+				@Override
+				public void onErrorTask(AbsCTSyncTask<String, Object> task,
+						ErrorResult error) {
+					// TODO Auto-generated method stub
+					layout.dismissLoading();
+					layout.showErrorDialog(error);
+				}
+
+				@Override
+				public void onSuccessTask(AbsCTSyncTask<String, Object> task,
+						Object result) {
+					// TODO Auto-generated method stub
+					layout.dismissLoading();
+					
+					// 20140723 chanroid 일단 그냥 메인으로 넘어가게 설정. 나중에 액티비티 구현할때 마저 구현
+					startActivity(new Intent(JoinActivity.this, MainActivity.class));
+					finish();
+				}
+			});
+			
+			task.executeParallel("userPost");
+		}
 	}
 }

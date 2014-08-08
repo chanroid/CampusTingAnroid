@@ -2,6 +2,7 @@ package kr.co.redstrap.campusting.common;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 public class LoginInfo {
 
@@ -46,6 +47,7 @@ public class LoginInfo {
 	}
 
 	public void setUserPw(String pw) {
+		Log.i("LoginInfo", "pw : " + pw);
 		mPref.edit().putString("userPw", pw).commit();
 	}
 
@@ -73,9 +75,9 @@ public class LoginInfo {
 		mPref.edit().putInt("userNum", num).commit();
 	}
 
-	public String getUserNum() {
+	public int getUserNum() {
 		// TODO Auto-generated method stub
-		return mPref.getString("userNum", "0");
+		return mPref.getInt("userNum", 0);
 	}
 
 	public void setNickName(String nickName) {

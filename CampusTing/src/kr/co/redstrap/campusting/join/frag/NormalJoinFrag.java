@@ -13,12 +13,13 @@ public class NormalJoinFrag extends AbsJoinFrag implements NormalJoinLayout.Call
 		public String email;
 		public String pw; // 연동 코드로 대체
 		public String nickName;
-		public String gender;
+		public boolean gender;
 		public String birth;
+		public String promoCode;
 	}
 	
 	private NormalJoinLayout layout;
-	public NormalJoinInfo info;
+	private NormalJoinInfo info;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,6 +36,19 @@ public class NormalJoinFrag extends AbsJoinFrag implements NormalJoinLayout.Call
 		layout.setEmailId(info.email);
 		layout.setGender(info.gender);
 		layout.setPwText(info.pw);
+	}
+	
+	public NormalJoinInfo getInfo() {
+		this.info = new NormalJoinInfo();
+		
+		info.birth = layout.getBirth();
+		info.email = layout.getEmailId();
+		info.gender = layout.getGender();
+		info.nickName = layout.getNickname();
+		info.pw = layout.getPwText();
+		info.promoCode = layout.getPromoCode();
+		
+		return this.info;
 	}
 
 	@Override
