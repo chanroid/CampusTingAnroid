@@ -38,6 +38,7 @@
             android:src="@drawable/com_facebook_picker_list_selector_disabled" />
 
         <LinearLayout
+            android:id="@+id/matchingResultIdCardContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical" >

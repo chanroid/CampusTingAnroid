@@ -88,4 +88,9 @@ public class LoginInfo {
 		mPref.edit().putInt("major", major).commit();
 	}
 
+	public String getNickName() {
+		// TODO Auto-generated method stub
+		return mPref.getString("nickName", "");
+	}
+	
 }

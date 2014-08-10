@@ -33,7 +33,7 @@ public class HalfPagingScrollView extends HorizontalScrollView {
 	protected void onScrollChanged(int l, int t, int oldl, int oldt) {
 		// TODO Auto-generated method stub
 		super.onScrollChanged(l, t, oldl, oldt);
-		Log.i("HalfPagingScrollView", "l : " + l + ", oldl :" + oldl);
+		Log.i("HalfPagingScrollView", "l : " + l);
 	}
 	
 }
