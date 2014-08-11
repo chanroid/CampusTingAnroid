@@ -16,7 +16,7 @@ public class FaqActivity extends Activity implements FaqLayout.Callback {
 		layout.setCallback(this);
 		setContentView(layout.getView());
 	}
-
+	
 	@Override
 	public void onBackClick() {
 		// TODO Auto-generated method stub

@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class ModifyIDCardSkinFragment extends Fragment {
+public class ModifyIDCardSkinFragment extends Fragment implements ModifyIDCardSkinLayout.Callback {
 
 	private ModifyIDCardSkinLayout layout;
 	
@@ -16,7 +16,14 @@ public class ModifyIDCardSkinFragment extends Fragment {
 		// TODO Auto-generated method stub
 		
 		layout = new ModifyIDCardSkinLayout(getActivity());
+		layout.setCallback(this);
 		
 		return layout.getView();
+	}
+
+	@Override
+	public void onSkinClick(int index) {
+		// TODO Auto-generated method stub
+		
 	}
 }

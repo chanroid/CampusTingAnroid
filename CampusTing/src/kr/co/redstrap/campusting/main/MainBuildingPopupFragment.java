@@ -98,6 +98,8 @@ public class MainBuildingPopupFragment extends DialogFragment implements MainBui
 		// TODO Auto-generated method stub
 		dismiss();
 		// 20140731 chanroid 전달할 인자값들 좀 필요할듯
-		startActivity(new Intent(getActivity(), MatchingResultActivity.class));
+		Intent intent = new Intent(getActivity(), MatchingResultActivity.class);
+		intent.putExtra("building", type);
+		startActivity(intent);
 	}
 }

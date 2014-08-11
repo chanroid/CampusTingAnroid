@@ -43,6 +43,7 @@
         android:layout_height="wrap_content" >
 
         <CheckedTextView
+            android:id="@+id/historyAlltingTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -53,6 +54,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <CheckedTextView
+            android:id="@+id/historyReceiveTingTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -62,6 +64,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <CheckedTextView
+            android:id="@+id/historySendTingTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -71,6 +74,7 @@
             android:textAppearance="?android:attr/textAppearanceSmall" />
 
         <CheckedTextView
+            android:id="@+id/historyConfirmTingTab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

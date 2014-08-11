@@ -63,8 +63,8 @@
         </activity>
         <activity
             android:name=".common.IdActivity"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" >
         </activity>
         <activity
             android:name=".main.NoticeActivity"
@@ -105,6 +105,10 @@
         </activity>
         <activity
             android:name=".setting.ChangePWActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".setting.PushAlarmActivity"
             android:screenOrientation="portrait" >
         </activity>
         <activity

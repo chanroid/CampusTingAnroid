@@ -75,6 +75,26 @@ public class MainLayout extends AbsCTLayout {
 		
 		v.setBackgroundColor(Color.DKGRAY);
 	}
+	
+	public void switchButtonBackground(int index) {
+		switch (index) {
+		case 0:
+			switchButtonBackground(idcardBtn);
+			break;
+		case 1:
+			switchButtonBackground(historyBtn);
+			break;
+		case 2:
+			switchButtonBackground(mainBtn);
+			break;
+		case 3:
+			switchButtonBackground(chatBtn);
+			break;
+		case 4:
+			switchButtonBackground(moreBtn);
+			break;
+		}
+	}
 
 	private class Listener implements OnClickListener {
 

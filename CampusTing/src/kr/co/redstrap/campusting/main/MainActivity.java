@@ -95,6 +95,27 @@ public class MainActivity extends FragmentActivity implements
 		trans.show(fragment);
 		trans.commit();
 	}
+	
+	public void switchFragment(int index) {
+		switch (index) {
+		case 0:
+			switchFragment(idCardFrag);
+			break;
+		case 1:
+			switchFragment(historyFrag);
+			break;
+		case 2:
+			switchFragment(mainFrag);
+			break;
+		case 3:
+			switchFragment(chatFrag);
+			break;
+		case 4:
+			switchFragment(moreFrag);
+			break;
+		}
+		layout.switchButtonBackground(index);
+	}
 
 	@Override
 	protected void onResume() {

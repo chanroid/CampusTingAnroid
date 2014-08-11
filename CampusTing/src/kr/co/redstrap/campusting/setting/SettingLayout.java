@@ -50,6 +50,18 @@ public class SettingLayout extends AbsCTLayout {
 	private TextView emailText;
 	private TextView promocodeText;
 	
+	public void setVersionText(String current, String recent) {
+		currentVerText.setText("현재버전 " + current);
+		recentVerText.setText("최신버전 " + recent);
+	}
+	
+	public void setEmailIdText(String email) {
+		emailText.setText(email);
+	}
+	
+	public void setPromoCodeText(String code) {
+		promocodeText.setText(code);
+	}
 	
 	public SettingLayout(Context ctx) {
 		super(ctx);
@@ -103,6 +115,9 @@ public class SettingLayout extends AbsCTLayout {
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
+			case R.id.settingBackBtn:
+				callback.onBackClick();
+				break;
 			case R.id.settingVersionBtn:
 				callback.onVersionClick();
 				break;

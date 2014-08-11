@@ -9,14 +9,12 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="내 소개"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="* 전화번호나 메신저 ID 등을 적을 경우 서비스 이용이 불가합니다."
@@ -43,18 +41,13 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <TextView
+                    android:id="@+id/modifyintroduceNicknameText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="냥냥이" />
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
-            
+
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,33 +64,27 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <RadioGroup
-                    android:id="@+id/radioGroup1"
+                    android:id="@+id/modifyintroduceGenderRadioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal" >
 
                     <RadioButton
-                        android:id="@+id/radio0"
+                        android:id="@+id/modifyintroduceGenderRadio1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="남성" />
 
                     <RadioButton
-                        android:id="@+id/radio1"
+                        android:id="@+id/modifyintroduceGenderRadio2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="여성" />
                 </RadioGroup>
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
-            
+
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,18 +101,12 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Button
+                    android:id="@+id/modifyintroduceBirthBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Button" />
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
+                    android:layout_weight="1" />
             </TableRow>
-            
+
             <TableRow
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -142,16 +123,11 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Button
+                    android:id="@+id/modifyintroduceLocalBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Button" />
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
 
             <TableRow
@@ -170,16 +146,11 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Button
+                    android:id="@+id/modifyintroduceCharacterBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Button" />
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
 
             <TableRow
@@ -198,16 +169,11 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Button
+                    android:id="@+id/modifyintroduceBodyBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Button" />
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
 
             <TableRow
@@ -226,19 +192,12 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
-                    android:id="@+id/editText1"
+                    android:id="@+id/modifyintroduceHeightBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:inputType="number"
                     android:layout_weight="1" >
-
-                    <requestFocus />
                 </EditText>
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
 
             <TableRow
@@ -257,16 +216,11 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Button
+                    android:id="@+id/modifyintroduceBloodBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Button" />
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
 
             <TableRow
@@ -285,16 +239,11 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Button
+                    android:id="@+id/modifyintroduceReligionBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Button" />
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
 
             <TableRow
@@ -313,28 +262,25 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <RadioGroup
+                    android:id="@+id/modifyintroduceSmokeRadioGroup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal" >
 
                     <RadioButton
+                        android:id="@+id/modifyintroduceSmokeRadio1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="흡연" />
 
                     <RadioButton
+                        android:id="@+id/modifyintroduceSmokeRadio2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="비흡연" />
                 </RadioGroup>
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
 
             <TableRow
@@ -353,16 +299,11 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Button
+                    android:id="@+id/modifyintroduceDrinkBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Button" />
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
 
             <TableRow
@@ -381,16 +322,10 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <EditText
-                    android:id="@+id/editText2"
+                    android:id="@+id/modifyintroduceJobEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
 
             <TableRow
@@ -409,16 +344,11 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Button
+                    android:id="@+id/modifyintroduceMajorBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Button" />
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
 
             <TableRow
@@ -437,20 +367,16 @@
                     android:textAppearance="?android:attr/textAppearanceSmall" />
 
                 <Button
+                    android:id="@+id/modifyintroduceCouplecountBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Button" />
-
-                <CheckedTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="C" />
             </TableRow>
         </TableLayout>
 
         <LinearLayout
+            android:id="@+id/modifyintroduceConfirmUnivLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -468,6 +394,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <Button
+                android:id="@+id/modifyintroduceConfirmUnivBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="대학교 인증하러 가기" />
@@ -476,6 +403,7 @@
         <!-- 인증하면 나옴 -->
 
         <LinearLayout
+            android:id="@+id/modifyintroduceConfirmedUnivLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -506,11 +434,11 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <TextView
-                        android:id="@+id/textView5"
+                        android:id="@+id/modifyintroduceConfirmedUnivText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Small Text"
+                        android:text="경남정보대학"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
                 </TableRow>
 
@@ -529,17 +457,18 @@
                         android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/modifyintroduceConfirmedUnivMailText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Small Text"
+                        android:text="chanroid@kit.ac.kr"
                         android:textAppearance="?android:attr/textAppearanceSmall" />
                 </TableRow>
             </TableLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/modifyintroduceConfirmJobLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
@@ -557,6 +486,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <Button
+                android:id="@+id/modifyintroduceConfirmJobBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="직업 인증하러 가기" />
@@ -565,6 +495,7 @@
         <!-- 인증하면 보임 -->
 
         <LinearLayout
+            android:id="@+id/modifyintroduceConfirmedJobLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

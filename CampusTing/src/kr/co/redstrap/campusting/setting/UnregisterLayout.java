@@ -58,10 +58,13 @@ public class UnregisterLayout extends AbsCTLayout {
 			// TODO Auto-generated method stub
 			switch (v.getId()) {
 			case R.id.unregisterBackBtn:
+				callback.onBackClick();
 				break;
 			case R.id.unregisterBtn:
+				callback.onUnregisterClick();
 				break;
 			case R.id.unregisterRestBtn:
+				callback.onRestClick();
 				break;
 			}
 		}

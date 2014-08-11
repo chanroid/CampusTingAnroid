@@ -27,7 +27,7 @@ public class MoreFragment extends Fragment implements MoreLayout.Callback {
 	@Override
 	public void onProfileClick() {
 		// TODO Auto-generated method stub
-
+		((MainActivity) getActivity()).switchFragment(0);
 	}
 
 	@Override

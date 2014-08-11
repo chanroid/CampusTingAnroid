@@ -14,6 +14,8 @@ public class UnregisterActivity extends Activity implements UnregisterLayout.Cal
 		
 		layout = new UnregisterLayout(this);
 		layout.setCallback(this);
+		
+		setContentView(layout.getView());
 	}
 
 	@Override
@@ -31,6 +33,10 @@ public class UnregisterActivity extends Activity implements UnregisterLayout.Cal
 	@Override
 	public void onUnregisterClick() {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	private void unregisterAction(int type) {
 		
 	}
 }

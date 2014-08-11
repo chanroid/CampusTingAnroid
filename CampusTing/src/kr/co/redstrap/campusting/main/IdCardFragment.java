@@ -30,12 +30,21 @@ public class IdCardFragment extends Fragment implements IdCardLayout.Callback {
 
 		layout = new IdCardLayout(getActivity());
 		layout.setCallback(this);
+		
+		loadUserInfo();
+
+		return layout.getView();
+	}
+
+	private void loadUserInfo() {
 
 		CTJSONSyncTask task = new CTJSONSyncTask();
 
+		task.addHttpParam("univcardType", 0); // 서버작업 완료되면 삭제
 		task.addHttpParam("userNum", LoginInfo.getInstance(getActivity())
 				.getUserNum());
-		task.addHttpParam("univCardType", 1);
+		task.addHttpParam("targetUserNum", LoginInfo.getInstance(getActivity())
+				.getUserNum());
 
 		task.addCallback(new CTSyncTaskCallback<String, Object>() {
 
@@ -78,14 +87,13 @@ public class IdCardFragment extends Fragment implements IdCardLayout.Callback {
 
 		task.executeParallel("user");
 
-		return layout.getView();
 	}
 
 	private void settingIdCardInfo(JSONObject result) throws JSONException {
 		// TODO Auto-generated method stub
 
 		// 얻을 수 있는 모든 데이터를 우선 변수로 할당
-		String nickName = result.getString("nickName");
+		// String nickName = result.getString("nickName");
 		int photoCount = result.getInt("photoCount");
 		String simpleIntro = result.getString("simpleIntro");
 		String birth = result.getString("birth");
@@ -114,10 +122,10 @@ public class IdCardFragment extends Fragment implements IdCardLayout.Callback {
 		// 키 표시 생략 (표시할 칸 없음)
 		layout.setProfileBodyText(JoinInfoSelectItems.body[body]);
 		// 학교 표시 생략 (데이터베이스 필요)
-		layout.setNicknameText(nickName);
+		// layout.setNicknameText(nickName);
 		// 학과 표시 생략 (표시할 칸 없음)
 		layout.setProfileBloodText(bloodType);
-		
+
 		String drinksmokeFormat = "%s이고, 술은 %s.";
 		String drinkText = JoinInfoSelectItems.drink[drink];
 		String smokeText = smoke ? "흡연자" : "비흡연자";

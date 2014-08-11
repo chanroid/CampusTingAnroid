@@ -157,7 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="XPU2S3"
+                    android:text="가져오는 중입니다.."
                     android:textAppearance="?android:attr/textAppearanceSmall" />
             </RelativeLayout>
 

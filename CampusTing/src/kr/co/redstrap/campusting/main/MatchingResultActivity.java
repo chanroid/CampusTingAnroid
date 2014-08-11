@@ -37,6 +37,7 @@ public class MatchingResultActivity extends Activity implements Callback {
 		if (buildingNum == -1) {
 			Toast.makeText(this, "잘못된 요청입니다.", Toast.LENGTH_LONG).show();
 			finish();
+			return;
 		}
 		
 		CTJSONSyncTask task = new CTJSONSyncTask();
@@ -72,6 +73,7 @@ public class MatchingResultActivity extends Activity implements Callback {
 					Object result) {
 				// TODO Auto-generated method stub
 				layout.dismissLoading();
+				// 20140811 chanroid 아직 이부분 서버구현 안됨
 				try {
 					settingMatchingResultInfo((JSONObject) result);
 				} catch (JSONException e) {
