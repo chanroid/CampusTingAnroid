@@ -62,6 +62,10 @@ public class ModifyMyProfileFragment extends Fragment implements
 		this.man = man;
 		onGenderChanged(man);
 	}
+	
+	public void setNickName(String nickName) {
+		layout.setNickName(nickName);
+	}
 
 	public int getHeight() {
 		return height;

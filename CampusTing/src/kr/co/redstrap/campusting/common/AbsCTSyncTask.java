@@ -12,6 +12,37 @@ public abstract class AbsCTSyncTask<P, R> extends AsyncTask<P, Integer, R> {
 		public void onProgressTask(AbsCTSyncTask<P, R> task, int progress);
 		public void onErrorTask(AbsCTSyncTask<P, R> task, ErrorResult error);
 		public void onSuccessTask(AbsCTSyncTask<P, R> task, R result);
+		
+		public class Stub implements CTSyncTaskCallback<String, Object>{
+
+			@Override
+			public void onStartTask(AbsCTSyncTask<String, Object> task) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onProgressTask(AbsCTSyncTask<String, Object> task,
+					int progress) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onErrorTask(AbsCTSyncTask<String, Object> task,
+					ErrorResult error) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void onSuccessTask(AbsCTSyncTask<String, Object> task,
+					Object result) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		}
 	}
 	
 	public Vector<CTSyncTaskCallback<P, R>> callbacks = new Vector<CTSyncTaskCallback<P,R>>();

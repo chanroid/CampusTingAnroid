@@ -16,22 +16,22 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 public class MatchingResultActivity extends Activity implements Callback {
-	
+
 	private MatchingResultLayout layout;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+
 		layout = new MatchingResultLayout(this);
 		layout.setCallback(this);
-		
+
 		setContentView(layout.getView());
-		
+
 		loadMatchingResult();
 	}
-	
+
 	private void loadMatchingResult() {
 		int buildingNum = getIntent().getIntExtra("building", -1);
 		if (buildingNum == -1) {
@@ -39,12 +39,12 @@ public class MatchingResultActivity extends Activity implements Callback {
 			finish();
 			return;
 		}
-		
+
 		CTJSONSyncTask task = new CTJSONSyncTask();
-		
+
 		task.addHttpParam("userNum", LoginInfo.getInstance(this).getUserNum());
 		task.addHttpParam("building", buildingNum);
-		
+
 		task.addCallback(new CTSyncTaskCallback<String, Object>() {
 
 			@Override
@@ -57,7 +57,7 @@ public class MatchingResultActivity extends Activity implements Callback {
 			public void onProgressTask(AbsCTSyncTask<String, Object> task,
 					int progress) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
@@ -83,39 +83,45 @@ public class MatchingResultActivity extends Activity implements Callback {
 				}
 			}
 		});
-		
+
 		task.executeParallel("searchForServer");
 	}
-	
-	private void settingMatchingResultInfo(JSONObject json) throws JSONException {
-		JSONArray list = json.getJSONArray("list");
-		
-		int user1 = list.getInt(0);
-		int user2 = list.getInt(1);
-		
-		loadMatchingUserInfo(0, user1);
-		loadMatchingUserInfo(1, user2);
+
+	private void settingMatchingResultInfo(JSONObject json)
+			throws JSONException {
+		try {
+			JSONArray list = json.getJSONArray("list");
+			int user1 = list.getInt(0);
+			int user2 = list.getInt(1);
+
+			loadMatchingUserInfo(0, user1);
+			loadMatchingUserInfo(1, user2);
+		} catch (JSONException e) {
+			e.printStackTrace();
+			layout.showErrorDialog(new ErrorResult(0, "매칭 대상이 없습니다."));
+		}
+
 	}
-	
+
 	private void loadMatchingUserInfo(final int index, int user) {
 		CTJSONSyncTask task = new CTJSONSyncTask();
-		
+
 		task.addHttpParam("userNum", user);
 		task.addHttpParam("univcardType", 0);
-		
+
 		task.addCallback(new CTSyncTaskCallback<String, Object>() {
 
 			@Override
 			public void onStartTask(AbsCTSyncTask<String, Object> task) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void onProgressTask(AbsCTSyncTask<String, Object> task,
 					int progress) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
@@ -131,7 +137,7 @@ public class MatchingResultActivity extends Activity implements Callback {
 				// TODO Auto-generated method stub
 
 				JSONObject result = (JSONObject) orignresult;
-				
+
 				// 20140810 chanroid 얻을 수 있는 모든 데이터를 우선 변수로 할당
 				try {
 					String nickName = result.getString("nickName");

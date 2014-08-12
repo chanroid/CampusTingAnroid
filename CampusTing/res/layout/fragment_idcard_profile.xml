@@ -77,7 +77,6 @@
             android:padding="5dp" >
 
             <TextView
-                android:id="@+id/profileBodyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
@@ -85,7 +84,7 @@
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/profileBodyText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="profileBodyText"
@@ -243,9 +242,9 @@
 
     <TextView
         android:id="@+id/profileSimpleIntroDescText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="운동을 좋아해요"
+        android:background="@android:color/darker_gray"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -257,9 +256,10 @@
 
     <TextView
         android:id="@+id/profileFaceText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="복이 들어온다는 복코\n큰키"
+        android:background="@android:color/darker_gray"
+        android:lines="3"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -271,9 +271,10 @@
 
     <TextView
         android:id="@+id/profileHobbyText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="자전거\n책읽기\n미싱"
+        android:background="@android:color/darker_gray"
+        android:lines="3"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
@@ -285,9 +286,10 @@
 
     <TextView
         android:id="@+id/profileFavoriteText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="자상한 사람\n오빠같이 잘챙겨주는 사람"
+        android:background="@android:color/darker_gray"
+        android:lines="3"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </LinearLayout>

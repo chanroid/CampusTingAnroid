@@ -127,6 +127,7 @@ public class ModifyProfileActivity extends FragmentActivity implements
 		String job = result.getString("job");
 		int height = result.getInt("height");
 		int body = result.getInt("body");
+		String nickName = result.getString("nickName");
 
 		int univNum = -1;
 		if (!"".equals(result.getString("univNum"))) {
@@ -152,14 +153,14 @@ public class ModifyProfileActivity extends FragmentActivity implements
 		if (!result.isNull("idealType")) {
 			idealTypes = result.getJSONArray("idealType");
 		}
-		
+
 		// JSONArray character = result.getJSONArray("character");
 
-		// String confirmedUnivName = result.getString("confirmedUnivName");
-		// String confirmedUnivEmail = result.getString("confirmedUnivEmail");
-		// boolean confirmedUnivPhoto = "Y".equals(result
-		// .getString("confirmedUnivPhoto"));
-		// boolean confirmedJob = "Y".equals(result.getString("confirmedJob"));
+		String confirmedUnivName = result.getString("confirmedUnivName");
+		String confirmedUnivEmail = result.getString("confirmedUnivEmail");
+		boolean confirmedUnivPhoto = "Y".equals(result
+				.getString("confirmedUnivPhoto"));
+		boolean confirmedJob = "Y".equals(result.getString("confirmedJob"));
 		// boolean gender = "Y".equals(result.getString("gender"));
 
 		modifyPhotoFragment.setPhotoCount(photoCount);
@@ -169,8 +170,9 @@ public class ModifyProfileActivity extends FragmentActivity implements
 		modifyProfileFragment.setJob(job);
 		modifyProfileFragment.setHeight(height);
 		modifyProfileFragment.setBody(body);
+		modifyProfileFragment.setNickName(nickName);
 		if (univNum >= 0) {
-//			modifyProfileFragment.setUnivNum(univNum);
+			// modifyProfileFragment.setUnivNum(univNum);
 			// 20140812 chanroid 학교 db 넘어가면 진행
 		}
 		if (majorNum >= 0) {
@@ -198,8 +200,8 @@ public class ModifyProfileActivity extends FragmentActivity implements
 		// }
 		// modifyProfileFragment.setCharacter(characterArray);
 
-		// modifyProfileFragment.setConfirmedUniv(confirmedUnivName,
-		// confirmedUnivEmail, confirmedUnivPhoto);
+		modifyProfileFragment.setConfirmedUniv(confirmedUnivName,
+				confirmedUnivEmail, confirmedUnivPhoto);
 		// modifyProfileFragment.setConfirmedJob(confirmedJob);
 		// modifyProfileFragment.setMan(gender);
 	}

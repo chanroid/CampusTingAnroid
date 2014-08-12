@@ -152,6 +152,7 @@ public class IdCardLayout extends AbsCTLayout {
 	
 	public void setSimpleintroText(String simpleintroText) {
 		this.simpleintroText.setText(simpleintroText);
+		this.profileAboutmeText.setText(simpleintroText);
 	}
 	
 	public void setProfileImage(int index, String url) {
