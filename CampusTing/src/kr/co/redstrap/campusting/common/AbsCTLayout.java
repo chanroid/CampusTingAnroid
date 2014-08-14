@@ -1,8 +1,10 @@
 package kr.co.redstrap.campusting.common;
 
+import kr.co.redstrap.campusting.util.view.SpinProgressPopupFragment;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
@@ -24,20 +26,30 @@ public abstract class AbsCTLayout {
 
 		mProgressDialog = new ProgressDialog(mContext);
 		mProgressDialog.setCancelable(false);
+		
+		if (ctx instanceof FragmentActivity)
+			mProgressFragment = new SpinProgressPopupFragment();
 	}
-
+	
 	private View mRoot;
 	private Context mContext;
 	private LayoutInflater mInflater;
 
 	// 미리 생성해두고 필요시 사용
 	private ProgressDialog mProgressDialog;
+	private SpinProgressPopupFragment mProgressFragment;
 
 	public void showLoading(int messageId) {
 		showLoading(mContext.getString(messageId));
 	}
 
 	public void showLoading(CharSequence message) {
+		if (mProgressFragment != null && message == null) {
+			FragmentActivity activity = (FragmentActivity) mContext;
+			mProgressFragment.show(activity.getSupportFragmentManager(), null);
+			return;
+		}
+		
 		mProgressDialog.setMessage(message);
 
 		if (!mProgressDialog.isShowing())
@@ -47,6 +59,10 @@ public abstract class AbsCTLayout {
 	public void dismissLoading() {
 		if (mProgressDialog.isShowing())
 			mProgressDialog.dismiss();
+		
+		if (mProgressFragment != null)
+			mProgressFragment.dismiss();
+			
 	}
 
 	public void showErrorDialog(ErrorResult error) {

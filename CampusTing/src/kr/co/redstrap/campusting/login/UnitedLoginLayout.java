@@ -1,6 +1,5 @@
 package kr.co.redstrap.campusting.login;
 
-import kr.co.redstrap.campusting.MainApp;
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTLayout;
 import kr.co.redstrap.campusting.util.AnimUtil;
@@ -12,9 +11,8 @@ import android.text.InputFilter;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView.OnEditorActionListener;
 
 /**
@@ -32,8 +30,9 @@ public class UnitedLoginLayout extends AbsCTLayout {
 	public EditText inputId;
 	public EditText inputPw;
 	
-	private View introTitle;
-	private View txtSummary;
+	private ImageView splash1;
+	private ImageView splash2;
+	
 //	private View loginInterface;
 	private View loginBtnInterface;
 	private View fbBtn;
@@ -69,8 +68,6 @@ public class UnitedLoginLayout extends AbsCTLayout {
 		
 		// 뷰 연결
 		// 타이틀 및 컨테이너(인터페이스)
-		introTitle = findViewById(R.id.layout_intro_title);
-		txtSummary = findViewById(R.id.txt_summary);
 //		loginInterface = findViewById(R.id.login_interface);
 		loginBtnInterface = findViewById(R.id.login_btn_interface);
 		loginNormalInterface = findViewById(R.id.login_normal_interface);
@@ -81,6 +78,9 @@ public class UnitedLoginLayout extends AbsCTLayout {
 		loginConfirm = findViewById(R.id.btn_normal_login_confirm);
 		normalJoin = findViewById(R.id.btn_normal_join);
 		findPw = findViewById(R.id.btn_find_pw);
+		
+		splash1 = (ImageView) findViewById(R.id.introLoading1Img);
+		splash2 = (ImageView) findViewById(R.id.introLoading2Img);
 
 		// 1. 페이스북 버튼 뷰 연결
 		fbBtn = findViewById(R.id.btn_facebook);
@@ -129,18 +129,14 @@ public class UnitedLoginLayout extends AbsCTLayout {
 	 * 로그인 관련 뷰들을 표시합니다
 	 */
 	public void showLoginViews() {
-		// 0. 타이틀 인
-		Animation anim = AnimationUtils.loadAnimation(MainApp.appContext, R.anim.trans_up); 
-		// 인트로 타이틀 통째로 y축으로 -20% 이동하는 애니메이션
-		anim.setStartOffset(1000); // 1초 후에 실행
-		introTitle.startAnimation(anim);
-		AnimUtil.startFadeOutAnim(txtSummary, 1000, 1000);
-		// 타이틀 하단 부제 페이드 아웃
 
 		// 1. 로그인 버튼 인터페이스 생성
 		fbBtn.setClickable(true);
 		normalLoginBtn.setClickable(true);
 		AnimUtil.startFadeInAnim(loginBtnInterface, 1000, 1000);
+		
+		AnimUtil.startFadeInAnim(splash2, 1000, 1000);
+		AnimUtil.startFadeOutAnim(splash1, 1000, 1000);
 	}
 	
 	/**

@@ -55,7 +55,7 @@ public class HistoryFragment extends Fragment implements HistoryLayout.Callback 
 			@Override
 			public void onStartTask(AbsCTSyncTask<String, Object> task) {
 				// TODO Auto-generated method stub
-				layout.showLoading("Loading...");
+				layout.showLoading(null);
 			}
 
 			@Override
@@ -114,7 +114,8 @@ public class HistoryFragment extends Fragment implements HistoryLayout.Callback 
 			tingItem.tingNum = tingObject.getInt("tingNum");
 			tingItem.targetNum = tingObject.getInt("targetNum");
 			tingItem.requestType = tingObject.getInt("tingRequestType");
-			tingItem.time = tingObject.getLong("time");
+//			tingItem.time = tingObject.getLong("time");
+			// 20140814 chanroid 서버에서 값 형식이 맞지 않음
 			tingItem.isAccept = "Y".equals(tingObject.getString("isAcceptTing"));
 			tingItem.isChating = "Y".equals(tingObject.getString("isChating"));
 			tingItem.isDeleted = "Y".equals(tingObject.getString("isDeletedChating"));

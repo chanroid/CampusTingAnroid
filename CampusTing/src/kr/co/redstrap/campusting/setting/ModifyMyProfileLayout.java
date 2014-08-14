@@ -192,6 +192,9 @@ public class ModifyMyProfileLayout extends AbsCTLayout {
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
+				if ("".equals(s.toString()))
+					return;
+				
 				int height = Integer.parseInt(s.toString());
 				if (height > 100 && height < 300) {
 					ViewUtil.setGood(heightEdit);

@@ -264,7 +264,7 @@ public class JoinActivity extends FragmentActivity implements
 				@Override
 				public void onStartTask(AbsCTSyncTask<String, Object> task) {
 					// TODO Auto-generated method stub
-					layout.showLoading("Loading...");
+					layout.showLoading(null);
 				}
 
 				@Override

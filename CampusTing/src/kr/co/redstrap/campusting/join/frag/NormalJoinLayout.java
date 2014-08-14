@@ -43,7 +43,7 @@ public class NormalJoinLayout extends AbsCTLayout {
 	private Button nextBtn;
 
 	private boolean gender = true;
-	private String birth = null;
+	private String birth = "";
 
 	public NormalJoinLayout(Context ctx) {
 		super(ctx);
@@ -198,7 +198,7 @@ public class NormalJoinLayout extends AbsCTLayout {
 		boolean confirmPw = getPwText().equals(getPwConfirmText())
 				&& getPwText().length() > 5;
 		boolean confirmNick = getNickname().length() > 1;
-		boolean confirmBirth = !getBirth().equals("00000000");
+		boolean confirmBirth = !"".equals(getBirth());
 		return confirmEmail && confirmPw && confirmNick && confirmBirth;
 	}
 

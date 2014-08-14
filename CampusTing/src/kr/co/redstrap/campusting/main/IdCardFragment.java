@@ -100,12 +100,15 @@ public class IdCardFragment extends Fragment implements IdCardLayout.Callback {
 		int type = result.getInt("charmingType");
 		int point = result.getInt("charmingPoint");
 		long time = result.getLong("time");
-		int percent = result.getInt("charmingPercent");
+		int percent = -1;
+		if (!result.isNull("charmingPercent")) {
+			percent = result.getInt("charmingPercent");	
+		}
 		if (type == 0) {
-			layout.setProfileCharmingPointText(String.format("당신의 프로필호감도는 평균 %i점으로\n상위 %i%입니다.", point, percent));
+			layout.setProfileCharmingPointText(String.format("당신의 프로필호감도는 평균 %d점으로\n상위 %d%%입니다.", point, percent));
 			layout.setProfileCharmingPointButtonText(time + "");
 		} else if (type == 1) {
-			layout.setFaceCharmingPointText(String.format("당신의 외모호감도는 평균 %i점으로\n상위 %i%입니다.", point, percent));
+			layout.setFaceCharmingPointText(String.format("당신의 외모호감도는 평균 %d점으로\n상위 %d%%입니다.", point, percent));
 			layout.setFaceCharmingPointBtnText(time + "");
 		}
 	}
@@ -125,7 +128,7 @@ public class IdCardFragment extends Fragment implements IdCardLayout.Callback {
 			@Override
 			public void onStartTask(AbsCTSyncTask<String, Object> task) {
 				// TODO Auto-generated method stub
-				layout.showLoading("Loading...");
+				layout.showLoading(null);
 			}
 
 			@Override
@@ -170,7 +173,7 @@ public class IdCardFragment extends Fragment implements IdCardLayout.Callback {
 		int character = result.getInt("character");
 		int height = result.getInt("height");
 		int body = result.getInt("body");
-		boolean gender = "Y".equals(result.getInt("gender"));
+		boolean gender = result.getBoolean("gender");
 		int univNum = -1;
 		if (!"".equals(result.getString("univNum"))) {
 			univNum = result.getInt("univNum");

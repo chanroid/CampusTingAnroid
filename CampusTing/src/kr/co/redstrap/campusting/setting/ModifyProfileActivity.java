@@ -83,7 +83,7 @@ public class ModifyProfileActivity extends FragmentActivity implements
 			@Override
 			public void onStartTask(AbsCTSyncTask<String, Object> task) {
 				// TODO Auto-generated method stub
-				layout.showLoading("Loading...");
+				layout.showLoading(null);
 			}
 
 			@Override
@@ -239,6 +239,12 @@ public class ModifyProfileActivity extends FragmentActivity implements
 	@Override
 	public void onConfirmClick() {
 		// TODO Auto-generated method stub
+		if (modifyPhotoFragment == null || modifyAppealFragment == null
+				|| modifyProfileFragment == null) {
+			finish();
+			return;
+		}
+
 		int photoCount = modifyPhotoFragment.getProfileImages().size();
 		String simpleIntro = modifyAppealFragment.getOneLineText();
 		String birth = modifyProfileFragment.getBirth();
@@ -290,7 +296,7 @@ public class ModifyProfileActivity extends FragmentActivity implements
 			@Override
 			public void onStartTask(AbsCTSyncTask<String, Object> task) {
 				// TODO Auto-generated method stub
-				layout.showLoading("Loading...");
+				layout.showLoading(null);
 			}
 
 			@Override
