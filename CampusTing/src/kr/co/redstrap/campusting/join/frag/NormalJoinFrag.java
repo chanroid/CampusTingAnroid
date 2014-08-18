@@ -20,22 +20,26 @@ public class NormalJoinFrag extends AbsJoinFrag implements NormalJoinLayout.Call
 	
 	private NormalJoinLayout layout;
 	private NormalJoinInfo info;
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		Log.i("NormalJoinFrag :: onCreateView", "onCreateView");
-		layout = new NormalJoinLayout(actContext);
-		layout.setCallback(this);
+		
+		if (layout == null) {
+			layout = new NormalJoinLayout(actContext);
+			layout.setCallback(this);
+		}
+
+		layout.setBirth(info.birth);
+		layout.setEmailId(info.email);
+		layout.setGender(info.gender);
+		layout.setPwText(info.pw);
 
 		return layout.getView();
 	}
 	
 	public void setNormalJoinInfo(NormalJoinInfo info) {
 		this.info = info;
-		layout.setBirth(info.birth);
-		layout.setEmailId(info.email);
-		layout.setGender(info.gender);
-		layout.setPwText(info.pw);
 	}
 	
 	public NormalJoinInfo getInfo() {

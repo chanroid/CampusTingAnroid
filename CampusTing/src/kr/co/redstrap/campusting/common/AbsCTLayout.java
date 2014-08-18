@@ -4,6 +4,7 @@ import kr.co.redstrap.campusting.util.view.SpinProgressPopupFragment;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface.OnClickListener;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,11 +27,11 @@ public abstract class AbsCTLayout {
 
 		mProgressDialog = new ProgressDialog(mContext);
 		mProgressDialog.setCancelable(false);
-		
+
 		if (ctx instanceof FragmentActivity)
 			mProgressFragment = new SpinProgressPopupFragment();
 	}
-	
+
 	private View mRoot;
 	private Context mContext;
 	private LayoutInflater mInflater;
@@ -46,10 +47,14 @@ public abstract class AbsCTLayout {
 	public void showLoading(CharSequence message) {
 		if (mProgressFragment != null && message == null) {
 			FragmentActivity activity = (FragmentActivity) mContext;
-			mProgressFragment.show(activity.getSupportFragmentManager(), null);
+			try {
+				mProgressFragment.show(activity.getSupportFragmentManager(),
+						null);
+			} catch (Exception e) {
+			}
 			return;
 		}
-		
+
 		mProgressDialog.setMessage(message);
 
 		if (!mProgressDialog.isShowing())
@@ -59,15 +64,19 @@ public abstract class AbsCTLayout {
 	public void dismissLoading() {
 		if (mProgressDialog.isShowing())
 			mProgressDialog.dismiss();
-		
+
 		if (mProgressFragment != null)
 			mProgressFragment.dismiss();
-			
+
 	}
 
 	public void showErrorDialog(ErrorResult error) {
+		showErrorDialog(error, null);
+	}
+
+	public void showErrorDialog(ErrorResult error, OnClickListener callback) {
 		new AlertDialog.Builder(getContext()).setMessage(error.message)
-				.setTitle("에러").setPositiveButton("확인", null).show();
+				.setTitle("에러").setPositiveButton("확인", callback).show();
 	}
 
 	public LayoutInflater getLayoutInflater() {

@@ -1,13 +1,19 @@
 package kr.co.redstrap.campusting.login;
 
+import java.util.Arrays;
+import java.util.List;
+
 import kr.co.redstrap.campusting.MainApp;
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTSyncTask;
 import kr.co.redstrap.campusting.common.AbsCTSyncTask.CTSyncTaskCallback;
 import kr.co.redstrap.campusting.common.ErrorResult;
 import kr.co.redstrap.campusting.common.LoginInfo;
+import kr.co.redstrap.campusting.common.SimpleTextWatcher;
 import kr.co.redstrap.campusting.constant.CampusTingConstant;
 import kr.co.redstrap.campusting.constant.CampusTingConstant.LoginType;
+import kr.co.redstrap.campusting.constant.CampusTingConstant.RequestCodes;
+import kr.co.redstrap.campusting.join.JoinActivity;
 import kr.co.redstrap.campusting.main.MainActivity;
 import kr.co.redstrap.campusting.util.PwInputFilter;
 import kr.co.redstrap.campusting.util.SHA256;
@@ -24,7 +30,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.InputFilter;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -33,12 +38,16 @@ import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
+import com.facebook.LoggingBehavior;
 import com.facebook.Request;
 import com.facebook.Request.GraphUserCallback;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
+import com.facebook.Settings;
 import com.facebook.model.GraphUser;
+import com.nhn.android.naverlogin.OAuthLogin;
+import com.nhn.android.naverlogin.OAuthLoginHandler;
 
 public class UnitedLoginActivity extends FragmentActivity implements
 		CTSyncTaskCallback<String, Object> {
@@ -57,6 +66,11 @@ public class UnitedLoginActivity extends FragmentActivity implements
 
 	private UnitedLoginLayout layout;
 
+	private OAuthLogin oAuthLoginInstance;
+
+	private List<String> fbPermissions = Arrays
+			.asList("email", "user_about_me");
+
 	public UnitedLoginActivity() {
 		super();
 	}
@@ -73,18 +87,7 @@ public class UnitedLoginActivity extends FragmentActivity implements
 		layout.setClickListener(loginClickListener);
 		layout.setEditorListener(loginEditorActionListener);
 		layout.setPwInputFilters(new InputFilter[] { new PwInputFilter() });
-		layout.addIdTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-			}
-
+		layout.addIdTextChangedListener(new SimpleTextWatcher() {
 			@Override
 			public void afterTextChanged(Editable s) {
 				layout.changeInputIdIcon(ViewUtil.isTypeEmail(s.toString()));
@@ -95,6 +98,25 @@ public class UnitedLoginActivity extends FragmentActivity implements
 
 		// 인트로 시작
 		introStart();
+
+		// 페이스북 로그인 관련 데이터 세팅
+		Settings.addLoggingBehavior(LoggingBehavior.INCLUDE_ACCESS_TOKENS);
+		Session session = Session.getActiveSession();
+		if (session == null) {
+			if (savedInstanceState != null) {
+				session = Session.restoreSession(this, null, statusCallback,
+						savedInstanceState);
+			}
+			if (session == null) {
+				session = new Session(this);
+			}
+			Session.setActiveSession(session);
+		}
+		
+		// 네이버 로그인 관련 데이터 세팅
+		oAuthLoginInstance = OAuthLogin.getInstance();
+		oAuthLoginInstance.init(this, "HqHCKMGfh5WrSrZEV1R7", "fN56Rd7iQr", "캠퍼스팅", "http://www.redstrap.co.kr");
+		layout.setNaverloginHandler(mOAuthLoginHandler);
 
 		if (LoginInfo.getInstance(this).isAutoLogin()) {
 			loginFlag = false;
@@ -114,7 +136,7 @@ public class UnitedLoginActivity extends FragmentActivity implements
 
 		// 로그인 체크
 		if (resultCode == Activity.RESULT_OK) {
-			if (requestCode == 64206) { // 페이스북
+			if (requestCode == RequestCodes.LOGIN_FACEBOOK) { // 페이스북
 				Session.getActiveSession().onActivityResult(this, requestCode,
 						resultCode, data);
 			} else if (requestCode == CampusTingConstant.RequestCodes.INTRO_REQUEST) {
@@ -125,6 +147,12 @@ public class UnitedLoginActivity extends FragmentActivity implements
 				} else { // 자동 로그인
 					normalLoginAction();
 				}
+			}
+		} else {
+			if (requestCode == CampusTingConstant.RequestCodes.INTRO_REQUEST) {
+				finish();
+			} else if (requestCode == 64206) {
+
 			}
 		}
 	}
@@ -176,8 +204,66 @@ public class UnitedLoginActivity extends FragmentActivity implements
 	 * @param response
 	 *            {@link GraphUserCallback#onCompleted(GraphUser, Response)}
 	 */
-	private void facebookLoginAction(GraphUser user, Response response) {
-		// 20140804 chanroid 페이스북 로그인은 나중에...
+	private void facebookLoginAction(final GraphUser user, Response response) {
+
+		final String email = (String) user.getProperty("email");
+		final String id = user.getId();
+
+		CTJSONSyncTask task = new CTJSONSyncTask();
+		task.addCallback(new CTSyncTaskCallback.Stub() {
+			@Override
+			public void onErrorTask(AbsCTSyncTask<String, Object> task,
+					ErrorResult error) {
+				// TODO Auto-generated method stub
+				layout.dismissLoading();
+				if (error.message.contains("없는")) {
+					// 20140818 chanroid 없는 유저 경우 회원가입으로 넘어가게. 차후 코드구분으로 변경해야 함
+
+					Toast.makeText(UnitedLoginActivity.this,
+							"이 아이디로 처음 로그인 하셨어요. 회원가입 진행 후 사용이 가능합니다.",
+							Toast.LENGTH_LONG).show();
+
+					String gender = (String) user.getProperty("gender");
+					String birth = user.getBirthday();
+
+					Intent joinIntent = new Intent(UnitedLoginActivity.this,
+							JoinActivity.class);
+					joinIntent.putExtra("email", email);
+					joinIntent.putExtra("id", id);
+					joinIntent.putExtra("gender", gender);
+					joinIntent.putExtra("birth", birth);
+					joinIntent.putExtra("loginType", LoginType.FACEBOOK);
+
+					startActivity(joinIntent);
+					finishActivity(CampusTingConstant.RequestCodes.INTRO_REQUEST);
+					finish();
+
+				} else {
+					layout.showErrorDialog(error);
+					layout.swapLoginInterface();
+				}
+			}
+
+			@Override
+			public void onStartTask(AbsCTSyncTask<String, Object> task) {
+				// TODO Auto-generated method stub
+				layout.showLoading(null);
+			}
+
+			@Override
+			public void onSuccessTask(AbsCTSyncTask<String, Object> task,
+					Object result) {
+				// TODO Auto-generated method stub
+				UnitedLoginActivity.this.onSuccessTask(task, result);
+			}
+		});
+
+		task.addHttpParam("userId", email);
+		task.addHttpParam("userPw", id);
+		task.addHttpParam("pushKey", "12312312312313"); // 20140808
+														// chanroid test
+
+		task.executeParallel("login");
 	}
 
 	/**
@@ -303,36 +389,11 @@ public class UnitedLoginActivity extends FragmentActivity implements
 				break;
 			case R.id.btn_find_pw:
 				break;
+			case R.id.btn_naver:
+				onNaverLoginClick();
+				break;
 			case R.id.btn_facebook:
-				Session.openActiveSession(UnitedLoginActivity.this, true,
-						new Session.StatusCallback() {
-
-							@Override
-							public void call(Session session,
-									SessionState state, Exception exception) {
-								if (session.isOpened()) {
-									Request.newMeRequest(session,
-											new GraphUserCallback() {
-
-												@Override
-												public void onCompleted(
-														GraphUser user,
-														Response response) {
-													if (user != null) {
-														facebookLoginAction(
-																user, response);
-													} else {
-														layout.toast(
-																R.string.error_connection,
-																Toast.LENGTH_SHORT);
-													}
-												}
-											}).executeAsync();
-								} else {
-									Log.i("세션 닫힘", "세션 닫힘");
-								}
-							}
-						});
+				onFacebookLoginClick();
 				break;
 			case R.id.btn_normal_login:
 				layout.swapLoginInterface();
@@ -343,7 +404,74 @@ public class UnitedLoginActivity extends FragmentActivity implements
 			}
 
 		}
+
 	}
+
+	private void onNaverLoginClick() {
+		oAuthLoginInstance.startOauthLoginActivity(this, mOAuthLoginHandler);
+	}
+
+	/**
+	 * startOAuthLoginActivity() 호출시 인자로 넘기거나, OAuthLoginButton 에 등록해주면 인증이 종료되는
+	 * 걸 알 수 있다.
+	 */
+	private OAuthLoginHandler mOAuthLoginHandler = new OAuthLoginHandler() {
+		@Override
+		public void run(boolean success) {
+			if (success) {
+				String accessToken = oAuthLoginInstance
+						.getAccessToken(UnitedLoginActivity.this);
+				String refreshToken = oAuthLoginInstance
+						.getRefreshToken(UnitedLoginActivity.this);
+				long expiresAt = oAuthLoginInstance
+						.getExpiresAt(UnitedLoginActivity.this);
+				String tokenType = oAuthLoginInstance
+						.getTokenType(UnitedLoginActivity.this);
+				Log.i("Naver", "success : " + accessToken + ", " + refreshToken + ", " + expiresAt + ", " + tokenType);
+			} else {
+				String errorCode = oAuthLoginInstance.getLastErrorCode(
+						UnitedLoginActivity.this).getCode();
+				String errorDesc = oAuthLoginInstance
+						.getLastErrorDesc(UnitedLoginActivity.this);
+				Log.i("Naver", "errorCode:" + errorCode + ", errorDesc:" + errorDesc);
+			}
+		};
+	};
+
+	private void onFacebookLoginClick() {
+		// TODO Auto-generated method stub
+		Session session = Session.getActiveSession();
+		if (session != null && !session.isOpened() && !session.isClosed()) {
+			session.openForRead(new Session.OpenRequest(this).setPermissions(
+					fbPermissions).setCallback(statusCallback));
+		} else {
+			Session.openActiveSession(this, true, statusCallback);
+		}
+	}
+
+	private Session.StatusCallback statusCallback = new Session.StatusCallback() {
+		@Override
+		public void call(Session session, SessionState state,
+				Exception exception) {
+			// TODO Auto-generated method stub
+			if (session.isOpened()) {
+				String accessToken = session.getAccessToken();
+				Log.i("Facebook", "accessToken : " + accessToken);
+
+				Request.newMeRequest(session, new GraphUserCallback() {
+					@Override
+					public void onCompleted(GraphUser user, Response response) {
+						// TODO Auto-generated method stub
+						Log.i("Facebook", "user : " + user.getInnerJSONObject());
+						facebookLoginAction(user, response);
+					}
+				}).executeAsync();
+			} else {
+				// 에러
+				Log.i("Facebook", "login error");
+			}
+		}
+	};
 
 	@Override
 	public void onStartTask(AbsCTSyncTask<String, Object> task) {

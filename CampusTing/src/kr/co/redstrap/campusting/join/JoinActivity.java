@@ -15,6 +15,7 @@ import kr.co.redstrap.campusting.join.frag.InfoFrag;
 import kr.co.redstrap.campusting.join.frag.NormalJoinFrag;
 import kr.co.redstrap.campusting.join.frag.PictureFrag;
 import kr.co.redstrap.campusting.join.frag.TermsFrag;
+import kr.co.redstrap.campusting.join.frag.NormalJoinFrag.NormalJoinInfo;
 import kr.co.redstrap.campusting.login.UnitedLoginActivity;
 import kr.co.redstrap.campusting.main.MainActivity;
 import kr.co.redstrap.campusting.util.SHA256;
@@ -84,7 +85,13 @@ public class JoinActivity extends FragmentActivity implements
 		// 20140805 chanroid 인텐트 받아서 내정보 입력 부분 조정해 줘야 하는 부분
 		if (getIntent().getStringExtra("loginType").equalsIgnoreCase(
 				CampusTingConstant.LoginType.FACEBOOK)) {
+			NormalJoinInfo info = new NormalJoinInfo();
+			info.birth = getIntent().getStringExtra("birth");
+			info.email = getIntent().getStringExtra("email");
+			info.pw = getIntent().getStringExtra("id");
+			info.gender = "male".equals(getIntent().getStringExtra("gender"));
 			
+			normalFrag.setNormalJoinInfo(info);
 		} else if (getIntent().getStringExtra("loginType").equalsIgnoreCase(
 				CampusTingConstant.LoginType.NAVER)) {
 			

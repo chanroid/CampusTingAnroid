@@ -124,8 +124,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="페이스북 버튼" />
+                android:background="@drawable/com_facebook_loginbutton_silver" />
 
+            <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
+                android:id="@+id/btn_naver"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"/>
+            
             <Button
                 android:id="@+id/btn_normal_login"
                 android:layout_width="match_parent"

@@ -14,20 +14,22 @@ public class ErrorResult {
 	 * @param e
 	 */
 	public static ErrorResult resultFromException(Exception e) {
+		int code = 99;
+		String message = "알 수 없는 오류가 발생했습니다.";
 		if (e instanceof IOException) {
-			
+			message = "네트워크 연결이 되지 않습니다.";
 		} else if (e instanceof JSONException) {
-			
+			message = "잘못된 데이터를 전송받았습니다.";
 		} else if (e instanceof ClientProtocolException) {
-			
+			message = "잘못된 요청입니다.";
 		} else if (e instanceof MalformedURLException) {
-			
+			message = "잘못된 요청입니다.";
 		} else if (e instanceof InterruptedException) {
 			
 		} else if (e instanceof NullPointerException) {
 			
 		}
-		return new ErrorResult(99, "알 수 없는 오류가 발생했습니다.");
+		return new ErrorResult(code, message);
 		// 새로운 exception이 생기면 계속 추가
 	}
 	

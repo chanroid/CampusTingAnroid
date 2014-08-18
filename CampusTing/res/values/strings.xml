@@ -3,7 +3,7 @@
 
     <string name="app_name">캠퍼스팅</string>
     <string name="app_intro">소개팅, 미팅에 목마른 대학생들이여,\n주선자가 필요해?</string>
-    <string name="app_id">1412899105629907</string>
+    <string name="fb_app_id">356615154493185</string>
     <string name="action_settings">설정</string>
     <string name="btn_cancel">취소</string>
     <string name="btn_login">로그인</string>

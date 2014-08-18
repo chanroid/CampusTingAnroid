@@ -15,6 +15,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView.OnEditorActionListener;
 
+import com.nhn.android.naverlogin.OAuthLoginHandler;
+import com.nhn.android.naverlogin.ui.view.OAuthLoginButton;
+
 /**
  * 로그인 레이아웃
  * 
@@ -36,6 +39,7 @@ public class UnitedLoginLayout extends AbsCTLayout {
 //	private View loginInterface;
 	private View loginBtnInterface;
 	private View fbBtn;
+	private OAuthLoginButton naverBtn;
 	private View normalLoginBtn;
 	private View loginNormalInterface;
 	private View loginCancel;
@@ -85,9 +89,15 @@ public class UnitedLoginLayout extends AbsCTLayout {
 		// 1. 페이스북 버튼 뷰 연결
 		fbBtn = findViewById(R.id.btn_facebook);
 		// 2. 네이버 버튼 뷰 연결
+		naverBtn = (OAuthLoginButton) findViewById(R.id.btn_naver);
+		naverBtn.setBgType("green", "long");
 		// 3. 일반 로그인 버튼 뷰
 		normalLoginBtn = findViewById(R.id.btn_normal_login);
 
+	}
+	
+	public void setNaverloginHandler(OAuthLoginHandler handler) {
+		naverBtn.setOAuthLoginHandler(handler);
 	}
 	
 	public void performConfirm() {
@@ -123,6 +133,7 @@ public class UnitedLoginLayout extends AbsCTLayout {
 		normalJoin.setOnClickListener(listener);
 		findPw.setOnClickListener(listener);
 		fbBtn.setOnClickListener(listener);
+		naverBtn.setOnClickListener(listener);
 	}
 
 	/**
@@ -132,6 +143,7 @@ public class UnitedLoginLayout extends AbsCTLayout {
 
 		// 1. 로그인 버튼 인터페이스 생성
 		fbBtn.setClickable(true);
+		naverBtn.setClickable(true);
 		normalLoginBtn.setClickable(true);
 		AnimUtil.startFadeInAnim(loginBtnInterface, 1000, 1000);
 		
@@ -156,6 +168,7 @@ public class UnitedLoginLayout extends AbsCTLayout {
 						@Override
 						public void run() {
 							fbBtn.setClickable(true);
+							naverBtn.setClickable(true);
 							normalLoginBtn.setClickable(true);
 							inputId.setText("");
 							inputPw.setText("");
@@ -178,6 +191,7 @@ public class UnitedLoginLayout extends AbsCTLayout {
 			isSwaped = true;
 			// 1. 버튼 인터페이스 아웃
 			fbBtn.setClickable(false);
+			naverBtn.setClickable(false);
 			normalLoginBtn.setClickable(false);
 			AnimUtil.startFadeOutAnim(loginBtnInterface);
 			// 2. 자체 로그인 인터페이스 인
@@ -205,4 +219,5 @@ public class UnitedLoginLayout extends AbsCTLayout {
 		}
 
 	}
+
 }

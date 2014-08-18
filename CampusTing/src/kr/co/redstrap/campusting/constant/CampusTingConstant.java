@@ -1,5 +1,7 @@
 package kr.co.redstrap.campusting.constant;
 
+import android.content.Intent;
+
 public interface CampusTingConstant {
 	
 	// 네트워크 요청시 인자값
@@ -118,6 +120,8 @@ public interface CampusTingConstant {
 		public static final int PHOTO_VIEW = 14;
 		public static final int BEGINNER = 15;
 		public static final int SETTING = 16;
+		public static final int LOGIN_FACEBOOK = 64206;
+		public static final int UNREGISTER = 18;
 	}
 
 	public class Parameter {

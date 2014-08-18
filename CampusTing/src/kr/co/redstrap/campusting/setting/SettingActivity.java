@@ -7,6 +7,7 @@ import kr.co.redstrap.campusting.common.AbsCTSyncTask;
 import kr.co.redstrap.campusting.common.AbsCTSyncTask.CTSyncTaskCallback;
 import kr.co.redstrap.campusting.common.ErrorResult;
 import kr.co.redstrap.campusting.common.LoginInfo;
+import kr.co.redstrap.campusting.constant.CampusTingConstant.RequestCodes;
 import kr.co.redstrap.campusting.util.web.CTJSONSyncTask;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,6 +31,22 @@ public class SettingActivity extends Activity implements SettingLayout.Callback 
 		
 		setContentView(layout.getView());
 		
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (resultCode == RESULT_OK) {
+			if (requestCode == RequestCodes.UNREGISTER) {
+				setResult(RESULT_CANCELED);
+				LoginInfo info = LoginInfo.getInstance(SettingActivity.this);
+				info.setAutoLogin(false); // 로그인 정보 알아서 초기화됨
+				finish();
+			}
+		} else {
+			
+		}
 	}
 	
 	private void loadPromoCode() {
@@ -158,6 +175,6 @@ public class SettingActivity extends Activity implements SettingLayout.Callback 
 	@Override
 	public void onUnregisterClick() {
 		// TODO Auto-generated method stub
-		startActivity(new Intent(this, UnregisterActivity.class));
+		startActivityForResult(new Intent(this, UnregisterActivity.class), RequestCodes.UNREGISTER);
 	}
 }

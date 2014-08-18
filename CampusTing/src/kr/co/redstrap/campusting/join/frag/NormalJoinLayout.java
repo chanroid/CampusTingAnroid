@@ -187,8 +187,10 @@ public class NormalJoinLayout extends AbsCTLayout {
 	}
 
 	public void setBirth(String birth) {
-		birthBtn.setText(birth);
-		birthBtn.setEnabled(false);
+		if (birth != null) {
+			birthBtn.setText(birth);
+			birthBtn.setEnabled(false);
+		}
 	}
 
 	public boolean isConfirmed() {
