@@ -11,7 +11,7 @@ public class NormalJoinFrag extends AbsJoinFrag implements NormalJoinLayout.Call
 	
 	public static class NormalJoinInfo {
 		public String email;
-		public String pw; // 연동 코드로 대체
+		public String pw; // 외부 로그인시 아이디값으로 대체
 		public String nickName;
 		public boolean gender;
 		public String birth;
@@ -30,20 +30,25 @@ public class NormalJoinFrag extends AbsJoinFrag implements NormalJoinLayout.Call
 			layout.setCallback(this);
 		}
 
-		layout.setBirth(info.birth);
-		layout.setEmailId(info.email);
-		layout.setGender(info.gender);
-		layout.setPwText(info.pw);
+		setNormalJoinInfo(info);
 
 		return layout.getView();
 	}
 	
 	public void setNormalJoinInfo(NormalJoinInfo info) {
 		this.info = info;
+		
+		if (layout != null && info != null) {
+			layout.setBirth(info.birth);
+			layout.setEmailId(info.email);
+			layout.setGender(info.gender);
+			layout.setPwText(info.pw);
+		}
 	}
 	
 	public NormalJoinInfo getInfo() {
-		this.info = new NormalJoinInfo();
+		if (this.info == null)
+			this.info = new NormalJoinInfo();
 		
 		info.birth = layout.getBirth();
 		info.email = layout.getEmailId();

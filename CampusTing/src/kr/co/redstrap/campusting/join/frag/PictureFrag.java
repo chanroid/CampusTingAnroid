@@ -3,31 +3,27 @@ package kr.co.redstrap.campusting.join.frag;
 import java.io.File;
 import java.util.ArrayList;
 
-import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.ListDialogFragment;
 import kr.co.redstrap.campusting.constant.CampusTingConstant;
+import kr.co.redstrap.campusting.constant.CampusTingConstant.RequestCodes;
 import kr.co.redstrap.campusting.join.AbsJoinFrag;
 import kr.co.redstrap.campusting.util.CircleDrawable;
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.provider.MediaStore.Images.Media;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
+import android.widget.Toast;
 
 public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 
-	private int targetPosition;
 	// 리스너
 	private PictureLayout layout;
 
@@ -36,12 +32,6 @@ public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 
 	public PictureFrag() {
 		super();
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-		Log.i("PictureFrag :: onResume", "onResume");
 	}
 
 	@Override
@@ -61,6 +51,8 @@ public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 	 */
 	private void pickCamera() {
 		Intent pickCameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+		pickCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT,
+				createSaveCaptureFile(loadPhotoNum));
 		startActivityForResult(pickCameraIntent,
 				CampusTingConstant.RequestCodes.PICK_CAMERA);
 	}
@@ -83,19 +75,36 @@ public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 	 *            크롭할 대상의 Uri
 	 */
 	private void crop(Intent intent) {
-		// 20140807 chanroid crop intent에 문제가 있어서 실행이 안됨
-		// handle activity not found 어쩌고 저쩌고
-		Log.i("uri", "" + intent.getData());
 		Intent cropIntent = new Intent("com.android.camera.action.CROP");
-		cropIntent.setData(intent.getData());
+		if (intent != null && intent.getData() != null)
+			cropIntent.setDataAndType(intent.getData(), "image/*");
+		else
+			cropIntent.setDataAndType(createSaveCaptureFile(loadPhotoNum),
+					"image/*");
 		cropIntent.putExtra("aspectX", 1);
 		cropIntent.putExtra("aspectY", 1);
 		cropIntent.putExtra("outputX", 100);
 		cropIntent.putExtra("outputY", 100);
-		cropIntent.putExtra("return-data", true);
+		cropIntent.putExtra("output", createSaveCropFile(loadPhotoNum));
 		cropIntent.putExtra("scale", true);
 		startActivityForResult(cropIntent,
 				CampusTingConstant.RequestCodes.CROP_PICTURE);
+	}
+
+	private Uri createSaveCaptureFile(int index) {
+		Uri uri;
+		String url = "campusting_tmp_capture_join_" + index + ".jpg";
+		uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+				url));
+		return uri;
+	}
+
+	private Uri createSaveCropFile(int index) {
+		Uri uri;
+		String url = "campusting_tmp_crop_join" + index + ".jpg";
+		uri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(),
+				url));
+		return uri;
 	}
 
 	@Override
@@ -104,19 +113,27 @@ public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 		super.onActivityResult(requestCode, resultCode, data);
 		Log.i("결과", requestCode + " // " + resultCode);
 		if (resultCode == Activity.RESULT_OK) { // 정상결과인 경우
-			if ((requestCode == CampusTingConstant.RequestCodes.PICK_CAMERA || requestCode == CampusTingConstant.RequestCodes.PICK_GALLERY)) { // 사진
-																																				// 선택
-				Log.i("onActivityResult", data.getData() + "");
+			if ((requestCode == RequestCodes.PICK_CAMERA || requestCode == RequestCodes.PICK_GALLERY)) { // 사진
+				// 선택
+				if (data != null)
+					Log.i("onActivityResult", data.getData() + "");
+				// 카메라 캡쳐로 온 경우 intent가 null이므로 미리 만들어 두었던 파일 경로를 참조해야 함
 				crop(data);
-			} else if (requestCode == CampusTingConstant.RequestCodes.CROP_PICTURE) { // 크롭
-				Log.i("onActivityResult", data.getData() + "");
-				Log.i("onActivityResult", data.getExtras() + "");
-				Log.i("onActivityResult", data.getParcelableExtra("data") + "");
-				if (profileImageList.size() > targetPosition) {
-					profileImageList.set(targetPosition, data.getData()
-							.toString());
+			} else if (requestCode == RequestCodes.CROP_PICTURE) { // 크롭
+																	// 선택
+
+				if (data != null) {
+					Log.i("onActivityResult", data.getData() + "");
+					Log.i("onActivityResult", data.getExtras() + "");
+					Log.i("onActivityResult", data.getParcelableExtra("data")
+							+ "");
+				}
+
+				if (profileImageList.size() > loadPhotoNum) {
+					profileImageList
+							.set(loadPhotoNum, data.getData().getPath());
 				} else {
-					profileImageList.add(data.getData().toString());
+					profileImageList.add(data.getData().getPath());
 				}
 				setPictures();
 			}
@@ -137,7 +154,7 @@ public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 				try {
 					Bitmap bm = Media.getBitmap(
 							actContext.getContentResolver(),
-							Uri.parse(profileImageList.get(i)));
+							Uri.fromFile(new File(profileImageList.get(i))));
 					layout.getImageHolder().get(i)
 							.setImageDrawable(new CircleDrawable(bm));
 				} catch (Exception e) {
@@ -146,10 +163,6 @@ public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 			} else {
 				layout.setEmptyIcon(i);
 			}
-		}
-
-		if (pictureSize == 0) {
-
 		}
 	}
 
@@ -183,14 +196,16 @@ public class PictureFrag extends AbsJoinFrag implements PictureLayout.Callback {
 			callback.goNext(3);
 		else {
 			// 20140807 chanroid 사진 더 넣으라고 뭐라도 알려줄것
+			layout.toast("사진을 최소 2장 이상 설정해 주세요.", Toast.LENGTH_LONG);
 		}
 	}
 
 	@Override
 	public boolean isComfirmed() {
 		// TODO Auto-generated method stub
-//		return profileImageList.size() > 1;
-		return true;
+		if (profileImageList == null)
+			return false;
+		return profileImageList.size() > 1;
 		// 20140808 chanroid 에러가 나는 관계로 일단 그냥 넘어감
 	}
 }

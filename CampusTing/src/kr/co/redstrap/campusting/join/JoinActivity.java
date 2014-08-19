@@ -47,10 +47,10 @@ public class JoinActivity extends FragmentActivity implements
 	}
 
 	private TermsFrag termsFrag;
-	private NormalJoinFrag normalFrag;
 	private InfoFrag infoFrag;
 	private PictureFrag picFrag;
 	private ConfirmUnivFrag confirmunivFrag;
+	public NormalJoinFrag normalFrag;
 
 	// 뷰
 	public JoinLayout layout;
@@ -63,7 +63,7 @@ public class JoinActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 
 		counter = 5;
-		
+
 		termsFrag = new TermsFrag();
 		termsFrag.setCallback(this);
 		normalFrag = new NormalJoinFrag();
@@ -74,7 +74,7 @@ public class JoinActivity extends FragmentActivity implements
 		picFrag.setCallback(this);
 		confirmunivFrag = new ConfirmUnivFrag();
 		confirmunivFrag.setCallback(this);
-		
+
 		// 인디케이터 셋팅
 		FragmentPagerAdapter adapter = new JoinFragAdapter(
 				getSupportFragmentManager());
@@ -90,11 +90,11 @@ public class JoinActivity extends FragmentActivity implements
 			info.email = getIntent().getStringExtra("email");
 			info.pw = getIntent().getStringExtra("id");
 			info.gender = "male".equals(getIntent().getStringExtra("gender"));
-			
+
 			normalFrag.setNormalJoinInfo(info);
 		} else if (getIntent().getStringExtra("loginType").equalsIgnoreCase(
 				CampusTingConstant.LoginType.NAVER)) {
-			
+
 		}
 		// 서비스 시작
 
@@ -232,10 +232,12 @@ public class JoinActivity extends FragmentActivity implements
 		else if (currentIndex == 4) {
 
 			CTJSONSyncTask task = new CTJSONSyncTask();
-			
+
 			task.addHttpParam("userId", normalFrag.getInfo().email);
-			task.addHttpParam("userPw", SHA256.getCipherText(normalFrag.getInfo().pw));
-			task.addHttpParam("gender", String.valueOf(normalFrag.getInfo().gender));
+			task.addHttpParam("userPw",
+					SHA256.getCipherText(normalFrag.getInfo().pw));
+			task.addHttpParam("gender",
+					String.valueOf(normalFrag.getInfo().gender));
 			task.addHttpParam("birth", normalFrag.getInfo().birth);
 			task.addHttpParam("promoCode", normalFrag.getInfo().promoCode);
 			task.addHttpParam("local", infoFrag.local);
@@ -250,22 +252,25 @@ public class JoinActivity extends FragmentActivity implements
 			task.addHttpParam("coupleCount", infoFrag.coupleCount);
 			task.addHttpParam("univMail", confirmunivFrag.univMail);
 			task.addHttpParam("univState", confirmunivFrag.univState);
-			task.addHttpFileParam("univCardPhoto", confirmunivFrag.univCardImage);
+
+			task.addHttpFileParam("univCardPhoto",
+					confirmunivFrag.univCardImage);
 			task.addHttpFileParam("jobPhoto", confirmunivFrag.jobImage);
-			task.addHttpFileParam("profilePhoto1", null); // 임시값
-			task.addHttpFileParam("profilePhoto2", null);
-			task.addHttpFileParam("profilePhoto3", null);
-			task.addHttpFileParam("profilePhoto4", null);
-			
-			
+			for (int i = 0; i < picFrag.profileImageList.size(); i++) {
+				task.addHttpFileParam("profilePhoto" + (i + 1),
+						picFrag.profileImageList.get(i));
+			}
+
 			try {
-				task.addHttpParam("job", URLEncoder.encode(infoFrag.job, HTTP.UTF_8));
-				task.addHttpParam("nickName", URLEncoder.encode(normalFrag.getInfo().nickName, HTTP.UTF_8));
+				task.addHttpParam("job",
+						URLEncoder.encode(infoFrag.job, HTTP.UTF_8));
+				task.addHttpParam("nickName", URLEncoder.encode(
+						normalFrag.getInfo().nickName, HTTP.UTF_8));
 			} catch (UnsupportedEncodingException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 			task.addCallback(new CTSyncTaskCallback<String, Object>() {
 
 				@Override
@@ -278,7 +283,7 @@ public class JoinActivity extends FragmentActivity implements
 				public void onProgressTask(AbsCTSyncTask<String, Object> task,
 						int progress) {
 					// TODO Auto-generated method stub
-					
+
 				}
 
 				@Override
@@ -294,13 +299,14 @@ public class JoinActivity extends FragmentActivity implements
 						Object result) {
 					// TODO Auto-generated method stub
 					layout.dismissLoading();
-					
+
 					// 20140723 chanroid 일단 그냥 메인으로 넘어가게 설정. 나중에 액티비티 구현할때 마저 구현
-					startActivity(new Intent(JoinActivity.this, MainActivity.class));
+					startActivity(new Intent(JoinActivity.this,
+							MainActivity.class));
 					finish();
 				}
 			});
-			
+
 			task.executeParallel("userPost");
 		}
 	}

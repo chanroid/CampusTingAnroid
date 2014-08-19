@@ -1,18 +1,23 @@
 package kr.co.redstrap.campusting.setting;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import kr.co.redstrap.campusting.common.AbsCTSyncTask;
 import kr.co.redstrap.campusting.common.AbsCTSyncTask.CTSyncTaskCallback;
+import kr.co.redstrap.campusting.common.AppInfo;
 import kr.co.redstrap.campusting.common.ErrorResult;
 import kr.co.redstrap.campusting.common.LoginInfo;
 import kr.co.redstrap.campusting.constant.CampusTingConstant.RequestCodes;
 import kr.co.redstrap.campusting.util.web.CTJSONSyncTask;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.net.Uri;
 import android.os.Bundle;
 
 public class SettingActivity extends Activity implements SettingLayout.Callback {
@@ -54,19 +59,12 @@ public class SettingActivity extends Activity implements SettingLayout.Callback 
 		
 		task.addHttpParam("userNum", LoginInfo.getInstance(this).getUserNum());
 		
-		task.addCallback(new CTSyncTaskCallback<String, Object>() {
+		task.addCallback(new CTSyncTaskCallback.Stub() {
 
 			@Override
 			public void onStartTask(AbsCTSyncTask<String, Object> task) {
 				// TODO Auto-generated method stub
 				layout.showLoading(null);
-			}
-
-			@Override
-			public void onProgressTask(AbsCTSyncTask<String, Object> task,
-					int progress) {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
@@ -107,6 +105,19 @@ public class SettingActivity extends Activity implements SettingLayout.Callback 
 	public void onVersionClick() {
 		// TODO Auto-generated method stub
 		// 20140811 chanroid 업데이트 있을 때만 실행
+		
+		String recent = AppInfo.getInstance().getRecentVersion();
+		String current = "1.0.0";
+		try {
+		   PackageInfo i = getPackageManager().getPackageInfo(getPackageName(), 0);
+		   current = i.versionName;
+		} catch(NameNotFoundException e) { }
+
+		if (!recent.equals(current)) {
+		    Intent intent = new Intent(Intent.ACTION_VIEW);
+		    intent.setData(Uri.parse("market://details?id=" + getPackageName()));
+		    startActivity(intent);
+		}
 	}
 
 	@Override

@@ -8,7 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:background="@drawable/splash1_1" >
+        android:background="@drawable/splash1_1"
+        android:scaleType="centerCrop" >
     </ImageView>
 
     <ImageView
@@ -17,14 +18,15 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:background="@drawable/splash1_2"
+        android:scaleType="centerCrop"
         android:visibility="gone" >
     </ImageView>
 
     <RelativeLayout
         android:id="@+id/login_interface"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" 
-        android:layout_marginBottom="50dp">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="50dp" >
 
         <LinearLayout
             android:id="@+id/login_normal_interface"
@@ -123,15 +125,15 @@
                 android:id="@+id/btn_facebook"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:background="@drawable/com_facebook_loginbutton_silver" />
+                android:background="@drawable/com_facebook_loginbutton_silver"
+                android:gravity="center" />
 
             <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
                 android:id="@+id/btn_naver"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"/>
-            
+                android:gravity="center" />
+
             <Button
                 android:id="@+id/btn_normal_login"
                 android:layout_width="match_parent"

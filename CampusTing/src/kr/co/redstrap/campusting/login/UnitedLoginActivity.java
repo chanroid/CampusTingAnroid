@@ -15,6 +15,7 @@ import kr.co.redstrap.campusting.constant.CampusTingConstant.LoginType;
 import kr.co.redstrap.campusting.constant.CampusTingConstant.RequestCodes;
 import kr.co.redstrap.campusting.join.JoinActivity;
 import kr.co.redstrap.campusting.main.MainActivity;
+import kr.co.redstrap.campusting.util.DayUtil;
 import kr.co.redstrap.campusting.util.PwInputFilter;
 import kr.co.redstrap.campusting.util.SHA256;
 import kr.co.redstrap.campusting.util.ViewUtil;
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
@@ -86,6 +88,7 @@ public class UnitedLoginActivity extends FragmentActivity implements
 		layout = new UnitedLoginLayout(this);
 		layout.setClickListener(loginClickListener);
 		layout.setEditorListener(loginEditorActionListener);
+		layout.setDay(DayUtil.isDay());
 		layout.setPwInputFilters(new InputFilter[] { new PwInputFilter() });
 		layout.addIdTextChangedListener(new SimpleTextWatcher() {
 			@Override
@@ -419,6 +422,7 @@ public class UnitedLoginActivity extends FragmentActivity implements
 		@Override
 		public void run(boolean success) {
 			if (success) {
+				// 20140819 chanroid 현재 콜백 url 에러로 인해 해당 부분으로 넘어오지 않음
 				String accessToken = oAuthLoginInstance
 						.getAccessToken(UnitedLoginActivity.this);
 				String refreshToken = oAuthLoginInstance
@@ -428,15 +432,59 @@ public class UnitedLoginActivity extends FragmentActivity implements
 				String tokenType = oAuthLoginInstance
 						.getTokenType(UnitedLoginActivity.this);
 				Log.i("Naver", "success : " + accessToken + ", " + refreshToken + ", " + expiresAt + ", " + tokenType);
+				
+				new NaverRequestApiTask().execute();
 			} else {
 				String errorCode = oAuthLoginInstance.getLastErrorCode(
 						UnitedLoginActivity.this).getCode();
 				String errorDesc = oAuthLoginInstance
 						.getLastErrorDesc(UnitedLoginActivity.this);
 				Log.i("Naver", "errorCode:" + errorCode + ", errorDesc:" + errorDesc);
+				layout.showErrorDialog(new ErrorResult(0, "네이버 아이디 로그인에 실패했습니다. " + errorDesc));
 			}
 		};
 	};
+	
+	private class NaverRequestApiTask extends AsyncTask<Void, Void, String> {
+		@Override
+		protected void onPreExecute() {
+			layout.showLoading(null);
+		}
+		@Override
+		protected String doInBackground(Void... params) {
+			String url = "https://apis.naver.com/nidlogin/nid/getHashId_v2.xml";
+			String at = oAuthLoginInstance.getAccessToken(UnitedLoginActivity.this);
+			return oAuthLoginInstance.requestApi(UnitedLoginActivity.this, at, url);
+		}
+		protected void onPostExecute(String content) {
+			layout.dismissLoading();
+			Log.d("Naver", "requestApi result : " + content);
+			// 20140819 chanroid 아이디값 가져와서 프로필 받아오는 부분으로 넘어가야 함
+			new NaverProfileApiTask().execute();
+		}
+	}
+	
+	private class NaverProfileApiTask extends AsyncTask<Void, Void, String> {
+		@Override
+		protected void onPreExecute() {
+			// TODO Auto-generated method stub
+			layout.showLoading(null);
+		}
+		@Override
+		protected String doInBackground(Void... params) {
+			// TODO Auto-generated method stub
+			String url = "https://apis.naver.com/nidlogin/nid/getUserProfile.xml";
+			String at = oAuthLoginInstance.getAccessToken(UnitedLoginActivity.this);
+			return oAuthLoginInstance.requestApi(UnitedLoginActivity.this, at, url);
+		}
+		@Override
+		protected void onPostExecute(String result) {
+			// TODO Auto-generated method stub
+			layout.dismissLoading();
+			Log.d("Naver", "userProfile result : " + result);
+		}
+		
+	}
 
 	private void onFacebookLoginClick() {
 		// TODO Auto-generated method stub
@@ -458,12 +506,16 @@ public class UnitedLoginActivity extends FragmentActivity implements
 				String accessToken = session.getAccessToken();
 				Log.i("Facebook", "accessToken : " + accessToken);
 
+				layout.showLoading(null);
 				Request.newMeRequest(session, new GraphUserCallback() {
 					@Override
 					public void onCompleted(GraphUser user, Response response) {
 						// TODO Auto-generated method stub
+						layout.dismissLoading();
+						if (user == null)
+							return;
 						Log.i("Facebook", "user : " + user.getInnerJSONObject());
-						facebookLoginAction(user, response);
+						facebookLoginAction(user, response);     
 					}
 				}).executeAsync();
 			} else {

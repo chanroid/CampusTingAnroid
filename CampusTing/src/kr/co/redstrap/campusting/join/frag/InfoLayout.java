@@ -1,5 +1,7 @@
 package kr.co.redstrap.campusting.join.frag;
 
+import java.util.Locale;
+
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTLayout;
 import kr.co.redstrap.campusting.common.SimpleTextWatcher;
@@ -66,7 +68,7 @@ public class InfoLayout extends AbsCTLayout {
 
 	public void setCharacter(String[] characters) {
 		String format = "%s, %s, %s";
-		characterBtn.setText(String.format(format, characters));
+		characterBtn.setText(String.format(Locale.getDefault(), format, characters));
 	}
 
 	public void setBody(String body) {

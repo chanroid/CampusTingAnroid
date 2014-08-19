@@ -2,6 +2,7 @@ package kr.co.redstrap.campusting.login;
 
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTSyncTask;
+import kr.co.redstrap.campusting.common.AppInfo;
 import kr.co.redstrap.campusting.common.AbsCTSyncTask.CTSyncTaskCallback;
 import kr.co.redstrap.campusting.common.ErrorResult;
 import kr.co.redstrap.campusting.util.DayUtil;
@@ -69,8 +70,10 @@ public class IntroActivity extends Activity {
 				try {
 					int dbVer = resultJSON.getInt("dbVer");
 					String domain = resultJSON.getString("mainDomain");
-//					String appVer = resultJSON.getString("appVer");
-//					boolean forceUpdate = resultJSON.getBoolean("forceUpdate");
+					String appVer = resultJSON.getString("appVer");
+					boolean forceUpdate = resultJSON.getBoolean("forceUpdate");
+					
+					AppInfo.getInstance().setRecentVersion(appVer);
 
 					setResult(RESULT_OK);
 					finish();

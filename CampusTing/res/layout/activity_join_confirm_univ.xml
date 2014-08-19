@@ -197,6 +197,7 @@
                         android:id="@+id/button_photo_one"
                         android:layout_weight="1"
                         android:gravity="center"
+                        android:checked="true"
                         android:text="재학중" />
 
                     <RadioButton

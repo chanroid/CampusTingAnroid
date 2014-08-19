@@ -30,9 +30,9 @@ public class IntroLayout extends AbsCTLayout {
 	
 	public void setDay(boolean day) {
 		if (day)
-			introImg.setImageResource(R.drawable.splash1_1);
-		else
 			introImg.setImageResource(R.drawable.splash2_1);
+		else
+			introImg.setImageResource(R.drawable.splash1_1);
 	}
 
 }

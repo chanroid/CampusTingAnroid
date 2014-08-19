@@ -49,6 +49,7 @@
                         android:id="@+id/emailIdEdit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress"
                         android:layout_weight="1"
                         android:maxLines="1" />
                 </TableRow>
@@ -74,6 +75,7 @@
                         android:id="@+id/pwEdit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:inputType="textPassword"
                         android:layout_weight="1"
                         android:maxLines="1" />
                 </TableRow>
@@ -99,6 +101,7 @@
                         android:id="@+id/pwConfirmEdit"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:inputType="textPassword"
                         android:layout_weight="1"
                         android:maxLines="1" />
                 </TableRow>
@@ -188,8 +191,7 @@
                         android:id="@+id/birthBtn"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Button" />
+                        android:layout_weight="1"/>
                 </TableRow>
             </TableLayout>
 

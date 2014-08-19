@@ -4,10 +4,17 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTLayout;
+import kr.co.redstrap.campusting.common.AbsCTSyncTask;
+import kr.co.redstrap.campusting.common.AbsCTSyncTask.CTSyncTaskCallback;
+import kr.co.redstrap.campusting.common.ErrorResult;
 import kr.co.redstrap.campusting.common.SimpleTextWatcher;
 import kr.co.redstrap.campusting.util.ViewUtil;
+import kr.co.redstrap.campusting.util.web.CTJSONSyncTask;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Context;
@@ -19,6 +26,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
+import android.widget.TextView;
 
 public class NormalJoinLayout extends AbsCTLayout {
 
@@ -70,7 +78,8 @@ public class NormalJoinLayout extends AbsCTLayout {
 				// TODO Auto-generated method stub
 				if (ViewUtil.isTypeEmail(s.toString())) {
 					// 20140805 chanroid 서버에 중복확인 요청까지 같이 하도록 처리해야 함
-					ViewUtil.setGood(emailIdEdit);
+//					ViewUtil.setGood(emailIdEdit);
+					checkDuplicate(0, s.toString(), emailIdEdit);
 				} else {
 					ViewUtil.setBad(emailIdEdit);
 				}
@@ -106,7 +115,8 @@ public class NormalJoinLayout extends AbsCTLayout {
 				// TODO Auto-generated method stub
 				if (s.length() > 1) {
 					// 20140805 chanroid 서버에 중복확인 요청까지 같이 하도록 처리해야 함
-					ViewUtil.setGood(nickEdit);
+//					ViewUtil.setGood(nickEdit);
+					checkDuplicate(1, s.toString(), nickEdit);
 				} else {
 					ViewUtil.setBad(nickEdit);
 				}
@@ -124,8 +134,8 @@ public class NormalJoinLayout extends AbsCTLayout {
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
 				if (s.length() == 6) { // 일단 6자리로 세팅놓고 변경되면 확인
-					// 20140805 chanroid 서버에 유효값 확인 요청까지 같이 하도록 처리해야 함
-					ViewUtil.setGood(promoCodeEdit);
+//					ViewUtil.setGood(promoCodeEdit);
+					checkDuplicate(2, s.toString(), promoCodeEdit);
 				} else {
 					ViewUtil.setBad(promoCodeEdit);
 				}
@@ -134,6 +144,38 @@ public class NormalJoinLayout extends AbsCTLayout {
 		nextBtn = (Button) findViewById(R.id.nextBtn);
 		nextBtn.setOnClickListener(l);
 
+	}
+	
+	private void checkDuplicate(int code, String value, final TextView resultCheck) {
+		CTJSONSyncTask task = new CTJSONSyncTask();
+		task.addHttpParam("acceptType", code);
+		task.addHttpParam("acceptValue", value);
+		task.addCallback(new CTSyncTaskCallback.Stub() {
+			@Override
+			public void onErrorTask(AbsCTSyncTask<String, Object> task,
+					ErrorResult error) {
+				// TODO Auto-generated method stub
+				ViewUtil.setBad(resultCheck);
+			}
+			@Override
+			public void onSuccessTask(AbsCTSyncTask<String, Object> task,
+					Object result) {
+				// TODO Auto-generated method stub
+				JSONObject resultJSON = (JSONObject) result;
+				
+				try {
+					int duplicated = resultJSON.getInt("count");
+					if (duplicated > 0)
+						ViewUtil.setBad(resultCheck);
+					else
+						ViewUtil.setGood(resultCheck);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		task.execute("userCheck");
 	}
 
 	public String getEmailId() {
@@ -194,8 +236,6 @@ public class NormalJoinLayout extends AbsCTLayout {
 	}
 
 	public boolean isConfirmed() {
-		// 20140805 chanroid 일단 테스트로 이렇게 만들어 놓고 얘네들 따로 변수로 관리해야 함. 서버모듈 붙이고.. 팝업
-		// 달고...
 		boolean confirmEmail = ViewUtil.isTypeEmail(getEmailId());
 		boolean confirmPw = getPwText().equals(getPwConfirmText())
 				&& getPwText().length() > 5;

@@ -3,8 +3,10 @@ package kr.co.redstrap.campusting.join.frag;
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTLayout;
 import kr.co.redstrap.campusting.common.SimpleTextWatcher;
+import kr.co.redstrap.campusting.util.CircleDrawable;
 import kr.co.redstrap.campusting.util.ViewUtil;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
 import android.view.View;
@@ -44,6 +46,8 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 		public void onUnivStateChanged(int position);
 
 		public void onUnivChanged(int num);
+
+		public void onUnivMailCodeChanged(String string);
 	}
 
 	private Drawable expandedArrow;
@@ -143,6 +147,13 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 		univMailSendBtn.setOnClickListener(listener);
 
 		univMailCodeEditText = (EditText) findViewById(R.id.univMailCodeEditText);
+		univMailCodeEditText.addTextChangedListener(new SimpleTextWatcher() {
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				callback.onUnivMailCodeChanged(s.toString());
+			}
+		});
 		univMailCodeBtn = (Button) findViewById(R.id.univMailCodeBtn);
 		univMailCodeBtn.setOnClickListener(listener);
 
@@ -175,6 +186,18 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 		confirmBtn.setOnClickListener(listener);
 
 		clickUnivConfirmLayout();
+	}
+	
+	public void setUnivMailConfirmCode(String univMailCode) {
+		univMailCodeEditText.setText(univMailCode);
+	}
+	
+	public void setConfirmedUnivMail(boolean confirmed) {
+		univAutoTextView.setEnabled(!confirmed);
+		univMailTextView.setEnabled(!confirmed);
+		univMailCodeBtn.setEnabled(!confirmed);
+		univMailCodeEditText.setEnabled(!confirmed);
+		univMailSendBtn.setEnabled(!confirmed);
 	}
 
 	private void clickUnivConfirmLayout() {
@@ -289,6 +312,16 @@ public class ConfirmUnivFragLayout extends AbsCTLayout {
 
 		}
 
+	}
+
+	public void setUnivCardImage(Bitmap univImage) {
+		// TODO Auto-generated method stub
+		univCardImage.setImageBitmap(univImage);
+	}
+
+	public void setJobCardImage(Bitmap jobcardImage2) {
+		// TODO Auto-generated method stub
+		jobCardImage.setImageBitmap(jobcardImage2);
 	}
 
 }

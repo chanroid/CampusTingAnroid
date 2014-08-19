@@ -94,7 +94,10 @@ public class InfoFrag extends AbsJoinFrag implements InfoLayout.Callback,
 	@Override
 	public void onBodyClick() {
 		// TODO Auto-generated method stub
-		showInfoSelectPopup(JoinInfoSelectItems.BODY_MALE);
+		if (actContext.normalFrag.getInfo().gender)
+			showInfoSelectPopup(JoinInfoSelectItems.BODY_MALE);
+		else
+			showInfoSelectPopup(JoinInfoSelectItems.BODY_FEMALE);
 		// 20140807 chanroid 기본정보에서 입력된 성별로 구분해야 함
 	}
 

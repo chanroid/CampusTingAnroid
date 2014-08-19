@@ -8,6 +8,7 @@ import kr.co.redstrap.campusting.main.QALayout.Callback;
 import kr.co.redstrap.campusting.util.web.CTJSONSyncTask;
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 public class QAActivity extends Activity implements Callback {
 
@@ -28,22 +29,15 @@ public class QAActivity extends Activity implements Callback {
 		CTJSONSyncTask task = new CTJSONSyncTask();
 
 		task.addHttpParam("userNum", LoginInfo.getInstance(this).getUserNum());
-		task.addHttpParam("reportType", 0);
+		task.addHttpParam("reportType", 0); // 20140819 chanroid 
 		task.addHttpParam("message", layout.getQADescText());
 
-		task.addCallback(new CTSyncTaskCallback<String, Object>() {
+		task.addCallback(new CTSyncTaskCallback.Stub() {
 
 			@Override
 			public void onStartTask(AbsCTSyncTask<String, Object> task) {
 				// TODO Auto-generated method stub
 				layout.showLoading(null);
-			}
-
-			@Override
-			public void onProgressTask(AbsCTSyncTask<String, Object> task,
-					int progress) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
@@ -59,8 +53,12 @@ public class QAActivity extends Activity implements Callback {
 					Object result) {
 				// TODO Auto-generated method stub
 				layout.dismissLoading();
+				layout.toast("문의가 접수되었습니다", Toast.LENGTH_LONG);
+				finish();
 			}
 		});
+		
+		task.executeParallel("reportPost");
 	}
 
 	@Override

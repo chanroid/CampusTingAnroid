@@ -131,11 +131,9 @@ public class CTJSONSyncTask extends AbsCTSyncTask<String, Object> {
 
 		String boundary = "*****BOUNDARY*****";
 
-		// UrlEncodedFormEntity entity = new UrlEncodedFormEntity(httpParams);
-
 		MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 		builder.setBoundary(boundary);
-		builder.setCharset(Charset.defaultCharset());
+		builder.setCharset(Charset.forName(HTTP.UTF_8));
 		builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
 
 		for (NameValuePair param : httpParams) {
@@ -148,18 +146,15 @@ public class CTJSONSyncTask extends AbsCTSyncTask<String, Object> {
 			}
 		}
 
-		// 20140808 chanroid 파일은 완전 추가되기 전까지 주석처리
-		// for (String key : httpFileParams.keySet()) {
-		// try {
-		// builder.addBinaryBody(key, httpFileParams.get(key));
-		// entity.addPart(key, httpFileParams.get(key));
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		// }
+		for (String key : httpFileParams.keySet()) {
+			try {
+				builder.addBinaryBody(key, httpFileParams.get(key));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 
 		httpPost.setEntity(builder.build());
-		// httpPost.setEntity(entity);
 		return httpPost;
 	}
 }

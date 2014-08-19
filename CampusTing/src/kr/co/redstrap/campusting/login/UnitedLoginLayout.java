@@ -59,6 +59,16 @@ public class UnitedLoginLayout extends AbsCTLayout {
 		
 		// TODO Auto-generated constructor stub
 	}
+	
+	public void setDay(boolean day) {
+		if (day) {
+			splash1.setImageResource(R.drawable.splash2_1);
+			splash2.setImageResource(R.drawable.splash2_2);
+		} else {
+			splash1.setImageResource(R.drawable.splash1_1);
+			splash2.setImageResource(R.drawable.splash1_2);
+		}
+	}
 
 	@Override
 	public int getRootViewId() {
