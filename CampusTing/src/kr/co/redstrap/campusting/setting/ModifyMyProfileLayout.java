@@ -18,8 +18,6 @@ import android.widget.TextView;
 public class ModifyMyProfileLayout extends AbsCTLayout {
 
 	public interface Callback {
-		public void onGenderChanged(boolean isman); // 뭔 성별을 바꿔 이거 없애셈
-
 		public void onBitrhClick();
 
 		public void onLocalClick();
@@ -60,8 +58,7 @@ public class ModifyMyProfileLayout extends AbsCTLayout {
 	}
 
 	public void setGender(boolean isman) {
-		genderRadio.check(isman ? R.id.modifyintroduceGenderRadio1
-				: R.id.modifyintroduceGenderRadio2);
+		genderText.setText(isman ? "남자" : "여자");
 	}
 
 	public void setBirth(String birth) {
@@ -115,25 +112,26 @@ public class ModifyMyProfileLayout extends AbsCTLayout {
 	}
 
 	public void setConfirmedUniv(String name, String mail, boolean photo) {
-		if (name != null) {
-			confirmunivLayout.setVisibility(View.GONE);
-			confirmedunivLayout.setVisibility(View.VISIBLE);
-			confirmedunivNameText.setText(name);
-			confirmedunivMailText.setText(mail);
-			// 20140811 chanroid 플로우차트에는 없는데 이미지도 들어가야 하지 않을까 싶음
-		} else {
-			confirmunivLayout.setVisibility(View.VISIBLE);
-			confirmedunivLayout.setVisibility(View.GONE);
-		}
+		// 20140820 chanroid 테스트시 일단 표시는 하도록
+//		if (name != null) {
+//			confirmunivLayout.setVisibility(View.GONE);
+//			confirmedunivLayout.setVisibility(View.VISIBLE);
+//			confirmedunivNameText.setText(name);
+//			confirmedunivMailText.setText(mail);
+//		} else {
+//			confirmunivLayout.setVisibility(View.VISIBLE);
+//			confirmedunivLayout.setVisibility(View.GONE);
+//		}
 	}
 
 	public void setConfirmedJob(boolean confirmed) {
-		confirmJobLayout.setVisibility(confirmed ? View.GONE : View.VISIBLE);
-		confirmedJobLayout.setVisibility(confirmed ? View.VISIBLE : View.GONE);
+		// 20140820 chanroid 테스트시 일단 표시는 하도록
+//		confirmJobLayout.setVisibility(confirmed ? View.GONE : View.VISIBLE);
+//		confirmedJobLayout.setVisibility(confirmed ? View.VISIBLE : View.GONE);
 	}
 
 	public TextView nicknameText;
-	public RadioGroup genderRadio;
+	public TextView genderText;
 	public Button birthBtn;
 	public Button localBtn;
 	public Button characterBtn;
@@ -177,8 +175,7 @@ public class ModifyMyProfileLayout extends AbsCTLayout {
 		Listener l = new Listener();
 
 		nicknameText = (TextView) findViewById(R.id.modifyintroduceNicknameText);
-		genderRadio = (RadioGroup) findViewById(R.id.modifyintroduceGenderRadioGroup);
-		genderRadio.setOnCheckedChangeListener(l);
+		genderText = (TextView) findViewById(R.id.modifyintroduceGenderText);
 		birthBtn = (Button) findViewById(R.id.modifyintroduceBirthBtn);
 		birthBtn.setOnClickListener(l);
 		localBtn = (Button) findViewById(R.id.modifyintroduceLocalBtn);
@@ -252,11 +249,8 @@ public class ModifyMyProfileLayout extends AbsCTLayout {
 		public void onCheckedChanged(RadioGroup group, int checkedId) {
 			// TODO Auto-generated method stub
 			switch (group.getId()) {
-			case R.id.modifyintroduceGenderRadioGroup:
-				callback.onGenderChanged(checkedId == R.id.modifyintroduceGenderRadio1);
-				break;
 			case R.id.modifyintroduceSmokeRadioGroup:
-				callback.onSmokeChanged(checkedId == R.id.modifyintroduceGenderRadio1);
+				callback.onSmokeChanged(checkedId == R.id.modifyintroduceSmokeRadio1);
 			}
 		}
 

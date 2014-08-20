@@ -126,6 +126,14 @@
             android:name=".setting.LockPasswordChangeActivity"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".setting.ModifyUnivActivity"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".setting.ModifyJobActivity"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

@@ -10,7 +10,6 @@ import kr.co.redstrap.campusting.common.ListDialogFragment;
 import kr.co.redstrap.campusting.constant.CampusTingConstant;
 import kr.co.redstrap.campusting.constant.CampusTingConstant.RequestCodes;
 import kr.co.redstrap.campusting.join.AbsJoinFrag;
-import kr.co.redstrap.campusting.util.CircleDrawable;
 import kr.co.redstrap.campusting.util.web.CTJSONSyncTask;
 
 import org.json.JSONException;

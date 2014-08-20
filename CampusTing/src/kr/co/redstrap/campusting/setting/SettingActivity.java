@@ -111,13 +111,14 @@ public class SettingActivity extends Activity implements SettingLayout.Callback 
 		try {
 		   PackageInfo i = getPackageManager().getPackageInfo(getPackageName(), 0);
 		   current = i.versionName;
+
+			if (!recent.equals(current)) {
+			    Intent intent = new Intent(Intent.ACTION_VIEW);
+			    intent.setData(Uri.parse("market://details?id=" + getPackageName()));
+			    startActivity(intent);
+			}
 		} catch(NameNotFoundException e) { }
 
-		if (!recent.equals(current)) {
-		    Intent intent = new Intent(Intent.ACTION_VIEW);
-		    intent.setData(Uri.parse("market://details?id=" + getPackageName()));
-		    startActivity(intent);
-		}
 	}
 
 	@Override

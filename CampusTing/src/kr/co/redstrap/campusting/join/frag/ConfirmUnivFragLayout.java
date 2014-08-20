@@ -3,7 +3,6 @@ package kr.co.redstrap.campusting.join.frag;
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTLayout;
 import kr.co.redstrap.campusting.common.SimpleTextWatcher;
-import kr.co.redstrap.campusting.util.CircleDrawable;
 import kr.co.redstrap.campusting.util.ViewUtil;
 import android.content.Context;
 import android.graphics.Bitmap;

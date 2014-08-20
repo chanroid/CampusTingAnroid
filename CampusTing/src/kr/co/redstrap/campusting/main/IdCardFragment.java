@@ -18,8 +18,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 
 public class IdCardFragment extends Fragment implements IdCardLayout.Callback {
 
@@ -98,12 +96,14 @@ public class IdCardFragment extends Fragment implements IdCardLayout.Callback {
 	
 	private void settingCharmingpointLayout(JSONObject result) throws JSONException {
 		int type = result.getInt("charmingType");
-		int point = result.getInt("charmingPoint");
 		long time = result.getLong("time");
 		int percent = -1;
 		if (!result.isNull("charmingPercent")) {
 			percent = result.getInt("charmingPercent");	
 		}
+
+		int point = result.getInt("charmingPoint");
+		
 		if (type == 0) {
 			layout.setProfileCharmingPointText(String.format("당신의 프로필호감도는 평균 %d점으로\n상위 %d%%입니다.", point, percent));
 			layout.setProfileCharmingPointButtonText(time + "");
@@ -111,6 +111,7 @@ public class IdCardFragment extends Fragment implements IdCardLayout.Callback {
 			layout.setFaceCharmingPointText(String.format("당신의 외모호감도는 평균 %d점으로\n상위 %d%%입니다.", point, percent));
 			layout.setFaceCharmingPointBtnText(time + "");
 		}
+
 	}
 
 	private void loadUserInfo() {

@@ -18,11 +18,11 @@ import android.widget.TextView;
 public class IdCardLayout extends AbsCTLayout {
 	
 	public interface Callback {
+		public void onMainProfileImageClick();
 		/**
 		 * 
 		 * @param position 메인은 0, 밑에껀 1부터 시작
 		 */
-		public void onMainProfileImageClick();
 		public void onProfileImageClick(int position);
 		public void onModifyProfileClick();
 		public void onShowFaceCharmingClick();

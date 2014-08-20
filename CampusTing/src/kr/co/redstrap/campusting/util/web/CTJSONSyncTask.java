@@ -42,12 +42,12 @@ public class CTJSONSyncTask extends AbsCTSyncTask<String, Object> {
 			URL url = new URL(UrlUtil.campusTingWebUrl + params[0]);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setDoInput(true);
+			conn.setDoOutput(true);
 
 			Log.d("CTJSONSyncTask", "url : " + url.toString());
 
 			StringBuilder paramBuilder = new StringBuilder();
 			if (params != null) {
-				conn.setDoOutput(true); // 이거 호출하면 자동으로 POST로 변경됨
 				addHttpParam("device", "android");
 				for (NameValuePair p : httpParams) {
 					if (!"".equals(p.getValue()) || p.getValue() != null) {

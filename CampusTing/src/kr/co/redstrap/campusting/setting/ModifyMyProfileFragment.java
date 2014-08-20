@@ -11,6 +11,7 @@ import kr.co.redstrap.campusting.join.frag.JoinInfoSelectPopupFragment;
 import kr.co.redstrap.campusting.join.frag.JoinInfoSelectPopupFragment.Callback;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -60,7 +61,7 @@ public class ModifyMyProfileFragment extends Fragment implements
 
 	public void setMan(boolean man) {
 		this.man = man;
-		onGenderChanged(man);
+		layout.setGender(man);
 	}
 	
 	public void setNickName(String nickName) {
@@ -211,12 +212,6 @@ public class ModifyMyProfileFragment extends Fragment implements
 
 
 	@Override
-	public void onGenderChanged(boolean isman) {
-		// TODO Auto-generated method stub
-		man = isman;
-	}
-
-	@Override
 	public void onBitrhClick() {
 		// TODO Auto-generated method stub
 
@@ -322,13 +317,13 @@ public class ModifyMyProfileFragment extends Fragment implements
 	@Override
 	public void onConfirmunivClick() {
 		// TODO Auto-generated method stub
-
+		startActivity(new Intent(getActivity(), ModifyUnivActivity.class));
 	}
 
 	@Override
 	public void onConfirmjobClick() {
 		// TODO Auto-generated method stub
-
+		startActivity(new Intent(getActivity(), ModifyJobActivity.class));
 	}
 
 	@Override
