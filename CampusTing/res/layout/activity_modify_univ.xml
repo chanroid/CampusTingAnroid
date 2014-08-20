@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#7ed9eb"
+        android:padding="3dp" >
+
+        <ImageButton
+            android:id="@+id/modifyUnivBackBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/abc_ic_ab_back_holo_light" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="대학교 인증"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#cccccc"
+                android:gravity="bottom" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="5dp"
+                    android:text="대학교 인증"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="이메일 또는 사진 중 한가지 인증방법을 선택하세요."
+                    android:textSize="10sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/univConfirmBtnLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="5dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="이메일로 인증하기"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <ImageView
+                    android:id="@+id/univConfirmBtnLayoutArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/univLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#cccccc"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <RadioGroup
+                    android:id="@+id/univStateSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/button_one"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:text="재학중" />
+
+                    <RadioButton
+                        android:id="@+id/button_two"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="졸업" />
+
+                    <RadioButton
+                        android:id="@+id/button_three"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="휴학" />
+
+                    <RadioButton
+                        android:id="@+id/button_four"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="자퇴" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/univAutoEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="학교"
+                        android:maxLines="1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" >
+
+                    <EditText
+                        android:id="@+id/univMailEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="학교메일"
+                        android:maxLines="1" />
+
+                    <Button
+                        android:id="@+id/univMailSendBtn"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:text="인증메일 발송"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center" >
+
+                    <EditText
+                        android:id="@+id/univMailCodeEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="인증번호"
+                        android:maxLines="1" />
+
+                    <Button
+                        android:id="@+id/univMailCodeBtn"
+                        android:layout_width="110dp"
+                        android:layout_height="wrap_content"
+                        android:text="인증하기"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/univMailConfirmBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="인증" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/univConfirmPhotoBtnLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:padding="5dp" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="사진촬영으로 인증하기"
+                    android:textAppearance="?android:attr/textAppearanceLarge" />
+
+                <ImageView
+                    android:id="@+id/univConfirmPhotoBtnLayoutArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/univConfirmPhotoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#cccccc"
+                android:orientation="vertical"
+                android:visibility="gone" >
+
+                <RadioGroup
+                    android:id="@+id/univPhotoStateSpinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/button_photo_one"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:gravity="center"
+                        android:text="재학중" />
+
+                    <RadioButton
+                        android:id="@+id/button_photo_two"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="졸업" />
+
+                    <RadioButton
+                        android:id="@+id/button_photo_three"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="휴학" />
+
+                    <RadioButton
+                        android:id="@+id/button_photo_four"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="자퇴" />
+                </RadioGroup>
+
+                <ImageButton
+                    android:id="@+id/univCardImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon" />
+
+                <Button
+                    android:id="@+id/univCardImageConfirmBtn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="인증" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/confirmBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="확인" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
