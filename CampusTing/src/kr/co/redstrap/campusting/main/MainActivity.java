@@ -2,9 +2,16 @@ package kr.co.redstrap.campusting.main;
 
 import kr.co.redstrap.campusting.MainApp;
 import kr.co.redstrap.campusting.R;
+import kr.co.redstrap.campusting.common.AbsCTSyncTask.CTSyncTaskCallback;
+import kr.co.redstrap.campusting.common.LoginInfo;
 import kr.co.redstrap.campusting.constant.CampusTingConstant;
 import kr.co.redstrap.campusting.login.UnitedLoginActivity;
+import kr.co.redstrap.campusting.util.web.CTJSONSyncTask;
 import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -13,7 +20,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity implements
-		MainLayout.Callback, CampusTingConstant {
+		MainLayout.Callback, CampusTingConstant, LocationListener {
 	private boolean finishFlag = false; // 두번 눌러야 종료
 
 	private MainLayout layout;
@@ -23,6 +30,8 @@ public class MainActivity extends FragmentActivity implements
 	private Fragment moreFrag;
 	private Fragment historyFrag;
 	private Fragment chatFrag;
+	
+	private LocationManager locManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +58,60 @@ public class MainActivity extends FragmentActivity implements
 
 		initFragment();
 		switchFragment(mainFrag);
+	}
+	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		requestGeoPoint();
+	}
+	
+	@Override
+	protected void onStop() {
+		// TODO Auto-generated method stub
+		super.onStop();
+		locManager.removeUpdates(this);
+	}
+	
+	private void requestGeoPoint() {
+		locManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+		locManager.requestLocationUpdates(locManager.getBestProvider(new Criteria(), true), 2000, 0, this);	
+	}
+	
+	private void sendGeoPoint(double lat, double lng) {
+		CTJSONSyncTask task = new CTJSONSyncTask();
+		
+		task.addHttpParam("userNum", LoginInfo.getInstance(this).getUserNum());
+		task.addHttpParam("longitude", lng);
+		task.addHttpParam("latitude", lat);
+		
+		task.addCallback(new CTSyncTaskCallback.Stub()); // 사실 필요없는데 안넣으면 npe 발생
+		task.execute("registerLocation");
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		// TODO Auto-generated method stub
+		sendGeoPoint(location.getLatitude(), location.getLongitude());
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override

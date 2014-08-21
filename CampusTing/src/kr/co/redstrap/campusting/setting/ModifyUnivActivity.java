@@ -52,7 +52,7 @@ public class ModifyUnivActivity extends FragmentActivity implements ModifyUnivLa
 	private void sendUnivConfirm() {
 		if ("".equals(univMail)) {
 			layout.toast("학교 이메일을 입력해주세요.", Toast.LENGTH_LONG);
-		} else if ("".equals(univMailCode) || imagePath == null) {
+		} else if ("".equals(univMailCode) && imagePath == null) {
 			layout.toast("학교 메일 인증 또는 학생증 사진 인증 중에 하나를 반드시 해주세요.", Toast.LENGTH_SHORT);
 		} else {
 			CTJSONSyncTask task = new CTJSONSyncTask();
@@ -345,6 +345,7 @@ public class ModifyUnivActivity extends FragmentActivity implements ModifyUnivLa
 	@Override
 	public void onUnivMailCodeChanged(String string) {
 		// TODO Auto-generated method stub
+		univMailCode = string;
 	}
 
 	@Override

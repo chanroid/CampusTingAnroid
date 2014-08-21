@@ -6,11 +6,11 @@ import kr.co.redstrap.campusting.common.ErrorResult;
 import kr.co.redstrap.campusting.common.LoginInfo;
 import kr.co.redstrap.campusting.main.QALayout.Callback;
 import kr.co.redstrap.campusting.util.web.CTJSONSyncTask;
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.widget.Toast;
 
-public class QAActivity extends Activity implements Callback {
+public class QAActivity extends FragmentActivity implements Callback {
 
 	private QALayout layout;
 

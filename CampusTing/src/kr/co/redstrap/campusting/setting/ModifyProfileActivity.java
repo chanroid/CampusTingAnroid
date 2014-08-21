@@ -1,5 +1,7 @@
 package kr.co.redstrap.campusting.setting;
 
+import java.util.ArrayList;
+
 import kr.co.redstrap.campusting.R;
 import kr.co.redstrap.campusting.common.AbsCTSyncTask;
 import kr.co.redstrap.campusting.common.AbsCTSyncTask.CTSyncTaskCallback;
@@ -160,8 +162,8 @@ public class ModifyProfileActivity extends FragmentActivity implements
 		String confirmedUnivEmail = result.getString("confirmedUnivEmail");
 		boolean confirmedUnivPhoto = "Y".equals(result
 				.getString("confirmedUnivPhoto"));
-		boolean confirmedJob = "Y".equals(result.getString("confirmedJob"));
-		// boolean gender = "Y".equals(result.getString("gender"));
+		boolean confirmedJob = !"0".equals(result.getString("confirmedJob"));
+		boolean gender = result.getBoolean("gender");
 
 		modifyPhotoFragment.setPhotoCount(photoCount);
 		modifyAppealFragment.setOneLineText(simpleIntro);
@@ -202,8 +204,8 @@ public class ModifyProfileActivity extends FragmentActivity implements
 
 		modifyProfileFragment.setConfirmedUniv(confirmedUnivName,
 				confirmedUnivEmail, confirmedUnivPhoto);
-		// modifyProfileFragment.setConfirmedJob(confirmedJob);
-		// modifyProfileFragment.setMan(gender);
+		modifyProfileFragment.setConfirmedJob(confirmedJob);
+		modifyProfileFragment.setMan(gender);
 	}
 
 	@Override
@@ -245,7 +247,6 @@ public class ModifyProfileActivity extends FragmentActivity implements
 			return;
 		}
 
-		int photoCount = modifyPhotoFragment.getProfileImages().size();
 		String simpleIntro = modifyAppealFragment.getOneLineText();
 		String birth = modifyProfileFragment.getBirth();
 		int local = modifyProfileFragment.getLocal();
@@ -289,7 +290,11 @@ public class ModifyProfileActivity extends FragmentActivity implements
 		task.addHttpParam("idealType", idealTypes);
 		task.addHttpParam("hobby", hobbies);
 
-		// 20140812 chanroid 프로필사진은 구현되면..
+		ArrayList<String> profileImages = modifyPhotoFragment.getProfileImages();
+		int photoCount = profileImages.size();
+		for (int i = 0; i < photoCount; i++) {
+			task.addHttpFileParam("profilePhoto" + (i+1), profileImages.get(i));
+		}
 
 		task.addCallback(new CTSyncTaskCallback<String, Object>() {
 

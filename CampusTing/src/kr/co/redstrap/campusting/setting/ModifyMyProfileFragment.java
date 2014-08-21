@@ -8,7 +8,6 @@ import java.util.Map;
 
 import kr.co.redstrap.campusting.join.JoinInfoSelectItems;
 import kr.co.redstrap.campusting.join.frag.JoinInfoSelectPopupFragment;
-import kr.co.redstrap.campusting.join.frag.JoinInfoSelectPopupFragment.Callback;
 import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.content.Intent;
@@ -20,10 +19,10 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 
 public class ModifyMyProfileFragment extends Fragment implements
-		ModifyMyProfileLayout.Callback, Callback {
+		ModifyMyProfileLayout.Callback, JoinInfoSelectPopupFragment.Callback {
 
 	private ModifyMyProfileLayout layout;
-	
+
 	private boolean man;
 	private int height;
 	private boolean smoke;
@@ -37,24 +36,24 @@ public class ModifyMyProfileFragment extends Fragment implements
 	private Integer major;
 	private Integer religion;
 	private String birth;
-	
+
 	private String univName;
 	private String univMail;
 	private boolean isUnivCard;
 	private boolean isJobConfirmed;
-	
+
 	public void setConfirmedUniv(String name, String mail, boolean photo) {
 		univName = name;
 		univMail = mail;
 		isUnivCard = photo;
 		layout.setConfirmedUniv(univName, univMail, isUnivCard);
 	}
-	
+
 	public void setConfirmedJob(boolean job) {
 		isJobConfirmed = job;
 		layout.setConfirmedJob(isJobConfirmed);
 	}
-	
+
 	public boolean isMan() {
 		return man;
 	}
@@ -63,7 +62,7 @@ public class ModifyMyProfileFragment extends Fragment implements
 		this.man = man;
 		layout.setGender(man);
 	}
-	
+
 	public void setNickName(String nickName) {
 		layout.setNickName(nickName);
 	}
@@ -119,11 +118,10 @@ public class ModifyMyProfileFragment extends Fragment implements
 
 	public void setCharacter(ArrayList<Integer> character) {
 		this.character = character;
-		layout.setCharacter(new String[]{
-			JoinInfoSelectItems.characters[character.get(0)],
-			JoinInfoSelectItems.characters[character.get(1)],
-			JoinInfoSelectItems.characters[character.get(2)]
-		});
+		layout.setCharacter(new String[] {
+				JoinInfoSelectItems.characters[character.get(0)],
+				JoinInfoSelectItems.characters[character.get(1)],
+				JoinInfoSelectItems.characters[character.get(2)] });
 	}
 
 	public Integer getCoupleCount() {
@@ -184,7 +182,7 @@ public class ModifyMyProfileFragment extends Fragment implements
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
+
 		layout = new ModifyMyProfileLayout(getActivity());
 		layout.setCallback(this);
 
@@ -194,7 +192,7 @@ public class ModifyMyProfileFragment extends Fragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		
+
 		if (layout == null) {
 			layout = new ModifyMyProfileLayout(getActivity());
 			layout.setCallback(this);
@@ -210,23 +208,21 @@ public class ModifyMyProfileFragment extends Fragment implements
 		popup.show(getActivity().getSupportFragmentManager(), null);
 	}
 
-
 	@Override
 	public void onBitrhClick() {
 		// TODO Auto-generated method stub
 
-		GregorianCalendar calendar = new GregorianCalendar(
-				Locale.getDefault());
+		GregorianCalendar calendar = new GregorianCalendar(Locale.getDefault());
 
 		DatePickerDialog.OnDateSetListener datecallback = new OnDateSetListener() {
 
 			@Override
-			public void onDateSet(DatePicker view, int year,
-					int monthOfYear, int dayOfMonth) {
+			public void onDateSet(DatePicker view, int year, int monthOfYear,
+					int dayOfMonth) {
 				// TODO Auto-generated method stub
 				String format = "%04d%02d%02d";
-				String birth = String.format(format, year,
-						monthOfYear + 1, dayOfMonth);
+				String birth = String.format(format, year, monthOfYear + 1,
+						dayOfMonth);
 				layout.setBirth(birth);
 				ModifyMyProfileFragment.this.birth = birth;
 			}

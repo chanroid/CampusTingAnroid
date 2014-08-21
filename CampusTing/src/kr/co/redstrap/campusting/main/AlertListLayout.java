@@ -5,6 +5,9 @@ import kr.co.redstrap.campusting.common.AbsCTLayout;
 import android.content.Context;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -43,10 +46,11 @@ public class AlertListLayout extends AbsCTLayout {
 		backBtn = (ImageButton) findViewById(R.id.alertlistBackBtn);
 		backBtn.setOnClickListener(l);
 		alertListView = (ListView) findViewById(R.id.alertListView);
+		alertListView.setOnItemClickListener(l);
 		
 	}
 	
-	private class Listener implements OnClickListener {
+	private class Listener implements OnClickListener, OnItemClickListener {
 
 		@Override
 		public void onClick(View v) {
@@ -56,6 +60,13 @@ public class AlertListLayout extends AbsCTLayout {
 				callback.onBackClick();
 				break;
 			}
+		}
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			// TODO Auto-generated method stub
+			
 		}
 		
 	}

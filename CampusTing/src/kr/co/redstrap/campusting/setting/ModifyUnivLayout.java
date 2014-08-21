@@ -203,6 +203,7 @@ public class ModifyUnivLayout extends AbsCTLayout {
 		univMailCodeBtn.setEnabled(!confirmed);
 		univMailCodeEditText.setEnabled(!confirmed);
 		univMailSendBtn.setEnabled(!confirmed);
+		univStateSpinner.setEnabled(!confirmed);
 	}
 	
 	private class Listener implements OnClickListener, OnItemSelectedListener,
